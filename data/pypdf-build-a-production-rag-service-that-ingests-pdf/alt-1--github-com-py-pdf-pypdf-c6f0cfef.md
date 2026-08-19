@@ -1,10 +1,10 @@
 ---
 library: "pypdf"
-query: "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database."
+query: "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction, python-multipart for uploads, and Pydantic models for validation. Use weaviate-client for the vector database. Use sentence-transformers for the embedding library."
 url: "https://github.com/py-pdf/pypdf"
 role: "alternate"
 rank: 1
-fetched_at: "2026-08-19T12:36:05.661603+00:00"
+fetched_at: "2026-08-19T19:23:44.953105+00:00"
 fetched_via: "brightdata-collector:c_msx9i6aq2bz5dznadk"
 sha256: "05c19cbcb141817cab8109e181233cfc222293165db5ef63789ae85477d9f3bb"
 ---

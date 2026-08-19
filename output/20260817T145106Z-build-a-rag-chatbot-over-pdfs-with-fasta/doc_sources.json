@@ -1,0 +1,142 @@
+{
+  "requirement": "build a RAG chatbot over PDFs with FastAPI and a vector database",
+  "model": "openai/gpt-oss-120b",
+  "generated_at": "2026-08-17T14:51:06.978101+00:00",
+  "libraries": [
+    {
+      "name": "fastapi",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Provides the web API for the chatbot"
+    },
+    {
+      "name": "langchain",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Orchestrates RAG pipelines and LLM calls"
+    },
+    {
+      "name": "openai",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Accesses LLM for generating responses"
+    },
+    {
+      "name": "sentence-transformers",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Creates embeddings for PDF text"
+    },
+    {
+      "name": "chromadb",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Stores and retrieves vector embeddings"
+    },
+    {
+      "name": "pypdf",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Extracts text from PDF documents"
+    },
+    {
+      "name": "uvicorn",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Runs the FastAPI ASGI server"
+    }
+  ],
+  "doc_sources": [
+    {
+      "library": "fastapi",
+      "url": "https://fastapi.tiangolo.com",
+      "title": "FastAPI Documentation",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The URL is the official documentation site hosted at fastapi.tiangolo.com, which is the primary entry point for FastAPI docs. It matches the preferred source (own docs site) and is the root landing page, making it the best canonical source.",
+      "alternates": [
+        "https://fastapi-tutorial.readthedocs.io",
+        "https://refine.dev/blog/introduction-to-fast-api",
+        "https://www.geeksforgeeks.org/python/introduction-to-fastapi"
+      ]
+    },
+    {
+      "library": "langchain",
+      "url": "https://docs.langchain.com/oss/python/langchain/overview",
+      "title": "LangChain Documentation",
+      "kind": "official_docs",
+      "confidence": 0.92,
+      "rationale": "The URL is on docs.langchain.com, the official documentation site for LangChain, and points to the Python overview page, making it the most authoritative entry point among the results. It is a first\u2011party source and reflects the current version of the docs.",
+      "alternates": [
+        "https://reference.langchain.com/python/langchain-core",
+        "https://langchain-doc.readthedocs.io/en/latest/index.html",
+        "https://github.com/langchain-ai/docs"
+      ]
+    },
+    {
+      "library": "openai",
+      "url": "https://community.openai.com/t/web-crawling-official-documentation/242653",
+      "title": "Web Crawling official documentation - Community - OpenAI Developer Community",
+      "kind": "other",
+      "confidence": 0.3,
+      "rationale": "No official documentation site appears in the search results. The closest first\u2011party source is a post on the OpenAI community forum, which is hosted on the openai.com domain, though it is a forum discussion rather than the library's docs root. Confidence is low because it is not the actual docs entry point.",
+      "alternates": [
+        "https://mcpmarket.com/tools/skills/openai-documentation-helper",
+        "https://github.com/matdac12/openai-skill",
+        "https://mcpmarket.com/tools/skills/openai-documentation-assistant"
+      ]
+    },
+    {
+      "library": "sentence-transformers",
+      "url": "https://sbert.net",
+      "title": "Sentence Transformers Documentation",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "The root domain https://sbert.net is the official documentation site for the Sentence\u2011Transformers library, providing the main landing page and navigation to all sections. It is the primary source maintained by the library authors, making it the best entry point. Confidence is high because it directly matches the library\u2019s own docs site.",
+      "alternates": [
+        "https://sbert.net/docs/package_reference/sentence_transformer/model.html",
+        "https://huggingface.co/docs/hub/en/sentence-transformers",
+        "https://www.sbert.net/docs/sentence_transformer/pretrained_models.html"
+      ]
+    },
+    {
+      "library": "chromadb",
+      "url": "https://www.trychroma.com",
+      "title": "Chroma - open-source search infrastructure for AI",
+      "kind": "official_docs",
+      "confidence": 0.4,
+      "rationale": "The URL https://docs.trychroma.com is the official documentation site for ChromaDB, providing the root landing page for all docs including getting\u2011started guides and API reference. It is a first\u2011party source and the most appropriate entry point for the library's documentation. (Model proposed a URL absent from the search results; fell back to the top hit.) (Model selected a non-documentation domain; substituted the best remaining candidate.)",
+      "alternates": [
+        "https://www.youtube.com/watch?v=QojA5urIDzA",
+        "https://docs.trychroma.com"
+      ]
+    },
+    {
+      "library": "pypdf",
+      "url": "https://pypdf.readthedocs.io",
+      "title": "Welcome to pypdf",
+      "kind": "official_docs",
+      "confidence": 0.98,
+      "rationale": "The result is the library's own documentation site hosted on ReadTheDocs, which is the official docs root page and provides the most up\u2011to\u2011date reference for pypdf.",
+      "alternates": [
+        "https://pypdf.readthedocs.io/en/stable/user/extract-text.html",
+        "https://pypdf.readthedocs.io/en/stable/modules/PdfReader.html"
+      ]
+    },
+    {
+      "library": "uvicorn",
+      "url": "https://uvicorn.dev",
+      "title": "Uvicorn Documentation",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "uvicorn.dev is the library's own documentation website and serves as the root landing page for the project, matching the preferred first-party source. It provides the full docs and is the canonical entry point.",
+      "alternates": [
+        "https://github.com/Kludex/uvicorn",
+        "https://github.com/encode/uvicorn/blob/master/docs/settings.md",
+        "https://docs.oyoclass.com/python3editor-ide/extralibs/uvicorn"
+      ]
+    }
+  ],
+  "documents": [],
+  "errors": []
+}

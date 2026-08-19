@@ -1,0 +1,108 @@
+{
+  "requirement": "build a CLI tool with typer and rich",
+  "model": "openai/gpt-oss-120b",
+  "generated_at": "2026-08-17T14:55:17.542052+00:00",
+  "libraries": [
+    {
+      "name": "typer",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "CLI argument parsing and command handling"
+    },
+    {
+      "name": "rich",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "styled console output and formatting"
+    }
+  ],
+  "doc_sources": [
+    {
+      "library": "typer",
+      "url": "https://typer.tiangolo.com",
+      "title": "Typer Documentation",
+      "kind": "official_docs",
+      "confidence": 0.98,
+      "rationale": "The Typer website (typer.tiangolo.com) is the library's own documentation site, matching the highest priority. It is the root landing page for the current version of the library.",
+      "alternates": [
+        "https://github.com/fastapi/typer/issues/221",
+        "https://github.com/sphinx-contrib/typer",
+        "https://config-ninja.readthedocs.io/en/feat-815-secrets-manager/typer/models.html"
+      ]
+    },
+    {
+      "library": "rich",
+      "url": "https://rich.readthedocs.io",
+      "title": "Rich documentation",
+      "kind": "official_docs",
+      "confidence": 0.96,
+      "rationale": "The top search result is the library's own documentation site hosted on readthedocs.io, which is the official entry point for Rich's docs. This matches the highest priority criterion. The GitHub repository is provided as a fallback.",
+      "alternates": [
+        "https://github.com/textualize/rich"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "library": "typer",
+      "url": "https://typer.tiangolo.com",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/typer/primary--typer-tiangolo-com-2c296914.md",
+      "raw_path": "data/typer/primary--typer-tiangolo-com-2c296914.json",
+      "title": "",
+      "bytes": 14079,
+      "sha256": "898c2cf9e88afd43a53dd3ec2dc00e87510a9e4dadc2367ce8a03118e71e83d9",
+      "fetched_at": "2026-08-17T14:55:17.184078+00:00",
+      "error": null
+    },
+    {
+      "library": "typer",
+      "url": "https://github.com/fastapi/typer/issues/221",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/typer/alt-1--github-com-fastapi-typer-issues-221-e172c289.md",
+      "raw_path": "data/typer/alt-1--github-com-fastapi-typer-issues-221-e172c289.json",
+      "title": "",
+      "bytes": 14577,
+      "sha256": "b355c36d3c477f304a24b23b69ccdc2feac76c2a2b268aa1e269150eef17c138",
+      "fetched_at": "2026-08-17T14:55:17.249730+00:00",
+      "error": null
+    },
+    {
+      "library": "rich",
+      "url": "https://rich.readthedocs.io",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/rich/primary--rich-readthedocs-io-d41cf5b0.md",
+      "raw_path": "data/rich/primary--rich-readthedocs-io-d41cf5b0.json",
+      "title": "",
+      "bytes": 148,
+      "sha256": "abe2cc6b331bad6fc135de55930dbc1b1c69bf08f60adb1e4bad3b0138a7053c",
+      "fetched_at": "2026-08-17T14:55:17.285952+00:00",
+      "error": null
+    },
+    {
+      "library": "rich",
+      "url": "https://github.com/textualize/rich",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/rich/alt-1--github-com-textualize-rich-7b632204.md",
+      "raw_path": "data/rich/alt-1--github-com-textualize-rich-7b632204.json",
+      "title": "",
+      "bytes": 21935,
+      "sha256": "219c171166046aa71f91371569530bcd90fa857155b41ed39679486cccef5096",
+      "fetched_at": "2026-08-17T14:55:17.522078+00:00",
+      "error": null
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,57 @@
+{
+  "requirement": "Build a REST API with FastAPI and Pydantic, served by uvicorn",
+  "plan_path": "",
+  "model": "openai/gpt-oss-120b",
+  "generated_at": "2026-08-19T09:54:33.449978+00:00",
+  "libraries": [
+    {
+      "name": "fastapi",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Provides the REST API framework"
+    },
+    {
+      "name": "pydantic",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Enables data validation and settings management"
+    },
+    {
+      "name": "uvicorn",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Runs the FastAPI app as an ASGI server"
+    }
+  ],
+  "doc_sources": [
+    {
+      "library": "fastapi",
+      "url": "https://fastapi.tiangolo.com/tutorial/",
+      "title": "fastapi",
+      "kind": "official_docs",
+      "confidence": 1.0,
+      "rationale": "Documentation URL supplied by the user.",
+      "alternates": []
+    },
+    {
+      "library": "pydantic",
+      "url": "https://pydantic.dev/docs/validation/latest/get-started/",
+      "title": "pydantic",
+      "kind": "official_docs",
+      "confidence": 1.0,
+      "rationale": "Documentation URL supplied by the user.",
+      "alternates": []
+    },
+    {
+      "library": "uvicorn",
+      "url": "https://uvicorn.dev/",
+      "title": "Uvicorn \u2013 Lightning\u2011fast ASGI server",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The uvicorn.dev site is the library's own documentation homepage, providing the full reference and quick\u2011start guide. It is the primary official docs site, matching the preferred source hierarchy. The other results are a PyPI project page, a GitHub source file, and a third\u2011party tutorial, which are lower priority.",
+      "alternates": []
+    }
+  ],
+  "documents": [],
+  "errors": []
+}

@@ -6,6 +6,7 @@ an array of inputs and bills per record either way. One snapshot, one poll loop.
 
 from __future__ import annotations
 
+import inspect
 from collections.abc import Callable
 
 from langchain_core.runnables import RunnableConfig
@@ -148,10 +149,24 @@ async def scrape_docs(state: DocResearchState, config: RunnableConfig) -> dict:
     if not doc_sources:
         return {"documents": []}
 
+    # Last look before anything is billed: every URL below becomes a scrape record
+    # and, if it is wrong, a citation in the plan. This is the only point where the
+    # complete list exists and nothing has been spent yet.
+    review = config["configurable"].get("review_urls")
+    if review is not None:
+        reviewed = review(doc_sources)
+        if inspect.isawaitable(reviewed):
+            reviewed = await reviewed
+        if reviewed is None:  # the user backed out
+            return {"documents": [], "errors": ["Scrape cancelled at the review step."]}
+        doc_sources = reviewed
+
     documents, errors = await scrape_to_store(
         settings,
         doc_sources,
         query=state.get("requirement", ""),
         max_alternates=config["configurable"].get("max_alternates"),
     )
-    return {"documents": documents, "errors": errors}
+    # Return the reviewed sources so the artifact records what was actually
+    # scraped rather than what curation originally proposed.
+    return {"documents": documents, "doc_sources": doc_sources, "errors": errors}

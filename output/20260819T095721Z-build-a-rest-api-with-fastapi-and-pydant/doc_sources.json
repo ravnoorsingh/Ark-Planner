@@ -1,0 +1,144 @@
+{
+  "requirement": "Build a REST API with FastAPI and Pydantic, served by uvicorn",
+  "plan_path": "",
+  "model": "openai/gpt-oss-120b",
+  "generated_at": "2026-08-19T09:57:21.880391+00:00",
+  "libraries": [
+    {
+      "name": "fastapi",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "API framework for defining routes and handling requests"
+    },
+    {
+      "name": "pydantic",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Data validation and settings management for request/response models"
+    },
+    {
+      "name": "uvicorn",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "ASGI server to run the FastAPI application"
+    }
+  ],
+  "doc_sources": [
+    {
+      "library": "fastapi",
+      "url": "https://fastapi.tiangolo.com/tutorial/",
+      "title": "fastapi",
+      "kind": "official_docs",
+      "confidence": 1.0,
+      "rationale": "Documentation URL supplied by the user.",
+      "alternates": []
+    },
+    {
+      "library": "pydantic",
+      "url": "https://pydantic.dev/docs/",
+      "title": "Pydantic Documentation",
+      "kind": "official_docs",
+      "confidence": 0.98,
+      "rationale": "The official documentation site (pydantic.dev/docs) is the primary entry point for the library, maintained by the authors and reflects the current version. It is the most authoritative source compared to sub\u2011pages or third\u2011party content.",
+      "alternates": [
+        "https://pydantic.dev/docs/validation/latest/get-started/",
+        "https://pydantic.dev/docs/validation/dev/concepts/models/",
+        "https://github.com/pydantic/pydantic"
+      ]
+    },
+    {
+      "library": "uvicorn",
+      "url": "https://uvicorn.dev/",
+      "title": "Uvicorn Documentation",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The uvicorn.dev site is the library's own documentation homepage, providing the official docs and quickstart. It is the primary entry point and matches the preferred source type.",
+      "alternates": []
+    }
+  ],
+  "documents": [
+    {
+      "library": "fastapi",
+      "query": "Build a REST API with FastAPI and Pydantic, served by uvicorn",
+      "url": "https://fastapi.tiangolo.com/tutorial/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/fastapi-build-a-rest-api-with-fastapi-and-pydantic-serve/primary--fastapi-tiangolo-com-tutorial-d77ca978.md",
+      "raw_path": "data/fastapi-build-a-rest-api-with-fastapi-and-pydantic-serve/primary--fastapi-tiangolo-com-tutorial-d77ca978.json",
+      "title": "",
+      "bytes": 5642,
+      "sha256": "36f4cf02ee46345b5444ba59a1ddc8ee899e68345b9f95b14d0a91775e96988f",
+      "fetched_at": "2026-08-19T09:55:57.944210+00:00",
+      "error": null
+    },
+    {
+      "library": "pydantic",
+      "query": "Build a REST API with FastAPI and Pydantic, served by uvicorn",
+      "url": "https://pydantic.dev/docs/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/pydantic-build-a-rest-api-with-fastapi-and-pydantic-serve/primary--pydantic-dev-docs-687669a5.md",
+      "raw_path": "data/pydantic-build-a-rest-api-with-fastapi-and-pydantic-serve/primary--pydantic-dev-docs-687669a5.json",
+      "title": "",
+      "bytes": 1364,
+      "sha256": "7f28bd28fb2d3081591197db28229507cbf34d1996ebe7ac410557c144246496",
+      "fetched_at": "2026-08-19T09:55:57.986288+00:00",
+      "error": null
+    },
+    {
+      "library": "pydantic",
+      "query": "Build a REST API with FastAPI and Pydantic, served by uvicorn",
+      "url": "https://pydantic.dev/docs/validation/latest/get-started/",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/pydantic-build-a-rest-api-with-fastapi-and-pydantic-serve/alt-1--pydantic-dev-docs-validation-latest-get-started-ddc6768a.md",
+      "raw_path": "data/pydantic-build-a-rest-api-with-fastapi-and-pydantic-serve/alt-1--pydantic-dev-docs-validation-latest-get-started-ddc6768a.json",
+      "title": "",
+      "bytes": 10743,
+      "sha256": "7a9fadda94ca3ac720684542592539950b4971fc5dfeab46e73eae7620a0f8fc",
+      "fetched_at": "2026-08-19T09:55:58.157541+00:00",
+      "error": null
+    },
+    {
+      "library": "pydantic",
+      "query": "Build a REST API with FastAPI and Pydantic, served by uvicorn",
+      "url": "https://pydantic.dev/docs/validation/dev/concepts/models/",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 2,
+      "status": "ok",
+      "path": "data/pydantic-build-a-rest-api-with-fastapi-and-pydantic-serve/alt-2--pydantic-dev-docs-validation-dev-concepts-models-d53298c7.md",
+      "raw_path": "data/pydantic-build-a-rest-api-with-fastapi-and-pydantic-serve/alt-2--pydantic-dev-docs-validation-dev-concepts-models-d53298c7.json",
+      "title": "",
+      "bytes": 52223,
+      "sha256": "fe9a073358422fb76eab0235218d04b78226157cfad70d5a39799f160e52ec15",
+      "fetched_at": "2026-08-19T09:55:58.578109+00:00",
+      "error": null
+    },
+    {
+      "library": "uvicorn",
+      "query": "Build a REST API with FastAPI and Pydantic, served by uvicorn",
+      "url": "https://uvicorn.dev/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/uvicorn-build-a-rest-api-with-fastapi-and-pydantic-serve/primary--uvicorn-dev-a46435f2.md",
+      "raw_path": "data/uvicorn-build-a-rest-api-with-fastapi-and-pydantic-serve/primary--uvicorn-dev-a46435f2.json",
+      "title": "",
+      "bytes": 4969,
+      "sha256": "2eb79e0a057bd7feaa67c107c4683108aece3a3e2f4c5f575de77e55fedf3005",
+      "fetched_at": "2026-08-19T09:55:58.689385+00:00",
+      "error": null
+    }
+  ],
+  "errors": [
+    "Plan synthesis failed: Model did not return schema-valid JSON for PlanDraft: 10 validation errors for PlanDraft\nphases.4\n  Input should be an object [type=model_type, input_value='tit"
+  ]
+}

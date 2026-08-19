@@ -1,0 +1,629 @@
+{
+  "requirement": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction, python-multipart for uploads, and Pydantic models for validation. Use weaviate-client for the vector database. Use sentence-transformers for the embedding library.",
+  "plan_path": "",
+  "model": "openai/gpt-oss-120b",
+  "generated_at": "2026-08-19T19:26:50.890344+00:00",
+  "libraries": [
+    {
+      "name": "fastapi",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Provides the HTTP API for querying the RAG service"
+    },
+    {
+      "name": "weaviate-client",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Communicates with the Weaviate vector database to store and retrieve embeddings"
+    },
+    {
+      "name": "sentence-transformers",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Generates dense embeddings for PDF text chunks"
+    },
+    {
+      "name": "pypdf",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Extracts text from PDF manuals for chunking"
+    },
+    {
+      "name": "python-multipart",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Handles multipart file uploads in FastAPI endpoints"
+    },
+    {
+      "name": "pydantic",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Defines request/response schemas and validates input data"
+    },
+    {
+      "name": "python",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "documentation supplied by the user"
+    }
+  ],
+  "doc_sources": [
+    {
+      "library": "fastapi",
+      "url": "https://fastapi.tiangolo.com/tutorial/",
+      "title": "fastapi",
+      "kind": "official_docs",
+      "confidence": 1.0,
+      "rationale": "Documentation URL(s) supplied by the user.",
+      "alternates": [],
+      "user_supplied": true
+    },
+    {
+      "library": "weaviate-client",
+      "url": "https://docs.weaviate.io/weaviate/client-libraries/python",
+      "title": "Weaviate Python client documentation",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "The URL is the official Weaviate documentation site dedicated to the Python client library, matching the preferred first-party docs source. It is the root landing page for the Python client, not a deep subsection, and is current as of the latest version listed on the site.",
+      "alternates": [
+        "https://docs.weaviate.io/weaviate/client-libraries"
+      ],
+      "user_supplied": false
+    },
+    {
+      "library": "sentence-transformers",
+      "url": "https://sbert.net/",
+      "title": "Sentence Transformers documentation",
+      "kind": "official_docs",
+      "confidence": 0.96,
+      "rationale": "The sbert.net site is the official documentation portal for the Sentence\u2011Transformers library, hosted by the project maintainers. It provides the usage guide, API reference, and examples, making it the primary entry point for docs. The GitHub repo and Hugging Face hub are secondary sources.",
+      "alternates": [
+        "https://github.com/huggingface/sentence-transformers"
+      ],
+      "user_supplied": false
+    },
+    {
+      "library": "pypdf",
+      "url": "https://pypdf.readthedocs.io/",
+      "title": "pypdf documentation",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The Read the Docs site is the official documentation host for pypdf and the root URL is the entry point for the current version. It is directly linked from the project and is the most authoritative source.",
+      "alternates": [
+        "https://github.com/py-pdf/pypdf"
+      ],
+      "user_supplied": true
+    },
+    {
+      "library": "python-multipart",
+      "url": "https://kludex.github.io/python-multipart/",
+      "title": "python-multipart",
+      "kind": "official_docs",
+      "confidence": 1.0,
+      "rationale": "Documentation URL(s) supplied by the user.",
+      "alternates": [],
+      "user_supplied": true
+    },
+    {
+      "library": "pydantic",
+      "url": "https://pydantic.dev/docs/validation/latest/get-started/",
+      "title": "Pydantic Documentation",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The official documentation site (pydantic.dev) is the primary source for the library. The root docs page is the canonical entry point, satisfying the preference for first\u2011party, current documentation.",
+      "alternates": [],
+      "user_supplied": true
+    },
+    {
+      "library": "python",
+      "url": "https://peps.python.org/pep-0484/",
+      "title": "python",
+      "kind": "official_docs",
+      "confidence": 1.0,
+      "rationale": "Documentation URL(s) supplied by the user.",
+      "alternates": [],
+      "user_supplied": true
+    },
+    {
+      "library": "httpx",
+      "url": "https://www.python-httpx.org",
+      "title": "httpx",
+      "kind": "official_docs",
+      "confidence": 1.0,
+      "rationale": "Added by the user at review.",
+      "alternates": [],
+      "user_supplied": true
+    }
+  ],
+  "documents": [
+    {
+      "library": "fastapi",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction, python-multipart for uploads, and Pydantic models for validation. Use weaviate-client for the vector database. Use sentence-transformers for the embedding library.",
+      "url": "https://fastapi.tiangolo.com/tutorial/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/fastapi-build-a-production-rag-service-that-ingests-pdf/primary--fastapi-tiangolo-com-tutorial-d77ca978.md",
+      "raw_path": "data/fastapi-build-a-production-rag-service-that-ingests-pdf/primary--fastapi-tiangolo-com-tutorial-d77ca978.json",
+      "title": "",
+      "bytes": 5642,
+      "sha256": "36f4cf02ee46345b5444ba59a1ddc8ee899e68345b9f95b14d0a91775e96988f",
+      "fetched_at": "2026-08-19T19:23:43.771636+00:00",
+      "error": null
+    },
+    {
+      "library": "weaviate-client",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction, python-multipart for uploads, and Pydantic models for validation. Use weaviate-client for the vector database. Use sentence-transformers for the embedding library.",
+      "url": "https://docs.weaviate.io/weaviate/client-libraries/python",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/weaviate-client-build-a-production-rag-service-that-ingests-pdf/primary--docs-weaviate-io-weaviate-client-libraries-python-ef3fe905.md",
+      "raw_path": "data/weaviate-client-build-a-production-rag-service-that-ingests-pdf/primary--docs-weaviate-io-weaviate-client-libraries-python-ef3fe905.json",
+      "title": "",
+      "bytes": 27140,
+      "sha256": "a391cb8a41ee740a46722b6d5580586cd22dd434ce32d96124109d4358c950b9",
+      "fetched_at": "2026-08-19T19:23:44.163161+00:00",
+      "error": null
+    },
+    {
+      "library": "weaviate-client",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction, python-multipart for uploads, and Pydantic models for validation. Use weaviate-client for the vector database. Use sentence-transformers for the embedding library.",
+      "url": "https://docs.weaviate.io/weaviate/client-libraries",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/weaviate-client-build-a-production-rag-service-that-ingests-pdf/alt-1--docs-weaviate-io-weaviate-client-libraries-0f5e2e64.md",
+      "raw_path": "data/weaviate-client-build-a-production-rag-service-that-ingests-pdf/alt-1--docs-weaviate-io-weaviate-client-libraries-0f5e2e64.json",
+      "title": "",
+      "bytes": 1913,
+      "sha256": "61e38def0bdaa1d10c1dbb34b2805a6a8d56b99095e97a90a9990b39a3df98ad",
+      "fetched_at": "2026-08-19T19:23:44.216341+00:00",
+      "error": null
+    },
+    {
+      "library": "sentence-transformers",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction, python-multipart for uploads, and Pydantic models for validation. Use weaviate-client for the vector database. Use sentence-transformers for the embedding library.",
+      "url": "https://sbert.net/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/sentence-transformers-build-a-production-rag-service-that-ingests-pdf/primary--sbert-net-7b8ec571.md",
+      "raw_path": "data/sentence-transformers-build-a-production-rag-service-that-ingests-pdf/primary--sbert-net-7b8ec571.json",
+      "title": "",
+      "bytes": 16902,
+      "sha256": "1470da3122ea9bc3af71da6826f4671bcd0f923f5740a8907f3d099ed9800c75",
+      "fetched_at": "2026-08-19T19:23:44.509121+00:00",
+      "error": null
+    },
+    {
+      "library": "sentence-transformers",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction, python-multipart for uploads, and Pydantic models for validation. Use weaviate-client for the vector database. Use sentence-transformers for the embedding library.",
+      "url": "https://github.com/huggingface/sentence-transformers",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/sentence-transformers-build-a-production-rag-service-that-ingests-pdf/alt-1--github-com-huggingface-sentence-transformers-2a6e1c07.md",
+      "raw_path": "data/sentence-transformers-build-a-production-rag-service-that-ingests-pdf/alt-1--github-com-huggingface-sentence-transformers-2a6e1c07.json",
+      "title": "",
+      "bytes": 18119,
+      "sha256": "062b966bb59ce25bb0e22362bdccb9da52021c486de0dcba3c37e8d25ffb7417",
+      "fetched_at": "2026-08-19T19:23:44.789038+00:00",
+      "error": null
+    },
+    {
+      "library": "pypdf",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction, python-multipart for uploads, and Pydantic models for validation. Use weaviate-client for the vector database. Use sentence-transformers for the embedding library.",
+      "url": "https://pypdf.readthedocs.io/",
+      "resolved_url": "https://pypdf.readthedocs.io/en/stable/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/pypdf-build-a-production-rag-service-that-ingests-pdf/primary--pypdf-readthedocs-io-deadc5f9.md",
+      "raw_path": "data/pypdf-build-a-production-rag-service-that-ingests-pdf/primary--pypdf-readthedocs-io-deadc5f9.json",
+      "title": "",
+      "bytes": 3667,
+      "sha256": "6d2fc092d79c814a03942e763c4ad836ff9d2310cc03f7ed96a2524a358cb5eb",
+      "fetched_at": "2026-08-19T19:23:44.846780+00:00",
+      "error": null
+    },
+    {
+      "library": "pypdf",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction, python-multipart for uploads, and Pydantic models for validation. Use weaviate-client for the vector database. Use sentence-transformers for the embedding library.",
+      "url": "https://github.com/py-pdf/pypdf",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/pypdf-build-a-production-rag-service-that-ingests-pdf/alt-1--github-com-py-pdf-pypdf-c6f0cfef.md",
+      "raw_path": "data/pypdf-build-a-production-rag-service-that-ingests-pdf/alt-1--github-com-py-pdf-pypdf-c6f0cfef.json",
+      "title": "",
+      "bytes": 5418,
+      "sha256": "05c19cbcb141817cab8109e181233cfc222293165db5ef63789ae85477d9f3bb",
+      "fetched_at": "2026-08-19T19:23:44.953105+00:00",
+      "error": null
+    },
+    {
+      "library": "python-multipart",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction, python-multipart for uploads, and Pydantic models for validation. Use weaviate-client for the vector database. Use sentence-transformers for the embedding library.",
+      "url": "https://kludex.github.io/python-multipart/",
+      "resolved_url": "https://multipart.fastapiexpert.com/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/python-multipart-build-a-production-rag-service-that-ingests-pdf/primary--kludex-github-io-python-multipart-2da25294.md",
+      "raw_path": "data/python-multipart-build-a-production-rag-service-that-ingests-pdf/primary--kludex-github-io-python-multipart-2da25294.json",
+      "title": "",
+      "bytes": 5964,
+      "sha256": "93e329a84a01891f777854d4c49a653c3e92e7d0ee6dcf02a0a740e516233e06",
+      "fetched_at": "2026-08-19T19:23:45.115537+00:00",
+      "error": null
+    },
+    {
+      "library": "pydantic",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction, python-multipart for uploads, and Pydantic models for validation. Use weaviate-client for the vector database. Use sentence-transformers for the embedding library.",
+      "url": "https://pydantic.dev/docs/validation/latest/get-started/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/pydantic-build-a-production-rag-service-that-ingests-pdf/primary--pydantic-dev-docs-validation-latest-get-started-ddc6768a.md",
+      "raw_path": "data/pydantic-build-a-production-rag-service-that-ingests-pdf/primary--pydantic-dev-docs-validation-latest-get-started-ddc6768a.json",
+      "title": "",
+      "bytes": 10745,
+      "sha256": "9668c668f58a508c3211c4a53c5d0c76a0d7c7eb52790f50310ead369cc77e43",
+      "fetched_at": "2026-08-19T19:23:45.239938+00:00",
+      "error": null
+    },
+    {
+      "library": "python",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction, python-multipart for uploads, and Pydantic models for validation. Use weaviate-client for the vector database. Use sentence-transformers for the embedding library.",
+      "url": "https://peps.python.org/pep-0484/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/python-build-a-production-rag-service-that-ingests-pdf/primary--peps-python-org-pep-0484-a1bd3b68.md",
+      "raw_path": "data/python-build-a-production-rag-service-that-ingests-pdf/primary--peps-python-org-pep-0484-a1bd3b68.json",
+      "title": "",
+      "bytes": 91546,
+      "sha256": "386e0a4a87909e083d9167cf345fc3d201748d304f2885833f4af9b24a39fa99",
+      "fetched_at": "2026-08-19T19:23:46.974354+00:00",
+      "error": null
+    },
+    {
+      "library": "httpx",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction, python-multipart for uploads, and Pydantic models for validation. Use weaviate-client for the vector database. Use sentence-transformers for the embedding library.",
+      "url": "https://www.python-httpx.org",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/httpx-build-a-production-rag-service-that-ingests-pdf/primary--python-httpx-org-d759ebd9.md",
+      "raw_path": "data/httpx-build-a-production-rag-service-that-ingests-pdf/primary--python-httpx-org-d759ebd9.json",
+      "title": "",
+      "bytes": 3801,
+      "sha256": "26a037a68e5db8f2e7a6b9a95dd77893c5d2c4c20b65e6c60c98e5c8f5e79868",
+      "fetched_at": "2026-08-19T19:23:47.032589+00:00",
+      "error": null
+    }
+  ],
+  "briefs": [
+    {
+      "library": "fastapi",
+      "install": "uv add \"fastapi[standard]\"",
+      "version": "",
+      "summary": "This tutorial shows you how to use **FastAPI** with most of its features, step by step. It is also built to work as a future reference so you can come back and see exactly what you need.",
+      "api": [
+        {
+          "name": "uv run fastapi dev",
+          "signature": "",
+          "summary": "Run the FastAPI development server.",
+          "example": "uv run fastapi dev"
+        },
+        {
+          "name": "fastapi run",
+          "signature": "",
+          "summary": "Run FastAPI in production mode.",
+          "example": "fastapi run"
+        },
+        {
+          "name": "uv add \"fastapi[standard]\"",
+          "signature": "",
+          "summary": "Add FastAPI with standard optional dependencies to a uv-managed project.",
+          "example": "uv add \"fastapi[standard]\""
+        },
+        {
+          "name": "pip install \"fastapi[standard]\"",
+          "signature": "",
+          "summary": "Install FastAPI with standard optional dependencies using pip.",
+          "example": "pip install \"fastapi[standard]\""
+        },
+        {
+          "name": "uvx library-skills",
+          "signature": "",
+          "summary": "Run Library Skills in a temporary environment to install the FastAPI AI agent skill.",
+          "example": "uvx library-skills"
+        }
+      ],
+      "gotchas": [
+        "If you don't want optional standard dependencies, install with `uv add fastapi` instead of `uv add \"fastapi[standard]\"`."
+      ],
+      "citation_keys": [
+        "fastapi-1"
+      ]
+    },
+    {
+      "library": "weaviate-client",
+      "install": "pip install -U weaviate-client",
+      "version": "v4.23.0",
+      "summary": "The weaviate-client is the official Python SDK for the Weaviate vector search engine. It provides a synchronous API via the `WeaviateClient` class and an asynchronous API via the `WeaviateAsyncClient` class (available from v4.7.0). The client enables connecting to Weaviate, managing collections, batch importing objects, and performing vector searches.",
+      "api": [
+        {
+          "name": "weaviate.connect_to_local",
+          "signature": "",
+          "summary": "Creates a client connected to a local Weaviate instance.",
+          "example": "client = weaviate.connect_to_local()"
+        },
+        {
+          "name": "client.collections.create",
+          "signature": "",
+          "summary": "Creates a new collection (class) with the given name and vector configuration.",
+          "example": "questions = client.collections.create(\n    name=\"Question\",\n    vector_config=Configure.Vectors.text2vec_ollama(\n        api_endpoint=\"http://ollama:11434\",  # If using Docker you might need: http://host.docker.internal:11434\n        model=\"nomic-embed-text\",  # The model to use\n    ),  # Configure the Ollama embedding model\n)"
+        },
+        {
+          "name": "questions.batch.dynamic",
+          "signature": "",
+          "summary": "Opens a dynamic batch context for efficient object import.",
+          "example": "with questions.batch.dynamic() as batch:\n    for d in data:\n        batch.add_object(\n            {\n                \"answer\": d[\"Answer\"],\n                \"question\": d[\"Question\"],\n                \"category\": d[\"Category\"],\n            }\n        )\n        if batch.number_errors > 10:\n            print(\"Batch import stopped due to excessive errors.\")\n            break"
+        },
+        {
+          "name": "batch.add_object",
+          "signature": "",
+          "summary": "Adds a single object to the current batch.",
+          "example": "batch.add_object(\n    {\n        \"answer\": d[\"Answer\"],\n        \"question\": d[\"Question\"],\n        \"category\": d[\"Category\"],\n    }\n)"
+        },
+        {
+          "name": "questions.query.near_text",
+          "signature": "",
+          "summary": "Performs a vector\u2011based near\u2011text query on the collection.",
+          "example": "response = questions.query.near_text(query=\"biology\", limit=2)\n\nfor obj in response.objects:\n    print(json.dumps(obj.properties, indent=2))"
+        },
+        {
+          "name": "client.close",
+          "signature": "",
+          "summary": "Closes the client and frees up resources.",
+          "example": "client.close()  # Free up resources"
+        },
+        {
+          "name": "WeaviateClient",
+          "signature": "",
+          "summary": "Synchronous client class providing the default API.",
+          "example": ""
+        },
+        {
+          "name": "WeaviateAsyncClient",
+          "signature": "",
+          "summary": "Asynchronous client class available from v4.7.0 onward.",
+          "example": ""
+        }
+      ],
+      "gotchas": [
+        "The v4 Python client requires Weaviate v1.23.7 or later; older database versions are incompatible.",
+        "A gRPC port (default 50051) must be open on the Weaviate server for the client to function.",
+        "In Weaviate Cloud, clusters created before 31 January 2024 are not compatible with the v4 client.",
+        "When using Configure.Vectors.text2vec_xxx in client versions 4.16.0\u20114.16.3, an error is thrown if no properties are defined and vectorize_collection_name is not True; this is fixed in 4.16.4.",
+        "To use the Query Agent, install the optional extras with `pip install -U \"weaviate-client[agents]\"`.",
+        "The asynchronous API is provided by the WeaviateAsyncClient class and requires weaviate-client v4.7.0 or newer."
+      ],
+      "citation_keys": [
+        "weaviate-client-1",
+        "weaviate-client-2"
+      ]
+    },
+    {
+      "library": "sentence-transformers",
+      "install": "pip install -U sentence-transformers",
+      "version": "v6.0",
+      "summary": "Sentence Transformers (SBERT) is a Python library for computing and training state\u2011of\u2011the\u2011art embedding and reranker models. It supports text, image, audio, and video inputs and provides tools for semantic search, similarity, and retrieval.",
+      "api": [
+        {
+          "name": "SentenceTransformer",
+          "signature": "",
+          "summary": "Class for loading a pretrained embedding model and computing embeddings.",
+          "example": "from sentence_transformers import SentenceTransformer\n\n# 1. Load a pretrained Sentence Transformer modelmodel = SentenceTransformer(\"sentence-transformers/all-MiniLM-L6-v2\")\n\n# The sentences to encodesentences = [\n    \"The weather is lovely today.\",\n    \"It's so sunny outside!\",\n    \"He drove to the stadium.\",]\n\n# 2. Calculate embeddings by calling model.encode()embeddings = model.encode(sentences)print(embeddings.shape)# [3, 384]\n\n# 3. Calculate the embedding similaritiessimilarities = model.similarity(embeddings, embeddings)print(similarities)# tensor([[1.0000, 0.6660, 0.1046],#         [0.6660, 1.0000, 0.1411],#         [0.1046, 0.1411, 1.0000]])"
+        },
+        {
+          "name": "model.encode",
+          "signature": "",
+          "summary": "Encode a list of texts into embedding vectors.",
+          "example": "embeddings = model.encode(sentences)print(embeddings.shape)# [3, 384]"
+        },
+        {
+          "name": "model.similarity",
+          "signature": "",
+          "summary": "Compute similarity scores between two sets of embeddings.",
+          "example": "similarities = model.similarity(embeddings, embeddings)print(similarities)# tensor([[1.0000, 0.6660, 0.1046],#         [0.6660, 1.0000, 0.1411],#         [0.1046, 0.1411, 1.0000]])"
+        },
+        {
+          "name": "CrossEncoder",
+          "signature": "",
+          "summary": "Class for loading a pretrained reranker (cross\u2011encoder) model.",
+          "example": "from sentence_transformers import CrossEncoder\n\n# 1. Load a pretrained CrossEncoder modelmodel = CrossEncoder(\"cross-encoder/ms-marco-MiniLM-L6-v2\")\n\n# The texts for which to predict similarity scoresquery = \"How many people live in Berlin?\"passages = [\n    \"Berlin had a population of 3,520,031 registered inhabitants in an area of 891.82 square kilometers.\",\n    \"Berlin has a yearly total of about 135 million day visitors, making it one of the most-visited cities in the European Union.\",\n    \"In 2013 around 600,000 Berliners were registered in one of the more than 2,300 sport and fitness clubs.\",]\n\n# 2a. Either predict scores pairs of textsscores = model.predict([(query, passage) for passage in passages])print(scores)# => [8.607139 5.506266 6.352977]\n\n# 2b. Or rank a list of passages for a queryranks = model.rank(query, passages, return_documents=True)\n\nprint(\"Query:\", query)for rank in ranks:\n    print(f\"- #{rank['corpus_id']} ({rank['score']:.2f}): {rank['text']}\")\"\"\"Query: How many people live in Berlin?- #0 (8.61): Berlin had a population of 3,520,031 regis"
+        },
+        {
+          "name": "model.predict",
+          "signature": "",
+          "summary": "Predict similarity scores for (query, passage) pairs.",
+          "example": "scores = model.predict([(query, passage) for passage in passages])print(scores)# => [8.607139 5.506266 6.352977]"
+        },
+        {
+          "name": "model.rank",
+          "signature": "",
+          "summary": "Rank passages for a query and optionally return the documents.",
+          "example": "ranks = model.rank(query, passages, return_documents=True)\n\nprint(\"Query:\", query)for rank in ranks:\n    print(f\"- #{rank['corpus_id']} ({rank['score']:.2f}): {rank['text']}\")"
+        }
+      ],
+      "gotchas": [
+        "Requires Python\u202f3.10+, PyTorch\u202f2.2+, and transformers\u202fv5.0+ as recommended dependencies.",
+        "Installation uses a pip upgrade command; see the docs for uv, conda, source, editable installs, CUDA setup, and optional extras such as [image], [audio], [video], [train], [onnx], [openvino], [dev].",
+        "Version\u202f6.0 introduced the MultiVectorEncoder for token\u2011level (multi\u2011vector) embeddings; migration may require following the migration guide."
+      ],
+      "citation_keys": [
+        "sentence-transformers-1",
+        "sentence-transformers-2"
+      ]
+    },
+    {
+      "library": "pypdf",
+      "install": "pip install pypdf",
+      "version": "3.1.0",
+      "summary": "pypdf is a free and open source pure\u2011python PDF library capable of splitting, merging, cropping, and transforming the pages of PDF files. It can also add custom data, viewing options, and passwords to PDF files. pypdf can retrieve text and metadata from PDFs as well.",
+      "api": [
+        {
+          "name": "PdfReader",
+          "signature": "",
+          "summary": "",
+          "example": "from pypdf import PdfReader\n\nreader = PdfReader(\"example.pdf\")\nnumber_of_pages = len(reader.pages)\npage = reader.pages[0]\ntext = page.extract_text()"
+        },
+        {
+          "name": "PdfWriter",
+          "signature": "",
+          "summary": "",
+          "example": ""
+        },
+        {
+          "name": "PageObject",
+          "signature": "",
+          "summary": "",
+          "example": ""
+        },
+        {
+          "name": "Transformation",
+          "signature": "",
+          "summary": "",
+          "example": ""
+        },
+        {
+          "name": "PageRange",
+          "signature": "",
+          "summary": "",
+          "example": ""
+        },
+        {
+          "name": "DocumentInformation",
+          "signature": "",
+          "summary": "",
+          "example": ""
+        },
+        {
+          "name": "Destination",
+          "signature": "",
+          "summary": "",
+          "example": ""
+        },
+        {
+          "name": "XmpInformation",
+          "signature": "",
+          "summary": "",
+          "example": ""
+        }
+      ],
+      "gotchas": [
+        "`pypdf` 3.1.0 and above include significant improvements compared to previous versions; refer to the migration guide for details.",
+        "For AES encryption or decryption you must install the extra dependencies with `pip install pypdf[crypto]`.",
+        "Use `print(pypdf.__version__)` to report the library version when filing issues."
+      ],
+      "citation_keys": [
+        "pypdf-1",
+        "pypdf-2"
+      ]
+    },
+    {
+      "library": "python-multipart",
+      "install": "",
+      "version": "",
+      "summary": "Python-Multipart is a streaming multipart parser for Python. The following example shows a quick example of parsing an incoming request body in a simple WSGI application.",
+      "api": [
+        {
+          "name": "python_multipart.parse_form",
+          "signature": "",
+          "summary": "",
+          "example": "import python_multipart\ndef simple_app(environ, start_response):\n    ret = []\n    def on_field(field):\n        ret.append(b\"Parsed value parameter named: %s\" % (field.field_name,))\n    def on_file(file):\n        ret.append(b\"Parsed file parameter named: %s\" % (file.field_name,))\n    headers = {'Content-Type': environ['CONTENT_TYPE']}\n    if 'CONTENT_LENGTH' in environ:\n        headers['Content-Length'] = environ['CONTENT_LENGTH']\n    python_multipart.parse_form(headers, environ['wsgi.input'], on_field, on_file)\n    start_response('200 OK', [('Content-type', 'text/plain')])\n    ret.append(b'\\n')\n    return ret"
+        },
+        {
+          "name": "python_multipart.MultipartParser",
+          "signature": "(boundary, callbacks)",
+          "summary": "",
+          "example": "import hashlib\nimport python_multipart\nfrom python_multipart.multipart import parse_options_header\n\ndef simple_app(environ, start_response):\n    ret = []\n    class g(object):\n        hash = None\n    def on_part_begin():\n        g.hash = hashlib.sha256()\n    def on_part_data(data, start, end):\n        g.hash.update(data[start:end])\n    def on_part_end():\n        ret.append(\"Part hash: %s\" % (g.hash.hexdigest(),))\n    content_type, params = parse_options_header(environ['CONTENT_TYPE'])\n    boundary = params.get(b'boundary')\n    callbacks = {\n        'on_part_begin': on_part_begin,\n        'on_part_data': on_part_data,\n        'on_part_end': on_part_end,\n    }\n    parser = python_multipart.MultipartParser(boundary, callbacks)\n    inp = environ['wsgi.input']\n    size = int(environ['CONTENT_LENGTH'])\n    while size > 0:\n        to_read = min(size, 1024 * 1024)\n        data = inp.read(to_read)\n        parser.write(data)\n        size -= len(data)\n        if len(data) != to_read:\n            break\n    start_response('200 OK', [('Content-type', 'text/plain')])\n    return ret"
+        },
+        {
+          "name": "parse_options_header",
+          "signature": "(header)",
+          "summary": "",
+          "example": "from python_multipart.multipart import parse_options_header\ncontent_type, params = parse_options_header(environ['CONTENT_TYPE'])\nboundary = params.get(b'boundary')"
+        }
+      ],
+      "gotchas": [
+        "This package used to be accessed via `import multipart`. This still works for now (with a warning) as long as the Python package `multipart` is not also installed. If both are installed, you need to use the full PyPI name `python_multipart` for this package."
+      ],
+      "citation_keys": [
+        "python-multipart-1"
+      ]
+    },
+    {
+      "library": "pydantic",
+      "install": "pip install pydantic",
+      "version": "v2.13.4",
+      "summary": "Pydantic is the most widely used data validation library for Python. Fast and extensible, Pydantic plays nicely with your linters/IDE/brain. Define how data should be in pure, canonical Python 3.9+; validate it with Pydantic.",
+      "api": [
+        {
+          "name": "BaseModel",
+          "signature": "",
+          "summary": "Base class for creating data models.",
+          "example": "from datetime import datetime\n\nfrom pydantic import BaseModel, PositiveInt\n\nclass User(BaseModel):\n  id: int\n  name: str = 'John Doe'\n  signup_ts: datetime | None\n  tastes: dict[str, PositiveInt]\n\nexternal_data = {\n  'id': 123,\n  'signup_ts': '2019-06-01 12:22',\n  'tastes': {\n      'wine': 9,\n      b'cheese': 7,\n      'cabbage': '1',\n  },\n}\n\nuser = User(**external_data)\n\nprint(user.id)\n#> 123\nprint(user.model_dump())\n\"\"\"\n{\n  'id': 123,\n  'name': 'John Doe',\n  'signup_ts': datetime.datetime(2019, 6, 1, 12, 22),\n  'tastes': {'wine': 9, 'cheese': 7, 'cabbage': 1},\n}\n\"\"\""
+        },
+        {
+          "name": "PositiveInt",
+          "signature": "",
+          "summary": "Shorthand for Annotated[int, annotated_types.Gt(0)].",
+          "example": "from pydantic import PositiveInt\n\n# used in model field definitions, e.g. tastes: dict[str, PositiveInt]"
+        },
+        {
+          "name": "ValidationError",
+          "signature": "",
+          "summary": "Exception raised when validation fails.",
+          "example": "from pydantic import BaseModel, PositiveInt, ValidationError\n\nclass User(BaseModel):\n  id: int\n  name: str = 'John Doe'\n  signup_ts: datetime | None\n  tastes: dict[str, PositiveInt]\n\nexternal_data = {'id': 'not an int', 'tastes': {}}\n\ntry:\n  User(**external_data)\nexcept ValidationError as e:\n  print(e.errors())\n  \"\"\"\n  [\n      {\n          'type': 'int_parsing',\n          'loc': ('id',),\n          'msg': 'Input should be a valid integer, unable to parse string as an integer',\n          'input': 'not an int',\n          'url': 'https://errors.pydantic.dev/2/v/int_parsing',\n      },\n      {\n          'type': 'missing',\n          'loc': ('signup_ts',),\n          'msg': 'Field required',\n          'input': {'id': 'not an int', 'tastes': {}},\n          'url': 'https://errors.pydantic.dev/2/v/missing',\n      },\n  ]\n  \"\"\""
+        },
+        {
+          "name": "BaseModel.model_dump",
+          "signature": "model_dump()",
+          "summary": "Return a dict representation of the model.",
+          "example": "print(user.model_dump())\n\"\"\"\n{\n  'id': 123,\n  'name': 'John Doe',\n  'signup_ts': datetime.datetime(2019, 6, 1, 12, 22),\n  'tastes': {'wine': 9, 'cheese': 7, 'cabbage': 1},\n}\n\"\"\""
+        }
+      ],
+      "gotchas": [],
+      "citation_keys": [
+        "pydantic-1"
+      ]
+    }
+  ],
+  "plan_draft": {
+    "title": "Implementation plan: Build a production RAG service that ingests PDF manuals, chu",
+    "overview": "",
+    "phases": [],
+    "pitfalls": []
+  },
+  "errors": [
+    "pypdf: asked for https://pypdf.readthedocs.io/ but the collector returned https://pypdf.readthedocs.io/en/stable/",
+    "python-multipart: asked for https://kludex.github.io/python-multipart/ but the collector returned https://multipart.fastapiexpert.com/",
+    "python: could not distill docs \u2014 Groq daily token quota (TPD) exhausted. Resets in about 20 min.",
+    "httpx: could not distill docs \u2014 Groq daily token quota (TPD) exhausted. Resets in about 12 min.",
+    "Plan synthesis failed: Groq daily token quota (TPD) exhausted. Resets in about 25 min."
+  ]
+}

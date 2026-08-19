@@ -30,6 +30,7 @@ from .render import (
     save_plan,
     to_payload,
 )
+from .review import apply_command, to_rows, to_sources
 from .state import (
     DocResearchState,
     DocSource,
@@ -276,6 +277,54 @@ def _ask_doc_urls(status=None):
     return ask
 
 
+def _review_urls(max_alternates: int, status=None):
+    """Show every URL that would be scraped and let the user edit the list.
+
+    Takes the *effective* cap rather than reading it from settings: a --max-alternates
+    override would otherwise be ignored here and the list would promise more URLs
+    than the scrape actually fetches.
+    """
+
+    def review(sources: list[DocSource]):
+        rows = to_rows(sources, max_alternates)
+        if status is not None:
+            status.stop()  # the spinner would fight the prompt for the terminal
+        try:
+            while True:
+                console.print(
+                    f"\n[bold]{len(rows)} URL(s)[/bold] will be scraped "
+                    f"[dim](1 Bright Data record each)[/dim]:"
+                )
+                for number, row in enumerate(rows, start=1):
+                    label = "primary" if row.primary else "alt"
+                    console.print(
+                        f"  [dim]{number:>2}.[/dim] [dim]{label:<7}[/dim] "
+                        f"[bold]{row.library}[/bold]  {row.url}"
+                    )
+                console.print(
+                    "[dim]  enter = scrape · [/dim][bold]d 3[/bold][dim] drop · [/dim]"
+                    "[bold]e 3 <url>[/bold][dim] replace · [/dim]"
+                    "[bold]a <lib> <url>[/bold][dim] add · [/dim][bold]q[/bold][dim] cancel[/dim]"
+                )
+                try:
+                    answer = console.input("[bold cyan]›[/bold cyan] ").strip()
+                except (EOFError, KeyboardInterrupt):
+                    console.print()
+                    return to_sources(rows, sources)
+                if not answer:
+                    return to_sources(rows, sources)
+                if answer.lower() in {"q", "quit", "cancel"}:
+                    return None
+                rows, message = apply_command(rows, answer)
+                if message:
+                    console.print(f"[dim]  {message}[/dim]")
+        finally:
+            if status is not None:
+                status.start()
+
+    return review
+
+
 def _merge(states: list[DocResearchState]) -> DocResearchState:
     """Fold a REPL session's turns into one state for display and saving."""
     merged: DocResearchState = {
@@ -326,6 +375,9 @@ def docs(
     ),
     no_ask_urls: bool = typer.Option(
         False, "--no-ask-urls", help="Don't offer to pin a docs URL per detected library."
+    ),
+    no_review: bool = typer.Option(
+        False, "--no-review", help="Don't show the URL list for approval before scraping."
     ),
 ) -> None:
     """Resolve official documentation links for one requirement and exit."""
@@ -389,6 +441,14 @@ def docs(
                 settings, scrape=scrape, plan=plan,
                 max_alternates=max_alternates, doc_urls=pinned,
                 ask_doc_urls=_ask_doc_urls(status) if interactive_urls else None,
+                review_urls=(
+                    _review_urls(
+                        settings.max_alternates if max_alternates is None else max_alternates,
+                        status,
+                    )
+                    if scrape and not no_review and sys.stdin.isatty()
+                    else None
+                ),
             ) as run:
                 return await run(goal, on_step)
 

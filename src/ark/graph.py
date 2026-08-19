@@ -66,6 +66,7 @@ async def research_session(
     max_alternates: int | None = None,
     doc_urls: dict[str, str] | None = None,
     ask_doc_urls: Callable | None = None,
+    review_urls: Callable | None = None,
 ) -> AsyncGenerator[Callable]:
     """Yield a `run(requirement, on_step=None)` coroutine backed by one MCP session.
 
@@ -101,6 +102,7 @@ async def research_session(
                     # calls once the libraries are known so they can pin more.
                     "doc_urls": dict(doc_urls or {}),
                     "ask_doc_urls": ask_doc_urls,
+                    "review_urls": review_urls,
                 },
             }
             state: DocResearchState = {

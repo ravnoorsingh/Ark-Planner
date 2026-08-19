@@ -1,0 +1,452 @@
+{
+  "requirement": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+  "plan_path": "",
+  "model": "openai/gpt-oss-120b",
+  "generated_at": "2026-08-17T19:17:54.778205+00:00",
+  "libraries": [
+    {
+      "name": "fastapi",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "the service being tested is built with FastAPI"
+    },
+    {
+      "name": "pytest",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "core test runner"
+    },
+    {
+      "name": "httpx",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "provides ASGI transport for endpoint testing without a live server"
+    },
+    {
+      "name": "pytest-asyncio",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "enables async fixtures for FastAPI tests"
+    },
+    {
+      "name": "pytest-cov",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "measures test coverage and enforces the 80% gate"
+    },
+    {
+      "name": "hypothesis",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "generates property\u2011based tests for validation logic"
+    },
+    {
+      "name": "ruff",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "lints the codebase as part of CI"
+    },
+    {
+      "name": "testcontainers",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "manages a Postgres Docker container during tests"
+    }
+  ],
+  "doc_sources": [
+    {
+      "library": "fastapi",
+      "url": "https://fastapi.tiangolo.com",
+      "title": "FastAPI \u2013 Official Documentation",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The URL https://fastapi.tiangolo.com is the official documentation site for FastAPI, hosted by the framework's author. It is the root landing page for the current version, matching the highest priority criteria.",
+      "alternates": []
+    },
+    {
+      "library": "pytest",
+      "url": "https://docs.pytest.org/en/stable/contents.html",
+      "title": "pytest documentation",
+      "kind": "official_docs",
+      "confidence": 0.96,
+      "rationale": "The URL is the official documentation site for pytest, hosted at docs.pytest.org, which is the primary entry point for the stable version. It is the root contents page, not a third\u2011party site. High confidence.",
+      "alternates": [
+        "https://docs.pytest.org/en/stable/reference/reference.html",
+        "https://docs.pytest.org/en/stable/getting-started.html"
+      ]
+    },
+    {
+      "library": "httpx",
+      "url": "https://www.python-httpx.org",
+      "title": "HTTPX \u2013 A next\u2011generation HTTP client for Python",
+      "kind": "official_docs",
+      "confidence": 0.98,
+      "rationale": "The URL https://www.python-httpx.org is the official documentation site for the Python httpx library, matching the library name and providing a root landing page with docs, installation, and usage. It is the primary source maintained by the library authors, making it the best entry point.",
+      "alternates": [
+        "https://github.com/projectdiscovery/httpx"
+      ]
+    },
+    {
+      "library": "pytest-asyncio",
+      "url": "https://pytest-asyncio.readthedocs.io",
+      "title": "pytest-asyncio documentation",
+      "kind": "official_docs",
+      "confidence": 0.98,
+      "rationale": "The first result is the library's own Read the Docs site, which serves as the official documentation root for pytest-asyncio. This matches the top priority criteria. The site is current and maintained, making it the best entry point.",
+      "alternates": [
+        "https://github.com/pytest-dev/pytest-asyncio"
+      ]
+    },
+    {
+      "library": "pytest-cov",
+      "url": "https://pytest-cov.readthedocs.io",
+      "title": "pytest-cov documentation",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "The library provides its own dedicated documentation site on Read the Docs (https://pytest-cov.readthedocs.io), which is the primary entry point for official docs and is more specific than the generic GitHub repo or third\u2011party tutorials. This matches the top priority of using the library's own docs site.",
+      "alternates": [
+        "https://github.com/pytest-dev/pytest-cov"
+      ]
+    },
+    {
+      "library": "hypothesis",
+      "url": "https://hypothesis.readthedocs.io",
+      "title": "Hypothesis documentation",
+      "kind": "official_docs",
+      "confidence": 0.96,
+      "rationale": "The root page on hypothesis.readthedocs.io is the library's own documentation site and serves as the main entry point for users. It is the official docs rather than a deep link or third\u2011party source. The quickstart page and developer resources are sub\u2011pages, and the GitHub repo is a fallback if needed.",
+      "alternates": [
+        "https://hypothesis.readthedocs.io/en/latest/quickstart.html",
+        "https://github.com/hypothesis/h"
+      ]
+    },
+    {
+      "library": "ruff",
+      "url": "https://github.com/astral-sh/ruff",
+      "title": "astral-sh/ruff \u2013 GitHub",
+      "kind": "github",
+      "confidence": 0.9,
+      "rationale": "The official repository for the Python linter Ruff is hosted at github.com/astral-sh/ruff. No dedicated documentation site appears in the provided results, so the repo serves as the primary source of documentation and reference. It is first\u2011party and current.",
+      "alternates": [
+        "https://github.com/apnadkarni/ruff"
+      ]
+    },
+    {
+      "library": "testcontainers",
+      "url": "https://testcontainers-python.readthedocs.io",
+      "title": "testcontainers-python documentation",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "The library provides its own ReadTheDocs site, which is the primary official documentation host. The root URL redirects to the latest version, making it the best entry point for crawling. All other results are just version\u2011specific subpaths of the same site.",
+      "alternates": [
+        "https://testcontainers-python.readthedocs.io/en/latest",
+        "https://testcontainers-python.readthedocs.io/en/testcontainers-v4.7.2",
+        "https://testcontainers-python.readthedocs.io/en/testcontainers-v4.7.1"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "library": "fastapi",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://fastapi.tiangolo.com",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/fastapi-set-up-a-complete-testing-and-ci-stack-for-an-ex/primary--fastapi-tiangolo-com-6355c1ab.md",
+      "raw_path": "data/fastapi-set-up-a-complete-testing-and-ci-stack-for-an-ex/primary--fastapi-tiangolo-com-6355c1ab.json",
+      "title": "",
+      "bytes": 22558,
+      "sha256": "5f2319fdf3c6618398daa2cab40bf2b4af2964e6e786a1c77a2b7c67331177a3",
+      "fetched_at": "2026-08-17T19:13:34.029126+00:00",
+      "error": null
+    },
+    {
+      "library": "pytest",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://docs.pytest.org/en/stable/contents.html",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/pytest-set-up-a-complete-testing-and-ci-stack-for-an-ex/primary--docs-pytest-org-en-stable-contents-html-4da21d81.md",
+      "raw_path": "data/pytest-set-up-a-complete-testing-and-ci-stack-for-an-ex/primary--docs-pytest-org-en-stable-contents-html-4da21d81.json",
+      "title": "",
+      "bytes": 21044,
+      "sha256": "7b6f6d187e4398cf91b9609837ed8d8d74720ca84aafc1e4e0ca29cd39030379",
+      "fetched_at": "2026-08-17T19:13:34.301416+00:00",
+      "error": null
+    },
+    {
+      "library": "pytest",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://docs.pytest.org/en/stable/reference/reference.html",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/pytest-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-1--docs-pytest-org-en-stable-reference-reference-html-e0723246.md",
+      "raw_path": "data/pytest-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-1--docs-pytest-org-en-stable-reference-reference-html-e0723246.json",
+      "title": "",
+      "bytes": 361072,
+      "sha256": "19964557ab4dfb033a9d702593273b2b8a55703614681ee91d5c5b6d5ccbdda7",
+      "fetched_at": "2026-08-17T19:13:41.937794+00:00",
+      "error": null
+    },
+    {
+      "library": "pytest",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://docs.pytest.org/en/stable/getting-started.html",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 2,
+      "status": "ok",
+      "path": "data/pytest-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-2--docs-pytest-org-en-stable-getting-started-html-39c1fd08.md",
+      "raw_path": "data/pytest-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-2--docs-pytest-org-en-stable-getting-started-html-39c1fd08.json",
+      "title": "",
+      "bytes": 8580,
+      "sha256": "67fa046964f43089182f205147a1ea2924fd17903734b8b98e82754a9761c59d",
+      "fetched_at": "2026-08-17T19:13:42.082468+00:00",
+      "error": null
+    },
+    {
+      "library": "httpx",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://www.python-httpx.org",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/httpx-set-up-a-complete-testing-and-ci-stack-for-an-ex/primary--python-httpx-org-d759ebd9.md",
+      "raw_path": "data/httpx-set-up-a-complete-testing-and-ci-stack-for-an-ex/primary--python-httpx-org-d759ebd9.json",
+      "title": "",
+      "bytes": 3801,
+      "sha256": "26a037a68e5db8f2e7a6b9a95dd77893c5d2c4c20b65e6c60c98e5c8f5e79868",
+      "fetched_at": "2026-08-17T19:13:42.137491+00:00",
+      "error": null
+    },
+    {
+      "library": "httpx",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://github.com/projectdiscovery/httpx",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/httpx-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-1--github-com-projectdiscovery-httpx-85e475a4.md",
+      "raw_path": "data/httpx-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-1--github-com-projectdiscovery-httpx-85e475a4.json",
+      "title": "",
+      "bytes": 21042,
+      "sha256": "04fbb53ac2397f915bc0432b97652bc4371d8316c4ad4faedd44d7b37e7c2bb7",
+      "fetched_at": "2026-08-17T19:13:42.359840+00:00",
+      "error": null
+    },
+    {
+      "library": "pytest-asyncio",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://pytest-asyncio.readthedocs.io",
+      "resolved_url": "https://pytest-asyncio.readthedocs.io/en/stable/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/pytest-asyncio-set-up-a-complete-testing-and-ci-stack-for-an-ex/primary--pytest-asyncio-readthedocs-io-76c0c8b6.md",
+      "raw_path": "data/pytest-asyncio-set-up-a-complete-testing-and-ci-stack-for-an-ex/primary--pytest-asyncio-readthedocs-io-76c0c8b6.json",
+      "title": "",
+      "bytes": 1076,
+      "sha256": "285495a6d685007646f2b3612b9966efae295e76e90134e1c34129b069632d8f",
+      "fetched_at": "2026-08-17T19:13:42.383270+00:00",
+      "error": null
+    },
+    {
+      "library": "pytest-asyncio",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://github.com/pytest-dev/pytest-asyncio",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/pytest-asyncio-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-1--github-com-pytest-dev-pytest-asyncio-e59f4400.md",
+      "raw_path": "data/pytest-asyncio-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-1--github-com-pytest-dev-pytest-asyncio-e59f4400.json",
+      "title": "",
+      "bytes": 2301,
+      "sha256": "2534a318b1a8ef2a0dcb17ed0d43212825a0301d64933c3d849f8a5e88688088",
+      "fetched_at": "2026-08-17T19:13:42.463368+00:00",
+      "error": null
+    },
+    {
+      "library": "pytest-cov",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://pytest-cov.readthedocs.io",
+      "resolved_url": "https://pytest-cov.readthedocs.io/en/latest/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/pytest-cov-set-up-a-complete-testing-and-ci-stack-for-an-ex/primary--pytest-cov-readthedocs-io-61ed7e24.md",
+      "raw_path": "data/pytest-cov-set-up-a-complete-testing-and-ci-stack-for-an-ex/primary--pytest-cov-readthedocs-io-61ed7e24.json",
+      "title": "",
+      "bytes": 3055,
+      "sha256": "78750b833cffe44c180bb8fe4a3b8294c4b3ca26710057c5f90a6b5cbb4605c4",
+      "fetched_at": "2026-08-17T19:13:42.525353+00:00",
+      "error": null
+    },
+    {
+      "library": "pytest-cov",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://github.com/pytest-dev/pytest-cov",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/pytest-cov-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-1--github-com-pytest-dev-pytest-cov-361287e7.md",
+      "raw_path": "data/pytest-cov-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-1--github-com-pytest-dev-pytest-cov-361287e7.json",
+      "title": "",
+      "bytes": 4011,
+      "sha256": "ca66047cc44aa2bfdaee0aaf09606974e1ca857c4c604c68d3ac50bbdd298066",
+      "fetched_at": "2026-08-17T19:13:42.630179+00:00",
+      "error": null
+    },
+    {
+      "library": "hypothesis",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://hypothesis.readthedocs.io",
+      "resolved_url": "https://hypothesis.readthedocs.io/en/latest/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/hypothesis-set-up-a-complete-testing-and-ci-stack-for-an-ex/primary--hypothesis-readthedocs-io-c09151f8.md",
+      "raw_path": "data/hypothesis-set-up-a-complete-testing-and-ci-stack-for-an-ex/primary--hypothesis-readthedocs-io-c09151f8.json",
+      "title": "",
+      "bytes": 1190,
+      "sha256": "9191b9c68c8e313073bc916e702021590e5ef73a57ed914e13419d03b3c05fb1",
+      "fetched_at": "2026-08-17T19:13:42.666291+00:00",
+      "error": null
+    },
+    {
+      "library": "hypothesis",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://hypothesis.readthedocs.io/en/latest/quickstart.html",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/hypothesis-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-1--hypothesis-readthedocs-io-en-latest-quickstart-html-8a1ac961.md",
+      "raw_path": "data/hypothesis-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-1--hypothesis-readthedocs-io-en-latest-quickstart-html-8a1ac961.json",
+      "title": "",
+      "bytes": 5974,
+      "sha256": "edc84cfbf9c5377827c6af02c4f3af6f612fc9c9c49022320d87d5b3d87b110b",
+      "fetched_at": "2026-08-17T19:13:42.871381+00:00",
+      "error": null
+    },
+    {
+      "library": "hypothesis",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://github.com/hypothesis/h",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 2,
+      "status": "ok",
+      "path": "data/hypothesis-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-2--github-com-hypothesis-h-cd00f6d1.md",
+      "raw_path": "data/hypothesis-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-2--github-com-hypothesis-h-cd00f6d1.json",
+      "title": "",
+      "bytes": 4575,
+      "sha256": "afef40d37fb564b78e37a18b0bb47e17e8c49445dde234a796a12d449b45aeca",
+      "fetched_at": "2026-08-17T19:13:42.981929+00:00",
+      "error": null
+    },
+    {
+      "library": "ruff",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://github.com/astral-sh/ruff",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/ruff-set-up-a-complete-testing-and-ci-stack-for-an-ex/primary--github-com-astral-sh-ruff-40c2c54a.md",
+      "raw_path": "data/ruff-set-up-a-complete-testing-and-ci-stack-for-an-ex/primary--github-com-astral-sh-ruff-40c2c54a.json",
+      "title": "",
+      "bytes": 24386,
+      "sha256": "dfc3208e74e2096d530245d0118800ad35e77e616bc7782542603b7896eb3b80",
+      "fetched_at": "2026-08-17T19:13:43.296247+00:00",
+      "error": null
+    },
+    {
+      "library": "ruff",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://github.com/apnadkarni/ruff",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/ruff-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-1--github-com-apnadkarni-ruff-675a3156.md",
+      "raw_path": "data/ruff-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-1--github-com-apnadkarni-ruff-675a3156.json",
+      "title": "",
+      "bytes": 6333,
+      "sha256": "cca4d8da56441c45a9d10cdebe02f0a6897c7002dd2a82a52c2092805889150b",
+      "fetched_at": "2026-08-17T19:13:43.404826+00:00",
+      "error": null
+    },
+    {
+      "library": "testcontainers",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://testcontainers-python.readthedocs.io",
+      "resolved_url": "https://testcontainers-python.readthedocs.io/en/latest/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/testcontainers-set-up-a-complete-testing-and-ci-stack-for-an-ex/primary--testcontainers-python-readthedocs-io-8c8c48d9.md",
+      "raw_path": "data/testcontainers-set-up-a-complete-testing-and-ci-stack-for-an-ex/primary--testcontainers-python-readthedocs-io-8c8c48d9.json",
+      "title": "",
+      "bytes": 7591,
+      "sha256": "6d58a76a74d2ea3d3a3fe96433295ad895a8eb03e8940c0e88fa7d3dea179c84",
+      "fetched_at": "2026-08-17T19:13:43.558319+00:00",
+      "error": null
+    },
+    {
+      "library": "testcontainers",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://testcontainers-python.readthedocs.io/en/latest",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/testcontainers-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-1--testcontainers-python-readthedocs-io-en-latest-33a97d13.md",
+      "raw_path": "data/testcontainers-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-1--testcontainers-python-readthedocs-io-en-latest-33a97d13.json",
+      "title": "",
+      "bytes": 7591,
+      "sha256": "6d58a76a74d2ea3d3a3fe96433295ad895a8eb03e8940c0e88fa7d3dea179c84",
+      "fetched_at": "2026-08-17T19:13:43.675436+00:00",
+      "error": null
+    },
+    {
+      "library": "testcontainers",
+      "query": "Set up a complete testing and CI stack for an existing FastAPI service. Use pytest with async fixtures, httpx's ASGI transport for endpoint tests without a live server, pytest-cov with an 80 percent gate, Hypothesis for property-based tests of the validation layer, and ruff for linting. Wire it into GitHub Actions running against a Postgres service container. Use testcontainers-python for the docker container management library.",
+      "url": "https://testcontainers-python.readthedocs.io/en/testcontainers-v4.7.2",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 2,
+      "status": "ok",
+      "path": "data/testcontainers-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-2--testcontainers-python-readthedocs-io-en-testcontainers-v4-7-2-50e4b582.md",
+      "raw_path": "data/testcontainers-set-up-a-complete-testing-and-ci-stack-for-an-ex/alt-2--testcontainers-python-readthedocs-io-en-testcontainers-v4-7-2-50e4b582.json",
+      "title": "",
+      "bytes": 7591,
+      "sha256": "695b266ba8ffe0ff08b2bd4c7399839feb4e7bdffb1ed0a9a9fcfa413f5a7165",
+      "fetched_at": "2026-08-17T19:13:43.792224+00:00",
+      "error": null
+    }
+  ],
+  "errors": [
+    "pytest-asyncio: asked for https://pytest-asyncio.readthedocs.io but the collector returned https://pytest-asyncio.readthedocs.io/en/stable/",
+    "pytest-cov: asked for https://pytest-cov.readthedocs.io but the collector returned https://pytest-cov.readthedocs.io/en/latest/",
+    "hypothesis: asked for https://hypothesis.readthedocs.io but the collector returned https://hypothesis.readthedocs.io/en/latest/",
+    "testcontainers: asked for https://testcontainers-python.readthedocs.io but the collector returned https://testcontainers-python.readthedocs.io/en/latest/",
+    "pytest: could not distill docs \u2014 Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01k106055sekerc72h9vcf3rpr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199929, Requested 4838. Please try again in 34m19.344s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+    "httpx: could not distill docs \u2014 Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01k106055sekerc72h9vcf3rpr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199858, Requested 4815. Please try again in 33m38.736s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+    "pytest-asyncio: could not distill docs \u2014 Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01k106055sekerc72h9vcf3rpr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199786, Requested 3455. Please try again in 23m20.112s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+    "pytest-cov: could not distill docs \u2014 Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01k106055sekerc72h9vcf3rpr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199715, Requested 3673. Please try again in 24m23.616s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+    "hypothesis: could not distill docs \u2014 Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01k106055sekerc72h9vcf3rpr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199643, Requested 3528. Please try again in 22m49.872s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+    "ruff: could not distill docs \u2014 Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01k106055sekerc72h9vcf3rpr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199572, Requested 4348. Please try again in 28m13.44s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+    "testcontainers: could not distill docs \u2014 Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01k106055sekerc72h9vcf3rpr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199500, Requested 5323. Please try again in 34m43.536s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+    "Plan synthesis failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01k106055sekerc72h9vcf3rpr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199429, Requested 2748. Please try again in 15m40.464s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  ]
+}

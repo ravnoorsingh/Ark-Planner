@@ -1,10 +1,10 @@
 ---
 library: "sentence-transformers"
-query: "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database."
+query: "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction, python-multipart for uploads, and Pydantic models for validation. Use weaviate-client for the vector database. Use sentence-transformers for the embedding library."
 url: "https://sbert.net/"
 role: "primary"
 rank: 0
-fetched_at: "2026-08-19T12:36:06.627544+00:00"
+fetched_at: "2026-08-19T19:23:44.509121+00:00"
 fetched_via: "brightdata-collector:c_msx9i6aq2bz5dznadk"
 sha256: "1470da3122ea9bc3af71da6826f4671bcd0f923f5740a8907f3d099ed9800c75"
 ---

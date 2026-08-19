@@ -1,0 +1,342 @@
+{
+  "requirement": "Build a real-time collaborative document editor backend. FastAPI serves WebSocket connections, Redis pub/sub broadcasts operational-transform patches between clients, SQLModel persists document snapshots to a Database, and Alembic manages migrations. Include JWT authentication, per-document access control, and graceful reconnection with missed-update replay. Use PyJWT for the jwt authentication. Use casbin for the access control. Use text-ot for the operational transform.",
+  "plan_path": "",
+  "model": "openai/gpt-oss-120b",
+  "generated_at": "2026-08-18T14:25:53.345628+00:00",
+  "libraries": [
+    {
+      "name": "fastapi",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Provides the ASGI web framework and WebSocket support"
+    },
+    {
+      "name": "redis",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Client library for Redis pub/sub to broadcast OT patches"
+    },
+    {
+      "name": "sqlmodel",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "ORM for persisting document snapshots in the database"
+    },
+    {
+      "name": "alembic",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Manages database schema migrations"
+    },
+    {
+      "name": "pyjwt",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Handles JWT creation and verification for authentication"
+    },
+    {
+      "name": "casbin",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Enforces per\u2011document access control policies"
+    },
+    {
+      "name": "text-ot",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Implements operational\u2011transform logic for collaborative editing"
+    }
+  ],
+  "doc_sources": [
+    {
+      "library": "fastapi",
+      "url": "https://fastapi.tiangolo.com/",
+      "title": "FastAPI Documentation",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The URL is the library's own documentation site (fastapi.tiangolo.com), which is the primary entry point for official docs. It matches the preferred source type and is current.",
+      "alternates": []
+    },
+    {
+      "library": "redis",
+      "url": "https://redis.io/docs/latest/",
+      "title": "Redis Documentation \u2013 Latest",
+      "kind": "official_docs",
+      "confidence": 0.6,
+      "rationale": "The search results do not contain a dedicated documentation site for the Python client library (redis-py). The closest first\u2011party source is the official Redis documentation root, which is maintained by the Redis project and is current. It is therefore the best available official entry point, though it is not specific to the Python client.",
+      "alternates": [
+        "https://github.com/redis/redis",
+        "https://redis.io/"
+      ]
+    },
+    {
+      "library": "sqlmodel",
+      "url": "https://sqlmodel.tiangolo.com/",
+      "title": "SQLModel Documentation",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The URL is the official documentation site hosted at sqlmodel.tiangolo.com, which is the primary entry point for the library's docs and includes the API reference. It is a first\u2011party source and the root landing page, making it the best candidate.",
+      "alternates": []
+    },
+    {
+      "library": "alembic",
+      "url": "https://alembic.sqlalchemy.org/",
+      "title": "Alembic Documentation",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The Alembic project hosts its own documentation site at https://alembic.sqlalchemy.org/, which is the primary entry point for official docs and matches the preferred source hierarchy. It is the root landing page for the current version, making it the best choice.",
+      "alternates": [
+        "https://github.com/sqlalchemy/alembic"
+      ]
+    },
+    {
+      "library": "pyjwt",
+      "url": "https://pyjwt.readthedocs.io/",
+      "title": "PyJWT Documentation",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "The Read the Docs site is the library's own documentation host, linked from the project and GitHub. It serves as the official documentation root for the current version.",
+      "alternates": [
+        "https://github.com/jpadilla/pyjwt"
+      ]
+    },
+    {
+      "library": "casbin",
+      "url": "https://casbin.org/",
+      "title": "Apache Casbin",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "The main domain casbin.org hosts the official documentation for Apache Casbin, including the Python implementation. It is the primary entry point for the library\u2019s docs, matching the preferred source type.",
+      "alternates": [
+        "https://casbin.org/docs/overview",
+        "https://github.com/apache/casbin"
+      ]
+    },
+    {
+      "library": "text-ot",
+      "url": "https://bit.ai/",
+      "title": "Bit.ai: AI-Powered Documents, Wikis, & Knowledge Management for Teams",
+      "kind": "other",
+      "confidence": 0.1,
+      "rationale": "None of the supplied results link to the library's official documentation, API reference, or GitHub repository. The only available link is a YouTube video, which is not an official source, so it is chosen as a placeholder with very low confidence. (Model selected a non-documentation domain; substituted the best remaining candidate.)",
+      "alternates": []
+    }
+  ],
+  "documents": [
+    {
+      "library": "fastapi",
+      "query": "Build a real-time collaborative document editor backend. FastAPI serves WebSocket connections, Redis pub/sub broadcasts operational-transform patches between clients, SQLModel persists document snapshots to a Database, and Alembic manages migrations. Include JWT authentication, per-document access control, and graceful reconnection with missed-update replay. Use PyJWT for the jwt authentication. Use casbin for the access control. Use text-ot for the operational transform.",
+      "url": "https://fastapi.tiangolo.com/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/fastapi-build-a-real-time-collaborative-document-editor/primary--fastapi-tiangolo-com-c889b628.md",
+      "raw_path": "data/fastapi-build-a-real-time-collaborative-document-editor/primary--fastapi-tiangolo-com-c889b628.json",
+      "title": "",
+      "bytes": 22558,
+      "sha256": "5f2319fdf3c6618398daa2cab40bf2b4af2964e6e786a1c77a2b7c67331177a3",
+      "fetched_at": "2026-08-18T14:21:12.723836+00:00",
+      "error": null
+    },
+    {
+      "library": "redis",
+      "query": "Build a real-time collaborative document editor backend. FastAPI serves WebSocket connections, Redis pub/sub broadcasts operational-transform patches between clients, SQLModel persists document snapshots to a Database, and Alembic manages migrations. Include JWT authentication, per-document access control, and graceful reconnection with missed-update replay. Use PyJWT for the jwt authentication. Use casbin for the access control. Use text-ot for the operational transform.",
+      "url": "https://redis.io/docs/latest/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/redis-build-a-real-time-collaborative-document-editor/primary--redis-io-docs-latest-51b3f7ab.md",
+      "raw_path": "data/redis-build-a-real-time-collaborative-document-editor/primary--redis-io-docs-latest-51b3f7ab.json",
+      "title": "",
+      "bytes": 4437,
+      "sha256": "def4e8dc5f760486c3691aadada4d90ca31cd064ee5a1c1d26fc90c16e24a500",
+      "fetched_at": "2026-08-18T14:21:13.223753+00:00",
+      "error": null
+    },
+    {
+      "library": "redis",
+      "query": "Build a real-time collaborative document editor backend. FastAPI serves WebSocket connections, Redis pub/sub broadcasts operational-transform patches between clients, SQLModel persists document snapshots to a Database, and Alembic manages migrations. Include JWT authentication, per-document access control, and graceful reconnection with missed-update replay. Use PyJWT for the jwt authentication. Use casbin for the access control. Use text-ot for the operational transform.",
+      "url": "https://github.com/redis/redis",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/redis-build-a-real-time-collaborative-document-editor/alt-1--github-com-redis-redis-8985d305.md",
+      "raw_path": "data/redis-build-a-real-time-collaborative-document-editor/alt-1--github-com-redis-redis-8985d305.json",
+      "title": "",
+      "bytes": 29090,
+      "sha256": "e6b5aa1a6b6e68d7ea8dbe253bcc0c2e6d0febf8fc5c1698d421a36c52456126",
+      "fetched_at": "2026-08-18T14:21:13.584925+00:00",
+      "error": null
+    },
+    {
+      "library": "redis",
+      "query": "Build a real-time collaborative document editor backend. FastAPI serves WebSocket connections, Redis pub/sub broadcasts operational-transform patches between clients, SQLModel persists document snapshots to a Database, and Alembic manages migrations. Include JWT authentication, per-document access control, and graceful reconnection with missed-update replay. Use PyJWT for the jwt authentication. Use casbin for the access control. Use text-ot for the operational transform.",
+      "url": "https://redis.io/",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 2,
+      "status": "ok",
+      "path": "data/redis-build-a-real-time-collaborative-document-editor/alt-2--redis-io-1d1b4e83.md",
+      "raw_path": "data/redis-build-a-real-time-collaborative-document-editor/alt-2--redis-io-1d1b4e83.json",
+      "title": "",
+      "bytes": 2571,
+      "sha256": "03c8b984f6272f4c24a72d11116d9ee7b843d79b0a60ff591f8ed880d4bc273b",
+      "fetched_at": "2026-08-18T14:21:13.726903+00:00",
+      "error": null
+    },
+    {
+      "library": "sqlmodel",
+      "query": "Build a real-time collaborative document editor backend. FastAPI serves WebSocket connections, Redis pub/sub broadcasts operational-transform patches between clients, SQLModel persists document snapshots to a Database, and Alembic manages migrations. Include JWT authentication, per-document access control, and graceful reconnection with missed-update replay. Use PyJWT for the jwt authentication. Use casbin for the access control. Use text-ot for the operational transform.",
+      "url": "https://sqlmodel.tiangolo.com/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/sqlmodel-build-a-real-time-collaborative-document-editor/primary--sqlmodel-tiangolo-com-61054360.md",
+      "raw_path": "data/sqlmodel-build-a-real-time-collaborative-document-editor/primary--sqlmodel-tiangolo-com-61054360.json",
+      "title": "",
+      "bytes": 7127,
+      "sha256": "01189e865712f8fcc7a1fa4be04edefb362d20308b5ce3cc12fb5294d8256348",
+      "fetched_at": "2026-08-18T14:21:13.815541+00:00",
+      "error": null
+    },
+    {
+      "library": "alembic",
+      "query": "Build a real-time collaborative document editor backend. FastAPI serves WebSocket connections, Redis pub/sub broadcasts operational-transform patches between clients, SQLModel persists document snapshots to a Database, and Alembic manages migrations. Include JWT authentication, per-document access control, and graceful reconnection with missed-update replay. Use PyJWT for the jwt authentication. Use casbin for the access control. Use text-ot for the operational transform.",
+      "url": "https://alembic.sqlalchemy.org/",
+      "resolved_url": "https://alembic.sqlalchemy.org/en/latest/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/alembic-build-a-real-time-collaborative-document-editor/primary--alembic-sqlalchemy-org-586ac293.md",
+      "raw_path": "data/alembic-build-a-real-time-collaborative-document-editor/primary--alembic-sqlalchemy-org-586ac293.json",
+      "title": "",
+      "bytes": 36594,
+      "sha256": "0857a541ea89a842a34b73b88ad9399fc58c82d72d022aac0fd4d12f52d67558",
+      "fetched_at": "2026-08-18T14:21:14.345844+00:00",
+      "error": null
+    },
+    {
+      "library": "alembic",
+      "query": "Build a real-time collaborative document editor backend. FastAPI serves WebSocket connections, Redis pub/sub broadcasts operational-transform patches between clients, SQLModel persists document snapshots to a Database, and Alembic manages migrations. Include JWT authentication, per-document access control, and graceful reconnection with missed-update replay. Use PyJWT for the jwt authentication. Use casbin for the access control. Use text-ot for the operational transform.",
+      "url": "https://github.com/sqlalchemy/alembic",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/alembic-build-a-real-time-collaborative-document-editor/alt-1--github-com-sqlalchemy-alembic-4a7f016a.md",
+      "raw_path": "data/alembic-build-a-real-time-collaborative-document-editor/alt-1--github-com-sqlalchemy-alembic-4a7f016a.json",
+      "title": "",
+      "bytes": 5528,
+      "sha256": "728944e233d97d5aef29f5bf89e95003d334f611c7f46e863189260fd5f3e02e",
+      "fetched_at": "2026-08-18T14:21:14.428745+00:00",
+      "error": null
+    },
+    {
+      "library": "pyjwt",
+      "query": "Build a real-time collaborative document editor backend. FastAPI serves WebSocket connections, Redis pub/sub broadcasts operational-transform patches between clients, SQLModel persists document snapshots to a Database, and Alembic manages migrations. Include JWT authentication, per-document access control, and graceful reconnection with missed-update replay. Use PyJWT for the jwt authentication. Use casbin for the access control. Use text-ot for the operational transform.",
+      "url": "https://pyjwt.readthedocs.io/",
+      "resolved_url": "https://pyjwt.readthedocs.io/en/stable/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/pyjwt-build-a-real-time-collaborative-document-editor/primary--pyjwt-readthedocs-io-15c29d25.md",
+      "raw_path": "data/pyjwt-build-a-real-time-collaborative-document-editor/primary--pyjwt-readthedocs-io-15c29d25.json",
+      "title": "",
+      "bytes": 4727,
+      "sha256": "aaee8ecb1caf590dc9ce4824dc9eea66f3fca1d8d4465e7a91050c744f512100",
+      "fetched_at": "2026-08-18T14:21:14.505045+00:00",
+      "error": null
+    },
+    {
+      "library": "pyjwt",
+      "query": "Build a real-time collaborative document editor backend. FastAPI serves WebSocket connections, Redis pub/sub broadcasts operational-transform patches between clients, SQLModel persists document snapshots to a Database, and Alembic manages migrations. Include JWT authentication, per-document access control, and graceful reconnection with missed-update replay. Use PyJWT for the jwt authentication. Use casbin for the access control. Use text-ot for the operational transform.",
+      "url": "https://github.com/jpadilla/pyjwt",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/pyjwt-build-a-real-time-collaborative-document-editor/alt-1--github-com-jpadilla-pyjwt-50a3cbec.md",
+      "raw_path": "data/pyjwt-build-a-real-time-collaborative-document-editor/alt-1--github-com-jpadilla-pyjwt-50a3cbec.json",
+      "title": "",
+      "bytes": 2355,
+      "sha256": "061f360c5f91b80198dab394d451ee7323390f0d657a829a0be42080d6b22aa9",
+      "fetched_at": "2026-08-18T14:21:14.600136+00:00",
+      "error": null
+    },
+    {
+      "library": "casbin",
+      "query": "Build a real-time collaborative document editor backend. FastAPI serves WebSocket connections, Redis pub/sub broadcasts operational-transform patches between clients, SQLModel persists document snapshots to a Database, and Alembic manages migrations. Include JWT authentication, per-document access control, and graceful reconnection with missed-update replay. Use PyJWT for the jwt authentication. Use casbin for the access control. Use text-ot for the operational transform.",
+      "url": "https://casbin.org/",
+      "resolved_url": "https://casbin.apache.org/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/casbin-build-a-real-time-collaborative-document-editor/primary--casbin-org-c62527da.md",
+      "raw_path": "data/casbin-build-a-real-time-collaborative-document-editor/primary--casbin-org-c62527da.json",
+      "title": "",
+      "bytes": 6825,
+      "sha256": "e7b2eeeda0b7e9762de7859e5e9a31207d9258c8fdcbd29ca6f2ade3e46bf1b9",
+      "fetched_at": "2026-08-18T14:21:14.716334+00:00",
+      "error": null
+    },
+    {
+      "library": "casbin",
+      "query": "Build a real-time collaborative document editor backend. FastAPI serves WebSocket connections, Redis pub/sub broadcasts operational-transform patches between clients, SQLModel persists document snapshots to a Database, and Alembic manages migrations. Include JWT authentication, per-document access control, and graceful reconnection with missed-update replay. Use PyJWT for the jwt authentication. Use casbin for the access control. Use text-ot for the operational transform.",
+      "url": "https://casbin.org/docs/overview",
+      "resolved_url": "https://casbin.apache.org/docs/overview/",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/casbin-build-a-real-time-collaborative-document-editor/alt-1--casbin-org-docs-overview-dce5765c.md",
+      "raw_path": "data/casbin-build-a-real-time-collaborative-document-editor/alt-1--casbin-org-docs-overview-dce5765c.json",
+      "title": "",
+      "bytes": 5353,
+      "sha256": "1794d259fdb8a737bd98cbc0fc54053dae3fabc98a4b7aa5c57fd75fa18da124",
+      "fetched_at": "2026-08-18T14:21:14.841475+00:00",
+      "error": null
+    },
+    {
+      "library": "casbin",
+      "query": "Build a real-time collaborative document editor backend. FastAPI serves WebSocket connections, Redis pub/sub broadcasts operational-transform patches between clients, SQLModel persists document snapshots to a Database, and Alembic manages migrations. Include JWT authentication, per-document access control, and graceful reconnection with missed-update replay. Use PyJWT for the jwt authentication. Use casbin for the access control. Use text-ot for the operational transform.",
+      "url": "https://github.com/apache/casbin",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 2,
+      "status": "ok",
+      "path": "data/casbin-build-a-real-time-collaborative-document-editor/alt-2--github-com-apache-casbin-5d03f00e.md",
+      "raw_path": "data/casbin-build-a-real-time-collaborative-document-editor/alt-2--github-com-apache-casbin-5d03f00e.json",
+      "title": "",
+      "bytes": 14822,
+      "sha256": "184e2928c6c79fbd0e898c9fe0f4c8e776ce624574d25f4e58f5e3fcb8446b65",
+      "fetched_at": "2026-08-18T14:21:15.130213+00:00",
+      "error": null
+    },
+    {
+      "library": "text-ot",
+      "query": "Build a real-time collaborative document editor backend. FastAPI serves WebSocket connections, Redis pub/sub broadcasts operational-transform patches between clients, SQLModel persists document snapshots to a Database, and Alembic manages migrations. Include JWT authentication, per-document access control, and graceful reconnection with missed-update replay. Use PyJWT for the jwt authentication. Use casbin for the access control. Use text-ot for the operational transform.",
+      "url": "https://bit.ai/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/text-ot-build-a-real-time-collaborative-document-editor/primary--bit-ai-954b6809.md",
+      "raw_path": "data/text-ot-build-a-real-time-collaborative-document-editor/primary--bit-ai-954b6809.json",
+      "title": "",
+      "bytes": 27611,
+      "sha256": "6a26d20049d71247a8f16613ff61ac756aafbb9e7e3b79ba2723e27970906b86",
+      "fetched_at": "2026-08-18T14:21:15.574395+00:00",
+      "error": null
+    }
+  ],
+  "errors": [
+    "alembic: asked for https://alembic.sqlalchemy.org/ but the collector returned https://alembic.sqlalchemy.org/en/latest/",
+    "pyjwt: asked for https://pyjwt.readthedocs.io/ but the collector returned https://pyjwt.readthedocs.io/en/stable/",
+    "casbin: asked for https://casbin.org/ but the collector returned https://casbin.apache.org/",
+    "casbin: asked for https://casbin.org/docs/overview but the collector returned https://casbin.apache.org/docs/overview/",
+    "fastapi: could not distill docs \u2014 Model did not return schema-valid JSON for LibraryBrief: 3 validation errors for LibraryBrief\napi.1\n  Input should be an object [type=model_type, input_value='{"
+  ]
+}

@@ -1,11 +1,11 @@
 ---
 library: "pypdf"
-query: "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database."
+query: "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction, python-multipart for uploads, and Pydantic models for validation. Use weaviate-client for the vector database. Use sentence-transformers for the embedding library."
 url: "https://pypdf.readthedocs.io/"
 resolved_url: "https://pypdf.readthedocs.io/en/stable/"
 role: "primary"
 rank: 0
-fetched_at: "2026-08-19T12:36:05.550316+00:00"
+fetched_at: "2026-08-19T19:23:44.846780+00:00"
 fetched_via: "brightdata-collector:c_msx9i6aq2bz5dznadk"
 sha256: "6d2fc092d79c814a03942e763c4ad836ff9d2310cc03f7ed96a2524a358cb5eb"
 ---

@@ -1,0 +1,48 @@
+{
+  "requirement": "latest docs for pydantic\nlatest docs for httpx",
+  "model": "openai/gpt-oss-120b",
+  "generated_at": "2026-08-17T12:13:34.969810+00:00",
+  "libraries": [
+    {
+      "name": "pydantic",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "required to reference its documentation"
+    },
+    {
+      "name": "httpx",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "used to retrieve the latest documentation"
+    }
+  ],
+  "doc_sources": [
+    {
+      "library": "pydantic",
+      "url": "https://pydantic.dev/docs",
+      "title": "Pydantic Documentation",
+      "kind": "official_docs",
+      "confidence": 0.97,
+      "rationale": "The root URL https://pydantic.dev/docs is the official documentation site for Pydantic, providing the latest version of the docs. It is the primary entry point recommended by the project and is more authoritative than language\u2011specific mirrors or deep links. The site is directly owned by the Pydantic maintainers, making it the best choice for a canonical documentation source.",
+      "alternates": [
+        "https://pydantic.dev/docs/validation/latest/get-started",
+        "https://pydantic.dev/docs/validation/dev/concepts/models",
+        "https://github.com/pydantic/pydantic"
+      ]
+    },
+    {
+      "library": "httpx",
+      "url": "https://www.python-httpx.org",
+      "title": "HTTPX \u2013 A next-generation HTTP client for Python",
+      "kind": "official_docs",
+      "confidence": 0.98,
+      "rationale": "https://www.python-httpx.org is the official documentation site maintained by the httpx developers. It serves as the primary entry point for the library\u2019s docs, matching the library name and providing comprehensive reference material. Other results refer to a different tool (projectdiscovery/httpx) or third\u2011party tutorials, making this the most appropriate choice.",
+      "alternates": [
+        "https://github.com/projectdiscovery/httpx",
+        "https://docs.projectdiscovery.io/opensource/httpx/overview",
+        "https://www.youtube.com/watch?v=qAh5dDODJ5k"
+      ]
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,67 @@
+{
+  "requirement": "get me the latest docs for LangGraph, Tavily and FastAPI",
+  "model": "openai/gpt-oss-120b",
+  "generated_at": "2026-08-17T12:09:52.179243+00:00",
+  "libraries": [
+    {
+      "name": "fastapi",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "to retrieve FastAPI documentation"
+    },
+    {
+      "name": "langgraph",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "to retrieve LangGraph documentation"
+    },
+    {
+      "name": "tavily-python",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "to retrieve Tavily documentation"
+    }
+  ],
+  "doc_sources": [
+    {
+      "library": "fastapi",
+      "url": "https://fastapi.tiangolo.com",
+      "title": "FastAPI \u2013 Official Documentation",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The URL https://fastapi.tiangolo.com is the official documentation site hosted by the library author (Tiangolo). It is the root landing page for the current version of FastAPI, matching the top priority criteria. Other results are third\u2011party tutorials or blog posts, so they are lower priority.",
+      "alternates": [
+        "https://fastapi-tutorial.readthedocs.io",
+        "https://code.visualstudio.com/docs/python/tutorial-fastapi",
+        "https://refine.dev/blog/introduction-to-fast-api"
+      ]
+    },
+    {
+      "library": "langgraph",
+      "url": "https://docs.langchain.com/oss/python/langgraph/overview",
+      "title": "LangGraph documentation \u2013 LangChain Docs",
+      "kind": "official_docs",
+      "confidence": 0.9,
+      "rationale": "The docs.langchain.com site is the official documentation hub for LangChain and its sub\u2011project LangGraph, providing the root overview page for the Python library. It is a first\u2011party source and serves as the primary docs entry point, matching the preferred hierarchy. The API reference (reference.langchain.com) is a secondary official source, while other results are third\u2011party or blog content.",
+      "alternates": [
+        "https://reference.langchain.com/python/langgraph",
+        "https://mcpservers.org/agent-skills/langchain-ai/langgraph-docs",
+        "https://docs.falkordb.com/genai-tools/langgraph.html"
+      ]
+    },
+    {
+      "library": "tavily-python",
+      "url": "https://docs.tavily.com/welcome",
+      "title": "Welcome - Tavily Docs",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "The Tavily documentation site (docs.tavily.com) is the library's own official docs. The Welcome page is the root landing page, making it the best entry point.",
+      "alternates": [
+        "https://docs.tavily.com/sdk/python/quick-start",
+        "https://docs.tavily.com/sdk/python/reference",
+        "https://github.com/tavily-ai/tavily-python"
+      ]
+    }
+  ],
+  "errors": []
+}

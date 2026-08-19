@@ -1,10 +1,10 @@
 ---
 library: "sentence-transformers"
-query: "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database."
+query: "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction, python-multipart for uploads, and Pydantic models for validation. Use weaviate-client for the vector database. Use sentence-transformers for the embedding library."
 url: "https://github.com/huggingface/sentence-transformers"
 role: "alternate"
 rank: 1
-fetched_at: "2026-08-19T12:36:06.864099+00:00"
+fetched_at: "2026-08-19T19:23:44.789038+00:00"
 fetched_via: "brightdata-collector:c_msx9i6aq2bz5dznadk"
 sha256: "062b966bb59ce25bb0e22362bdccb9da52021c486de0dcba3c37e8d25ffb7417"
 ---

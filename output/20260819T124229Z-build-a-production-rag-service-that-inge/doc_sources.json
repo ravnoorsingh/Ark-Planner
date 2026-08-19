@@ -1,0 +1,762 @@
+{
+  "requirement": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database.",
+  "plan_path": "",
+  "model": "openai/gpt-oss-120b",
+  "generated_at": "2026-08-19T12:42:29.224915+00:00",
+  "libraries": [
+    {
+      "name": "fastapi",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Provides the HTTP API for the RAG service"
+    },
+    {
+      "name": "pymilvus",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Connects to Milvus vector database for storing embeddings"
+    },
+    {
+      "name": "pypdf",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Extracts text from PDF manuals"
+    },
+    {
+      "name": "sentence-transformers",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Generates embeddings for document chunks"
+    },
+    {
+      "name": "langchain",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Handles chunking, retrieval, and RAG orchestration"
+    },
+    {
+      "name": "pydantic",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Validates request and response models"
+    },
+    {
+      "name": "uvicorn",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Runs the FastAPI app as an ASGI server"
+    },
+    {
+      "name": "python-multipart",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Enables file upload handling for PDF ingestion"
+    }
+  ],
+  "doc_sources": [
+    {
+      "library": "fastapi",
+      "url": "https://fastapi.tiangolo.com/",
+      "title": "FastAPI Documentation",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The URL is the official documentation site for FastAPI, hosted at fastapi.tiangolo.com, which is the primary entry point and root landing page for the library.",
+      "alternates": []
+    },
+    {
+      "library": "pymilvus",
+      "url": "https://milvus.io/api-reference/pymilvus/v3.0.x/About.md",
+      "title": "About PyMilvus",
+      "kind": "api_reference",
+      "confidence": 0.9,
+      "rationale": "The URL is on milvus.io under the 'api-reference' path, which is the official API reference for PyMilvus version 3.0.x, making it the primary documentation entry point. It is first\u2011party and current.",
+      "alternates": [
+        "https://github.com/milvus-io/pymilvus",
+        "https://milvus.io/docs/install-pymilvus.md"
+      ]
+    },
+    {
+      "library": "pypdf",
+      "url": "https://pypdf.readthedocs.io/",
+      "title": "pypdf documentation",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The root URL on readthedocs.io is the library's official documentation site, providing the latest stable docs and serving as the canonical entry point. It is directly linked from the search results and is the preferred source over deep links or the GitHub repo.",
+      "alternates": [
+        "https://github.com/py-pdf/pypdf",
+        "https://pypdf.readthedocs.io/en/stable/modules/PdfReader.html",
+        "https://pypdf.readthedocs.io/en/latest/user/extract-text.html"
+      ]
+    },
+    {
+      "library": "sentence-transformers",
+      "url": "https://sbert.net/",
+      "title": "Sentence Transformers Documentation",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "sbert.net is the official documentation site for the Sentence Transformers library, providing the root landing page and usage guide. It is the primary source over the GitHub repo or Hugging Face hub.",
+      "alternates": [
+        "https://github.com/huggingface/sentence-transformers"
+      ]
+    },
+    {
+      "library": "langchain",
+      "url": "https://reference.langchain.com/python/langchain?_gl=1*142x80g*_gcl_au*MTE3NDI2ODYyOC4xNzg2MDA3OTI4*_ga*MjA0NjkxODk3MC4xNzg1NzgyMDcy*_ga_47WX3HKKY2*czE3ODcxNDI2NzMkbzE5JGcxJHQxNzg3MTQyNzE4JGoxNSRsMCRoMA..",
+      "title": "langchain",
+      "kind": "official_docs",
+      "confidence": 1.0,
+      "rationale": "Documentation URL supplied by the user.",
+      "alternates": []
+    },
+    {
+      "library": "pydantic",
+      "url": "https://pydantic.dev/docs/validation/latest/get-started/",
+      "title": "pydantic",
+      "kind": "official_docs",
+      "confidence": 1.0,
+      "rationale": "Documentation URL supplied by the user.",
+      "alternates": []
+    },
+    {
+      "library": "uvicorn",
+      "url": "https://uvicorn.dev/",
+      "title": "Uvicorn Documentation",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The result https://uvicorn.dev/ is the official documentation site for Uvicorn, serving as the root landing page for the library. It matches the highest priority criterion (library's own docs site).",
+      "alternates": [
+        "https://uvicorn.dev/settings/",
+        "https://github.com/Kludex/uvicorn"
+      ]
+    },
+    {
+      "library": "python-multipart",
+      "url": "https://multipart.readthedocs.io/",
+      "title": "python-multipart documentation",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "Read the Docs site is the library's dedicated documentation host, matching the preferred official docs source. It is the primary entry point for users and is maintained by the project.",
+      "alternates": [
+        "https://github.com/Kludex/python-multipart"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "library": "fastapi",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database.",
+      "url": "https://fastapi.tiangolo.com/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/fastapi-build-a-production-rag-service-that-ingests-pdf/primary--fastapi-tiangolo-com-c889b628.md",
+      "raw_path": "data/fastapi-build-a-production-rag-service-that-ingests-pdf/primary--fastapi-tiangolo-com-c889b628.json",
+      "title": "",
+      "bytes": 22558,
+      "sha256": "5f2319fdf3c6618398daa2cab40bf2b4af2964e6e786a1c77a2b7c67331177a3",
+      "fetched_at": "2026-08-19T12:36:05.121362+00:00",
+      "error": null
+    },
+    {
+      "library": "pymilvus",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database.",
+      "url": "https://milvus.io/api-reference/pymilvus/v3.0.x/About.md",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/pymilvus-build-a-production-rag-service-that-ingests-pdf/primary--milvus-io-api-reference-pymilvus-v3-0-x-about-md-624ecd5a.md",
+      "raw_path": "data/pymilvus-build-a-production-rag-service-that-ingests-pdf/primary--milvus-io-api-reference-pymilvus-v3-0-x-about-md-624ecd5a.json",
+      "title": "",
+      "bytes": 3352,
+      "sha256": "3a452791e02f4205df41029151a77f103725fb5d79af0a61c0843a7f1cb8eeea",
+      "fetched_at": "2026-08-19T12:36:05.238478+00:00",
+      "error": null
+    },
+    {
+      "library": "pymilvus",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database.",
+      "url": "https://github.com/milvus-io/pymilvus",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/pymilvus-build-a-production-rag-service-that-ingests-pdf/alt-1--github-com-milvus-io-pymilvus-a87a5e3e.md",
+      "raw_path": "data/pymilvus-build-a-production-rag-service-that-ingests-pdf/alt-1--github-com-milvus-io-pymilvus-a87a5e3e.json",
+      "title": "",
+      "bytes": 5815,
+      "sha256": "caf55975ac9ccab2deefd14fa2429234416f09db21438887d3866166de90d019",
+      "fetched_at": "2026-08-19T12:36:05.378738+00:00",
+      "error": null
+    },
+    {
+      "library": "pymilvus",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database.",
+      "url": "https://milvus.io/docs/install-pymilvus.md",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 2,
+      "status": "ok",
+      "path": "data/pymilvus-build-a-production-rag-service-that-ingests-pdf/alt-2--milvus-io-docs-install-pymilvus-md-c36724e7.md",
+      "raw_path": "data/pymilvus-build-a-production-rag-service-that-ingests-pdf/alt-2--milvus-io-docs-install-pymilvus-md-c36724e7.json",
+      "title": "",
+      "bytes": 2870,
+      "sha256": "cfbff0a355d845a89de06fafebd945513ae58dfbc2d1e9d04ef771e0712753be",
+      "fetched_at": "2026-08-19T12:36:05.483812+00:00",
+      "error": null
+    },
+    {
+      "library": "pypdf",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database.",
+      "url": "https://pypdf.readthedocs.io/",
+      "resolved_url": "https://pypdf.readthedocs.io/en/stable/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/pypdf-build-a-production-rag-service-that-ingests-pdf/primary--pypdf-readthedocs-io-deadc5f9.md",
+      "raw_path": "data/pypdf-build-a-production-rag-service-that-ingests-pdf/primary--pypdf-readthedocs-io-deadc5f9.json",
+      "title": "",
+      "bytes": 3667,
+      "sha256": "6d2fc092d79c814a03942e763c4ad836ff9d2310cc03f7ed96a2524a358cb5eb",
+      "fetched_at": "2026-08-19T12:36:05.550316+00:00",
+      "error": null
+    },
+    {
+      "library": "pypdf",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database.",
+      "url": "https://github.com/py-pdf/pypdf",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/pypdf-build-a-production-rag-service-that-ingests-pdf/alt-1--github-com-py-pdf-pypdf-c6f0cfef.md",
+      "raw_path": "data/pypdf-build-a-production-rag-service-that-ingests-pdf/alt-1--github-com-py-pdf-pypdf-c6f0cfef.json",
+      "title": "",
+      "bytes": 5418,
+      "sha256": "05c19cbcb141817cab8109e181233cfc222293165db5ef63789ae85477d9f3bb",
+      "fetched_at": "2026-08-19T12:36:05.661603+00:00",
+      "error": null
+    },
+    {
+      "library": "pypdf",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database.",
+      "url": "https://pypdf.readthedocs.io/en/stable/modules/PdfReader.html",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 2,
+      "status": "ok",
+      "path": "data/pypdf-build-a-production-rag-service-that-ingests-pdf/alt-2--pypdf-readthedocs-io-en-stable-modules-pdfreader-html-3db5457a.md",
+      "raw_path": "data/pypdf-build-a-production-rag-service-that-ingests-pdf/alt-2--pypdf-readthedocs-io-en-stable-modules-pdfreader-html-3db5457a.json",
+      "title": "",
+      "bytes": 26429,
+      "sha256": "5dde1f955d23a85075b817acaa780e3daec6121bb09a568a333f7ac425e56115",
+      "fetched_at": "2026-08-19T12:36:06.290378+00:00",
+      "error": null
+    },
+    {
+      "library": "sentence-transformers",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database.",
+      "url": "https://sbert.net/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/sentence-transformers-build-a-production-rag-service-that-ingests-pdf/primary--sbert-net-7b8ec571.md",
+      "raw_path": "data/sentence-transformers-build-a-production-rag-service-that-ingests-pdf/primary--sbert-net-7b8ec571.json",
+      "title": "",
+      "bytes": 16902,
+      "sha256": "1470da3122ea9bc3af71da6826f4671bcd0f923f5740a8907f3d099ed9800c75",
+      "fetched_at": "2026-08-19T12:36:06.627544+00:00",
+      "error": null
+    },
+    {
+      "library": "sentence-transformers",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database.",
+      "url": "https://github.com/huggingface/sentence-transformers",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/sentence-transformers-build-a-production-rag-service-that-ingests-pdf/alt-1--github-com-huggingface-sentence-transformers-2a6e1c07.md",
+      "raw_path": "data/sentence-transformers-build-a-production-rag-service-that-ingests-pdf/alt-1--github-com-huggingface-sentence-transformers-2a6e1c07.json",
+      "title": "",
+      "bytes": 18119,
+      "sha256": "062b966bb59ce25bb0e22362bdccb9da52021c486de0dcba3c37e8d25ffb7417",
+      "fetched_at": "2026-08-19T12:36:06.864099+00:00",
+      "error": null
+    },
+    {
+      "library": "langchain",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database.",
+      "url": "https://reference.langchain.com/python/langchain?_gl=1*142x80g*_gcl_au*MTE3NDI2ODYyOC4xNzg2MDA3OTI4*_ga*MjA0NjkxODk3MC4xNzg1NzgyMDcy*_ga_47WX3HKKY2*czE3ODcxNDI2NzMkbzE5JGcxJHQxNzg3MTQyNzE4JGoxNSRsMCRoMA..",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/langchain-build-a-production-rag-service-that-ingests-pdf/primary--reference-langchain-com-python-langchain-gl-1-142x80g-gcl-au-mte3ndi2odyyoc4xnzg-506697fe.md",
+      "raw_path": "data/langchain-build-a-production-rag-service-that-ingests-pdf/primary--reference-langchain-com-python-langchain-gl-1-142x80g-gcl-au-mte3ndi2odyyoc4xnzg-506697fe.json",
+      "title": "",
+      "bytes": 22592,
+      "sha256": "258a877031343dbf67a7f5dd44fda82a852f9a218e82d5cb1a9ef61e5fe02bca",
+      "fetched_at": "2026-08-19T12:36:07.352014+00:00",
+      "error": null
+    },
+    {
+      "library": "pydantic",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database.",
+      "url": "https://pydantic.dev/docs/validation/latest/get-started/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/pydantic-build-a-production-rag-service-that-ingests-pdf/primary--pydantic-dev-docs-validation-latest-get-started-ddc6768a.md",
+      "raw_path": "data/pydantic-build-a-production-rag-service-that-ingests-pdf/primary--pydantic-dev-docs-validation-latest-get-started-ddc6768a.json",
+      "title": "",
+      "bytes": 10743,
+      "sha256": "7a9fadda94ca3ac720684542592539950b4971fc5dfeab46e73eae7620a0f8fc",
+      "fetched_at": "2026-08-19T12:36:07.481772+00:00",
+      "error": null
+    },
+    {
+      "library": "uvicorn",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database.",
+      "url": "https://uvicorn.dev/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/uvicorn-build-a-production-rag-service-that-ingests-pdf/primary--uvicorn-dev-a46435f2.md",
+      "raw_path": "data/uvicorn-build-a-production-rag-service-that-ingests-pdf/primary--uvicorn-dev-a46435f2.json",
+      "title": "",
+      "bytes": 4969,
+      "sha256": "2eb79e0a057bd7feaa67c107c4683108aece3a3e2f4c5f575de77e55fedf3005",
+      "fetched_at": "2026-08-19T12:36:07.637394+00:00",
+      "error": null
+    },
+    {
+      "library": "uvicorn",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database.",
+      "url": "https://uvicorn.dev/settings/",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/uvicorn-build-a-production-rag-service-that-ingests-pdf/alt-1--uvicorn-dev-settings-1e7d4ca8.md",
+      "raw_path": "data/uvicorn-build-a-production-rag-service-that-ingests-pdf/alt-1--uvicorn-dev-settings-1e7d4ca8.json",
+      "title": "",
+      "bytes": 12146,
+      "sha256": "688960a0f40ee3314a2c80c432a2ac583febf23cd6a7787a33f89149b960107c",
+      "fetched_at": "2026-08-19T12:36:07.739378+00:00",
+      "error": null
+    },
+    {
+      "library": "uvicorn",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database.",
+      "url": "https://github.com/Kludex/uvicorn",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 2,
+      "status": "ok",
+      "path": "data/uvicorn-build-a-production-rag-service-that-ingests-pdf/alt-2--github-com-kludex-uvicorn-2dc6029f.md",
+      "raw_path": "data/uvicorn-build-a-production-rag-service-that-ingests-pdf/alt-2--github-com-kludex-uvicorn-2dc6029f.json",
+      "title": "",
+      "bytes": 5087,
+      "sha256": "6828c8b40d69c9ab1352189fcd6a4219575178b273eb82ed9f453bfc0a091417",
+      "fetched_at": "2026-08-19T12:36:07.856994+00:00",
+      "error": null
+    },
+    {
+      "library": "python-multipart",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database.",
+      "url": "https://multipart.readthedocs.io/",
+      "resolved_url": "https://multipart.readthedocs.io/en/latest/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/python-multipart-build-a-production-rag-service-that-ingests-pdf/primary--multipart-readthedocs-io-15b8709e.md",
+      "raw_path": "data/python-multipart-build-a-production-rag-service-that-ingests-pdf/primary--multipart-readthedocs-io-15b8709e.json",
+      "title": "",
+      "bytes": 4269,
+      "sha256": "b147b270fee6fede462218b2653b9f1ae6d5f50049a52219ee715ea84dcfa4ae",
+      "fetched_at": "2026-08-19T12:36:07.915817+00:00",
+      "error": null
+    },
+    {
+      "library": "python-multipart",
+      "query": "Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page. Use pypdf for extraction and Pydantic models for request and response validation. Include streaming responses and health checks. Use pymilvus for the vector database.",
+      "url": "https://github.com/Kludex/python-multipart",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/python-multipart-build-a-production-rag-service-that-ingests-pdf/alt-1--github-com-kludex-python-multipart-9dea0d54.md",
+      "raw_path": "data/python-multipart-build-a-production-rag-service-that-ingests-pdf/alt-1--github-com-kludex-python-multipart-9dea0d54.json",
+      "title": "",
+      "bytes": 14425,
+      "sha256": "97a75e1257b19a4d95c32b2f953c0bcd16e12852617a2aec11a71a56122fe006",
+      "fetched_at": "2026-08-19T12:36:08.227635+00:00",
+      "error": null
+    }
+  ],
+  "briefs": [
+    {
+      "library": "fastapi",
+      "install": "uv add \"fastapi[standard]\"",
+      "version": "",
+      "summary": "FastAPI is a modern, high\u2011performance web framework for building APIs with Python based on standard Python type hints. It combines fast execution, easy development, and full standards\u2011based support for OpenAPI and JSON Schema.",
+      "api": [
+        {
+          "name": "FastAPI",
+          "signature": "FastAPI()",
+          "summary": "The main application class used to create a FastAPI app.",
+          "example": "from fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get(\"/\")\ndef read_root():\n    return {\"Hello\": \"World\"}\n\n@app.get(\"/items/{item_id}\")\ndef read_item(item_id: int, q: str | None = None):\n    return {\"item_id\": item_id, \"q\": q}"
+        },
+        {
+          "name": "app.get",
+          "signature": "@app.get(\"/\")",
+          "summary": "Decorator to declare a GET endpoint on the FastAPI app.",
+          "example": "@app.get(\"/\")\ndef read_root():\n    return {\"Hello\": \"World\"}"
+        },
+        {
+          "name": "async def read_root",
+          "signature": "async def read_root()",
+          "summary": "Async version of a GET endpoint, used when the code employs async/await.",
+          "example": "from fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get(\"/\")\nasync def read_root():\n    return {\"Hello\": \"World\"}\n\n@app.get(\"/items/{item_id}\")\nasync def read_item(item_id: int, q: str | None = None):\n    return {\"item_id\": item_id, \"q\": q}"
+        },
+        {
+          "name": "fastapi dev",
+          "signature": "fastapi dev",
+          "summary": "CLI command that reads the main file, detects the FastAPI app, and starts a development server with auto\u2011reload.",
+          "example": "uv run fastapi dev\n\nuv run fastapi dev\n\n \u256d\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 FastAPI CLI - Development mode \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e\n \u2502                                                     \u2502\n \u2502  Serving at: http://127.0.0.1:8000                  \u2502\n \u2502                                                     \u2502\n \u2502  API docs: http://127.0.0.1:8000/docs               \u2502\n \u2502                                                     \u2502\n \u2502  Running in development mode, for production use:   \u2502\n \u2502                                                     \u2502\n \u2502  fastapi run                                        \u2502\n \u2502                                                     \u2502\n \u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f\nINFO:     Will watch for changes in these directories: ['/home/user/code/awesomeapp']\nINFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)\nINFO:     Started reloader process [2248755] using WatchFiles\nINFO:     Started server process [2248757]\nINFO:     Waiting for application startup.\nINFO:     Application startup complete."
+        }
+      ],
+      "gotchas": [
+        "Make sure to put \"fastapi[standard]\" in quotes when using uv to ensure it works in all terminals.",
+        "If your code uses async/await, define endpoints with async def as shown in the async example.",
+        "fastapi dev starts with auto\u2011reload enabled for local development; use fastapi run for production."
+      ],
+      "citation_keys": [
+        "fastapi-1"
+      ]
+    },
+    {
+      "library": "pymilvus",
+      "install": "$ python3 -m pip install pymilvus==3.0.1",
+      "version": "3.0.1",
+      "summary": "PyMilvus is a Python SDK of Milvus. Its source code is open\u2011sourced and hosted on GitHub. In this release, you have the flexibility to choose MilvusClient or the original ORM module to talk with Milvus.",
+      "api": [
+        {
+          "name": "MilvusClient",
+          "signature": "",
+          "summary": "",
+          "example": "from\n pymilvus import\n MilvusClient\n# Authentication not enabled\n\nclient = MilvusClient(\"http://localhost:19530\")\n# Authentication enabled with the root user\n\nclient = MilvusClient(\n    uri=\"http://localhost:19530\",\n    token=\"root:Milvus\",\n    db_name=\"default\"\n\n)\n# Authentication enabled with a non-root user\n\nclient = MilvusClient(\n    uri=\"http://localhost:19530\",\n    token=\"user:password\", # replace this with your token\n\n    db_name=\"default\"\n\n)"
+        }
+      ],
+      "gotchas": [
+        "Python 3.7 or later is required.",
+        "Google protobuf must be installed, e.g., `pip3 install protobuf==3.20.0`.",
+        "grpcio-tools must be installed, e.g., `pip3 install grpcio-tools`."
+      ],
+      "citation_keys": [
+        "pymilvus-1",
+        "pymilvus-2",
+        "pymilvus-3"
+      ]
+    },
+    {
+      "library": "pypdf",
+      "install": "pip install pypdf",
+      "version": "3.1.0",
+      "summary": "pypdf is a free and open source pure\u2011python PDF library capable of splitting, merging, cropping, and transforming the pages of PDF files. It can also add custom data, viewing options, and passwords to PDF files, and retrieve text and metadata from PDFs.",
+      "api": [
+        {
+          "name": "PdfReader",
+          "signature": "PdfReader(stream : [str] | [IO] [ [Any] ] | [Path] , strict : [bool] = False , password : [str] | [bytes] | [None] = None , * , root_object_recovery_limit : [int] | [None] = 10000 )",
+          "summary": "Initialize a PdfReader object. This operation can take some time, as the PDF stream\u2019s cross\u2011reference tables are read into memory.",
+          "example": "from pypdf import PdfReader\n\nreader = PdfReader(\"example.pdf\")number_of_pages = len(reader.pages)page = reader.pages[0]text = page.extract_text()"
+        },
+        {
+          "name": "close",
+          "signature": "close() \u2192 None",
+          "summary": "Close the stream if opened in __init__ and clear memory.",
+          "example": ""
+        },
+        {
+          "name": "root_object",
+          "signature": "",
+          "summary": "Provide access to \u201c/Root\u201d. Standardized with PdfWriter.",
+          "example": ""
+        },
+        {
+          "name": "pdf_header",
+          "signature": "",
+          "summary": "The first 8 bytes of the file, typically something like '%PDF-1.6' and can be used to detect if the file is actually a PDF file and which version it is.",
+          "example": ""
+        }
+      ],
+      "gotchas": [
+        "pypdf 3.1.0 and above include significant improvements compared to previous versions; refer to the migration guide for more information.",
+        "For AES encryption or decryption you must install the extra dependencies with `pip install pypdf[crypto]`.",
+        "The `strict` parameter defaults to False; setting it to True will cause some correctable problems to raise errors."
+      ],
+      "citation_keys": [
+        "pypdf-1",
+        "pypdf-2",
+        "pypdf-3"
+      ]
+    },
+    {
+      "library": "sentence-transformers",
+      "install": "pip install -U sentence-transformers",
+      "version": "v6.0",
+      "summary": "Sentence Transformers (SBERT) is a Python library for computing and training state\u2011of\u2011the\u2011art embedding and reranker models. It supports text, image, audio, and video embeddings, similarity scoring with Cross\u2011Encoders, sparse embeddings, and token\u2011level multi\u2011vector embeddings for retrieval.",
+      "api": [
+        {
+          "name": "SentenceTransformer",
+          "signature": "",
+          "summary": "Class for loading a pretrained embedding model and computing embeddings.",
+          "example": "from sentence_transformers import SentenceTransformer\n\n# 1. Load a pretrained Sentence Transformer modelmodel = SentenceTransformer(\"sentence-transformers/all-MiniLM-L6-v2\")\n\n# The sentences to encodesentences = [\n    \"The weather is lovely today.\",\n    \"It's so sunny outside!\",\n    \"He drove to the stadium.\",]\n\n# 2. Calculate embeddings by calling model.encode()embeddings = model.encode(sentences)print(embeddings.shape)# [3, 384]\n\n# 3. Calculate the embedding similaritiessimilarities = model.similarity(embeddings, embeddings)print(similarities)# tensor([[1.0000, 0.6660, 0.1046],#         [0.6660, 1.0000, 0.1411],#         [0.1046, 0.1411, 1.0000]])"
+        },
+        {
+          "name": "CrossEncoder",
+          "signature": "",
+          "summary": "Class for loading a pretrained reranker (cross\u2011encoder) model and predicting similarity scores.",
+          "example": "from sentence_transformers import CrossEncoder\n\n# 1. Load a pretrained CrossEncoder modelmodel = CrossEncoder(\"cross-encoder/ms-marco-MiniLM-L6-v2\")\n\n# The texts for which to predict similarity scoresquery = \"How many people live in Berlin?\"passages = [\n    \"Berlin had a population of 3,520,031 registered inhabitants in an area of 891.82 square kilometers.\",\n    \"Berlin has a yearly total of about 135 million day visitors, making it one of the most-visited cities in the European Union.\",\n    \"In 2013 around 600,000 Berliners were registered in one of the more than 2,300 sport and fi\n\n# 2a. Either predict scores pairs of textsscores = model.predict([(query, passage) for passage in passages])print(scores)# => [8.607139 5.506266 6.352977]\n\n# 2b. Or rank a list of passages for a queryranks = model.rank(query, passages, return_documents=True)\n\nprint(\"Query:\", query)for rank in ranks:\n    print(f\"- #{rank['corpus_id']} ({rank['score']:.2f}): {rank['text']}\")"
+        },
+        {
+          "name": "MultiVectorEncoder",
+          "signature": "",
+          "summary": "Model class for token\u2011level (multi\u2011vector) embeddings used in ColBERT\u2011style retrieval.",
+          "example": ""
+        }
+      ],
+      "gotchas": [
+        "Requires Python\u202f3.10+ and PyTorch\u202f2.2+ (or newer).",
+        "Requires transformers\u202fv5.0+ or newer.",
+        "Installation extras such as [image], [audio], [video], [train], [onnx], [openvino], [dev] are available for additional functionality.",
+        "v6.0 introduced the MultiVectorEncoder; see the migration guide for breaking changes."
+      ],
+      "citation_keys": [
+        "sentence-transformers-1",
+        "sentence-transformers-2"
+      ]
+    },
+    {
+      "library": "langchain",
+      "install": "uv add langchain",
+      "version": "",
+      "summary": "LangChain is the easiest way to start building agents and applications powered by LLMs. With under 10 lines of code, you can connect to OpenAI, Anthropic, Google, and more. LangChain provides a pre\u2011built agent architecture and model integrations to help you get started quickly and seamlessly incorporate LLMs into your agents and applications.",
+      "api": [
+        {
+          "name": "SubagentRunStream",
+          "signature": "",
+          "summary": "Typed sync handle for a nested named-agent execution.",
+          "example": ""
+        },
+        {
+          "name": "AsyncSubagentRunStream",
+          "signature": "",
+          "summary": "Typed async handle for a nested named-agent execution.",
+          "example": ""
+        },
+        {
+          "name": "SubagentTransformer",
+          "signature": "",
+          "summary": "Promote nested named agents into typed handles on `run.subagents`.",
+          "example": ""
+        },
+        {
+          "name": "StructuredOutputError",
+          "signature": "",
+          "summary": "Base class for structured output errors.",
+          "example": ""
+        },
+        {
+          "name": "ToolRetryMiddleware",
+          "signature": "",
+          "summary": "Middleware that automatically retries failed tool calls with configurable backoff.",
+          "example": ""
+        },
+        {
+          "name": "ContextEditingMiddleware",
+          "signature": "",
+          "summary": "Automatically prune tool results to manage context size.",
+          "example": ""
+        },
+        {
+          "name": "ShellToolMiddleware",
+          "signature": "",
+          "summary": "Middleware that registers a persistent shell tool for agents.",
+          "example": ""
+        },
+        {
+          "name": "ModelCallLimitMiddleware",
+          "signature": "",
+          "summary": "Tracks model call counts and enforces limits.",
+          "example": ""
+        }
+      ],
+      "gotchas": [],
+      "citation_keys": [
+        "langchain-1"
+      ]
+    },
+    {
+      "library": "pydantic",
+      "install": "pip install pydantic",
+      "version": "",
+      "summary": "Pydantic is the most widely used data validation library for Python. Fast and extensible, Pydantic plays nicely with your linters/IDE/brain. Define how data should be in pure, canonical Python 3.10+; validate it with Pydantic.",
+      "api": [
+        {
+          "name": "BaseModel",
+          "signature": "",
+          "summary": "Base class for creating data models with validation.",
+          "example": "from pydantic import BaseModel, PositiveInt"
+        },
+        {
+          "name": "PositiveInt",
+          "signature": "",
+          "summary": "Shorthand for Annotated[int, annotated_types.Gt(0)].",
+          "example": "from pydantic import BaseModel, PositiveInt"
+        },
+        {
+          "name": "ValidationError",
+          "signature": "",
+          "summary": "Exception raised when model validation fails.",
+          "example": "from pydantic import BaseModel, PositiveInt, ValidationError"
+        },
+        {
+          "name": "model_dump",
+          "signature": "",
+          "summary": "Return a dict representation of the model.",
+          "example": "print(user.model_dump())"
+        }
+      ],
+      "gotchas": [],
+      "citation_keys": [
+        "pydantic-1"
+      ]
+    },
+    {
+      "library": "uvicorn",
+      "install": "pip install uvicorn\nuv add uvicorn",
+      "version": "",
+      "summary": "Uvicorn is an ASGI web server implementation for Python. It supports HTTP/1.1 and WebSockets.",
+      "api": [
+        {
+          "name": "uvicorn.run",
+          "signature": "",
+          "summary": "",
+          "example": "import uvicorn\n\nasync def app(scope, receive, send):\n    ...\n\nif __name__ == \"__main__\":\n    uvicorn.run(\"main:app\", port=5000, log_level=\"info\")"
+        },
+        {
+          "name": "uvicorn.Config",
+          "signature": "",
+          "summary": "",
+          "example": "import uvicorn\n\nasync def app(scope, receive, send):\n    ...\n\nif __name__ == \"__main__\":\n    config = uvicorn.Config(\"main:app\", port=5000, log_level=\"info\")\n    server = uvicorn.Server(config)\n    server.run()"
+        },
+        {
+          "name": "uvicorn.Server",
+          "signature": "",
+          "summary": "",
+          "example": "import uvicorn\n\nasync def app(scope, receive, send):\n    ...\n\nif __name__ == \"__main__\":\n    config = uvicorn.Config(\"main:app\", port=5000, log_level=\"info\")\n    server = uvicorn.Server(config)\n    server.run()"
+        },
+        {
+          "name": "uvicorn.Server.serve",
+          "signature": "",
+          "summary": "",
+          "example": "import asyncioimport uvicorn\n\nasync def app(scope, receive, send):\n    ...\n\nasync def main():\n    config = uvicorn.Config(\"main:app\", port=5000, log_level=\"info\")\n    server = uvicorn.Server(config)\n    await server.serve()\n\nif __name__ == \"__main__\":\n    asyncio.run(main())"
+        },
+        {
+          "name": "uvicorn command line",
+          "signature": "",
+          "summary": "",
+          "example": "uvicorn main:app"
+        },
+        {
+          "name": "uvicorn.workers",
+          "signature": "",
+          "summary": "Deprecated module; will be removed in a future release.",
+          "example": "python -m pip install uvicorn-worker"
+        }
+      ],
+      "gotchas": [
+        "The `uvicorn.workers` module is deprecated and will be removed in a future release; use the `uvicorn-worker` package instead.",
+        "When using `reload=True` or `workers=NUM`, you should put `uvicorn.run` into an `if __name__ == '__main__'` clause.",
+        "`UVICORN_*` prefixed settings cannot be used from within an environment configuration file."
+      ],
+      "citation_keys": [
+        "uvicorn-1",
+        "uvicorn-2",
+        "uvicorn-3"
+      ]
+    },
+    {
+      "library": "python-multipart",
+      "install": "pip install multipart or uv add multipart",
+      "version": "",
+      "summary": "The python-multipart library provides a fast incremental non\u2011blocking parser for multipart/form-data, as defined by HTML5 and RFC7578, and also offers blocking alternatives for easier use in WSGI or CGI applications. It includes a SansIO parser for async environments, a buffered stream parser, and high\u2011level WSGI helper functions.",
+      "api": [
+        {
+          "name": "multipart.MultipartPart",
+          "signature": "",
+          "summary": "",
+          "example": ""
+        }
+      ],
+      "gotchas": [
+        "Only supports multipart/form-data; multipart/mixed is not supported",
+        "Does not handle base64 or quoted\u2011printable transfer encodings",
+        "No support for encoded\u2011word or name=_charset_ markers",
+        "Legacy browsers are only partially supported and broken client inputs are not tolerated"
+      ],
+      "citation_keys": [
+        "python-multipart-1",
+        "python-multipart-2"
+      ]
+    }
+  ],
+  "plan_draft": {
+    "title": "RAG Service Implementation Plan",
+    "overview": "Create a FastAPI service that loads PDF manuals, splits them into page\u2011level chunks, embeds the text with Sentence\u2011Transformers, stores vectors and metadata in Milvus, and answers queries with citations. The API validates payloads with Pydantic, streams results, and includes health checks.",
+    "phases": [
+      {
+        "title": "Project setup and dependencies",
+        "body": "- Initialize a new project directory and run `uv add \"fastapi[standard]\"`[^fastapi-1] to install FastAPI.\n- Install Milvus SDK with `python3 -m pip install pymilvus==3.0.1`[^pymilvus-2].\n- Install PDF reader `pip install pypdf`[^pypdf-1].\n- Install embedding library `pip install -U sentence-transformers`[^sentence-transformers-1].\n- Install Pydantic `pip install pydantic`[^pydantic-1].\n- Install Uvicorn `uv add uvicorn`[^uvicorn-1].\n- Create a `requirements.txt` reflecting the exact versions used."
+      },
+      {
+        "title": "PDF ingestion and chunking",
+        "body": "- Create `app/pdf_loader.py`.\n- Import `PdfReader` from pypdf[^pypdf-1].\n- Write a function `load_pdf(path)` that opens the PDF, iterates `enumerate(reader.pages)`, extracts text via `page.extract_text()`, and returns a list of dicts `{ \"text\": ..., \"page\": page_number }`.\n- Implement a simple splitter that breaks each page text into chunks of ~500 characters without breaking words, preserving the original `page` number in each chunk.\n- Add a utility `save_chunks(chunks, output_path)` to serialize chunks as JSON for debugging."
+      },
+      {
+        "title": "Embedding generation and Milvus storage",
+        "body": "- Create `app/vector_store.py`.\n- Import `SentenceTransformer` from sentence_transformers[^sentence-transformers-1] and instantiate `model = SentenceTransformer(\"sentence-transformers/all-MiniLM-L6-v2\")`.\n- Import `MilvusClient` from pymilvus[^pymilvus-1].\n- Initialize `client = MilvusClient(\"http://localhost:19530\")`[^pymilvus-1].\n- Write `embed_chunks(chunks)` that extracts the `text` field, calls `model.encode(texts, batch_size=32)` and returns a list of embeddings.\n- Write `create_collection()` that uses `client.create_collection` (assumed API) with a vector field of dimension matching the model output and a scalar field for `page` and `source` metadata.\n- Write `insert_embeddings(embeddings, chunks)` that pairs each embedding with its metadata and calls `client.insert` to store them.\n- Add a convenience `setup_vector_store(pdf_path)` that loads, chunks, embeds, creates collection, and inserts data."
+      },
+      {
+        "title": "Pydantic request/response models",
+        "body": "- Create `app/schemas.py`.\n- Import `BaseModel` from pydantic[^pydantic-1].\n- Define `QueryRequest(BaseModel): question: str`.\n- Define `Citation(BaseModel): text: str\n    source: str\n    page: int`.\n- Define `AnswerChunk(BaseModel): answer: str\n    citations: list[Citation]`.\n- Ensure models are used in FastAPI endpoints for automatic validation."
+      },
+      {
+        "title": "FastAPI application with streaming answer endpoint",
+        "body": "- Create `app/main.py`.\n- Import `FastAPI` and instantiate `app = FastAPI()`[^fastapi-1].\n- Add a health check route `@app.get(\"/health\") async def health(): return {\"status\": \"ok\"}`[^fastapi-1].\n- Import request/response schemas from `app.schemas`.\n- Implement an async generator `async def stream_answer(question: str)` that:\n  1. Retrieves relevant vectors from Milvus via `client.search` (assumed API).\n  2. Concatenates retrieved texts, forms a prompt, and (placeholder) generates an answer string.\n  3. Yields partial answer strings interleaved with citation JSON objects.\n- Define endpoint `@app.post(\"/query\") async def query(req: QueryRequest): return StreamingResponse(stream_answer(req.question), media_type=\"application/json\")` using FastAPI's async capability[^fastapi-1].\n- Add `if __name__ == \"__main__\": uvicorn.run(\"app.main:app\", host=\"0.0.0.0\", port=8000, log_level=\"info\")`[^uvicorn-1]."
+      },
+      {
+        "title": "Run, test and verify the service",
+        "body": "- Start Milvus locally on default port 19530.\n- Execute `uv run fastapi dev` to launch the development server with auto\u2011reload[^fastapi-1].\n- Use `curl` or HTTP client to POST a JSON `{ \"question\": \"...\" }` to `/query` and confirm streaming JSON chunks arrive with `answer` and `citations` fields.\n- Call `/health` and verify it returns `{\"status\": \"ok\"}`.\n- Write a simple integration test that loads a small PDF, runs `setup_vector_store`, queries, and asserts that returned citations contain correct `page` numbers."
+      }
+    ],
+    "pitfalls": [
+      "Milvus collection creation and search APIs are not detailed in the provided brief, so exact method signatures may differ.",
+      "StreamingResponse is part of FastAPI's response utilities but not explicitly covered; ensure the async generator returns properly formatted JSON strings.",
+      "Chunk size and overlap logic are custom; overly large chunks may exceed model token limits.",
+      "Sentence\u2011Transformer model loading may require additional PyTorch dependencies not listed in the briefs.",
+      "pypdf strict mode defaults to False; encrypted PDFs need extra crypto extras not installed.",
+      "Running Milvus locally requires protobuf and grpcio-tools installations per the Milvus gotchas."
+    ]
+  },
+  "errors": [
+    "pypdf: asked for https://pypdf.readthedocs.io/ but the collector returned https://pypdf.readthedocs.io/en/stable/",
+    "python-multipart: asked for https://multipart.readthedocs.io/ but the collector returned https://multipart.readthedocs.io/en/latest/"
+  ]
+}

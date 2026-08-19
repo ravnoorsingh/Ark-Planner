@@ -1,0 +1,114 @@
+{
+  "requirement": "build a REST API with FastAPI and pydantic",
+  "plan_path": "",
+  "model": "openai/gpt-oss-120b",
+  "generated_at": "2026-08-17T17:15:13.864192+00:00",
+  "libraries": [
+    {
+      "name": "fastapi",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "provides the REST API framework"
+    },
+    {
+      "name": "pydantic",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "defines request/response data models"
+    },
+    {
+      "name": "uvicorn",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "runs the FastAPI ASGI server"
+    }
+  ],
+  "doc_sources": [
+    {
+      "library": "fastapi",
+      "url": "https://fastapi.tiangolo.com",
+      "title": "FastAPI \u2013 Modern, fast (high-performance) web framework for building APIs with Python 3.6+",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The result https://fastapi.tiangolo.com is the library's own documentation site, which is the primary entry point for official docs. It matches the preferred source type and is the root landing page, so confidence is very high.",
+      "alternates": [
+        "https://fastapi-tutorial.readthedocs.io",
+        "https://www.geeksforgeeks.org/python/introduction-to-fastapi"
+      ]
+    },
+    {
+      "library": "pydantic",
+      "url": "https://pydantic.dev/docs",
+      "title": "Pydantic Docs",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The official documentation site for Pydantic is https://pydantic.dev/docs, which is the root landing page for the current version of the library. This matches the preferred source (own documentation site) and is directly listed in the search results.",
+      "alternates": [
+        "https://pydantic.dev/docs/validation/latest/get-started",
+        "https://pydantic.com.cn/en",
+        "https://pydantic.dev/docs/validation/dev/concepts/models"
+      ]
+    },
+    {
+      "library": "uvicorn",
+      "url": "https://uvicorn.dev",
+      "title": "Uvicorn \u2013 Fast ASGI server",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "uvicorn.dev is the project's own documentation site and serves as the primary entry point for official docs. It matches the preferred source type (official docs) and is a root landing page, not a deep link. Other results are third\u2011party tutorials, a forked GitHub repo, or framework\u2011specific guides, making them lower priority.",
+      "alternates": [
+        "https://github.com/Kludex/uvicorn",
+        "https://docs.oyoclass.com/python3editor-ide/extralibs/uvicorn",
+        "https://docs.djangoproject.com/en/6.0/howto/deployment/asgi/uvicorn"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "library": "fastapi",
+      "url": "https://fastapi.tiangolo.com",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/fastapi/primary--fastapi-tiangolo-com-6355c1ab.md",
+      "raw_path": "data/fastapi/primary--fastapi-tiangolo-com-6355c1ab.json",
+      "title": "",
+      "bytes": 23092,
+      "sha256": "baaefff7e410e33167cd66066fec0d536962e0767ab6e5c9a9196b60e5df185c",
+      "fetched_at": "2026-08-17T17:14:13.009930+00:00",
+      "error": null
+    },
+    {
+      "library": "pydantic",
+      "url": "https://pydantic.dev/docs",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/pydantic/primary--pydantic-dev-docs-c542d144.md",
+      "raw_path": "data/pydantic/primary--pydantic-dev-docs-c542d144.json",
+      "title": "",
+      "bytes": 1157,
+      "sha256": "065e5fb1b99d2b216575e26974cb81623fbbf892dab6f86ec1c985a7a859b16c",
+      "fetched_at": "2026-08-17T17:14:13.041280+00:00",
+      "error": null
+    },
+    {
+      "library": "uvicorn",
+      "url": "https://uvicorn.dev",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/uvicorn/primary--uvicorn-dev-2017fa53.md",
+      "raw_path": "data/uvicorn/primary--uvicorn-dev-2017fa53.json",
+      "title": "",
+      "bytes": 5086,
+      "sha256": "dc2889c5ed5f36e1530f10a7ee36e932b9a300d9d433dfbe15e388d9ca24174e",
+      "fetched_at": "2026-08-17T17:14:13.170385+00:00",
+      "error": null
+    }
+  ],
+  "errors": []
+}

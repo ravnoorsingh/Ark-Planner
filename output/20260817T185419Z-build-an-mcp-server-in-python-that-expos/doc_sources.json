@@ -1,0 +1,187 @@
+{
+  "requirement": "Build an MCP server in Python that exposes a company's internal wiki as searchable tools for AI coding agents. Use the official MCP Python SDK with streamable HTTP transport, httpx for the wiki's REST API, and Pydantic for tool input schemas. Support tool listing, full-text search, page fetch by ID, and bearer-token auth.",
+  "plan_path": "",
+  "model": "openai/gpt-oss-120b",
+  "generated_at": "2026-08-17T18:54:19.836663+00:00",
+  "libraries": [
+    {
+      "name": "mcp",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "official MCP Python SDK for interacting with MCP server"
+    },
+    {
+      "name": "httpx",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "streamable HTTP transport to call wiki REST API"
+    },
+    {
+      "name": "pydantic",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "define tool input schemas"
+    },
+    {
+      "name": "fastapi",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "expose HTTP endpoints for tool listing and search"
+    },
+    {
+      "name": "uvicorn",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "ASGI server to run the FastAPI app"
+    }
+  ],
+  "doc_sources": [
+    {
+      "library": "mcp",
+      "url": "https://modelcontextprotocol.info/docs",
+      "title": "MCP Docs",
+      "kind": "official_docs",
+      "confidence": 0.93,
+      "rationale": "The documentation website (modelcontextprotocol.info/docs) is the dedicated official docs site for the Model Context Protocol, matching the highest priority source. It provides the main entry point for the Python SDK and other language guides. GitHub repositories are secondary and serve as source code rather than primary docs.",
+      "alternates": [
+        "https://github.com/modelcontextprotocol/modelcontextprotocol",
+        "https://github.com/modelcontextprotocol/docs",
+        "https://github.com/modelcontextprotocol"
+      ]
+    },
+    {
+      "library": "httpx",
+      "url": "https://www.python-httpx.org",
+      "title": "HTTPX \u2013 A next\u2011generation HTTP client for Python",
+      "kind": "official_docs",
+      "confidence": 0.98,
+      "rationale": "The URL https://www.python-httpx.org is the official documentation site for the Python httpx library, matching the library name and providing a root landing page with docs, installation, and usage. It is the primary source over third\u2011party sites or unrelated projects named httpx.",
+      "alternates": [
+        "https://github.com/projectdiscovery/httpx",
+        "https://docs.projectdiscovery.io/opensource/httpx/overview",
+        "https://base.bangwu.me/backend/Python/libs/httpx"
+      ]
+    },
+    {
+      "library": "pydantic",
+      "url": "https://pydantic.dev/docs",
+      "title": "Pydantic Documentation",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "The URL https://pydantic.dev/docs is the official documentation site for Pydantic, serving as the root landing page for the latest version. It matches the top priority (library's own docs) and is not a third\u2011party source. The site is directly maintained by the Pydantic project.",
+      "alternates": [
+        "https://pydantic.dev/docs/validation/latest/get-started",
+        "https://pydantic.com.cn/en",
+        "https://github.com/pydantic/pydantic-docs"
+      ]
+    },
+    {
+      "library": "fastapi",
+      "url": "https://fastapi.tiangolo.com",
+      "title": "FastAPI",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The official FastAPI documentation site (fastapi.tiangolo.com) is the primary entry point maintained by the library author, matching the preferred first priority. It provides the latest version docs and is the canonical source.",
+      "alternates": [
+        "https://fastapi-tutorial.readthedocs.io",
+        "https://davidmuraya.com/blog/fastapi-tutorial-for-beginners"
+      ]
+    },
+    {
+      "library": "uvicorn",
+      "url": "https://uvicorn.dev",
+      "title": "Uvicorn Documentation",
+      "kind": "official_docs",
+      "confidence": 0.96,
+      "rationale": "uvicorn.dev is the official documentation site for the Uvicorn ASGI server, providing the root landing page and up\u2011to\u2011date docs. Other results are third\u2011party sites or GitHub forks, so uvicorn.dev is the best entry point.",
+      "alternates": [
+        "https://github.com/Kludex/uvicorn",
+        "https://github.com/encode/uvicorn/blob/master/docs/settings.md",
+        "https://docs.oyoclass.com/python3editor-ide/extralibs/uvicorn"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "library": "mcp",
+      "query": "Build an MCP server in Python that exposes a company's internal wiki as searchable tools for AI coding agents. Use the official MCP Python SDK with streamable HTTP transport, httpx for the wiki's REST API, and Pydantic for tool input schemas. Support tool listing, full-text search, page fetch by ID, and bearer-token auth.",
+      "url": "https://modelcontextprotocol.info/docs",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/mcp-build-an-mcp-server-in-python-that-exposes-a-com/primary--modelcontextprotocol-info-docs-61b4c1fe.md",
+      "raw_path": "data/mcp-build-an-mcp-server-in-python-that-exposes-a-com/primary--modelcontextprotocol-info-docs-61b4c1fe.json",
+      "title": "",
+      "bytes": 1566,
+      "sha256": "94412f5c561623b172971c3d652b258832b0b5dec55491a23a739f6c297cd9c9",
+      "fetched_at": "2026-08-17T18:52:39.256565+00:00",
+      "error": null
+    },
+    {
+      "library": "httpx",
+      "query": "Build an MCP server in Python that exposes a company's internal wiki as searchable tools for AI coding agents. Use the official MCP Python SDK with streamable HTTP transport, httpx for the wiki's REST API, and Pydantic for tool input schemas. Support tool listing, full-text search, page fetch by ID, and bearer-token auth.",
+      "url": "https://www.python-httpx.org",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/httpx-build-an-mcp-server-in-python-that-exposes-a-com/primary--python-httpx-org-d759ebd9.md",
+      "raw_path": "data/httpx-build-an-mcp-server-in-python-that-exposes-a-com/primary--python-httpx-org-d759ebd9.json",
+      "title": "",
+      "bytes": 3801,
+      "sha256": "26a037a68e5db8f2e7a6b9a95dd77893c5d2c4c20b65e6c60c98e5c8f5e79868",
+      "fetched_at": "2026-08-17T18:52:39.311723+00:00",
+      "error": null
+    },
+    {
+      "library": "pydantic",
+      "query": "Build an MCP server in Python that exposes a company's internal wiki as searchable tools for AI coding agents. Use the official MCP Python SDK with streamable HTTP transport, httpx for the wiki's REST API, and Pydantic for tool input schemas. Support tool listing, full-text search, page fetch by ID, and bearer-token auth.",
+      "url": "https://pydantic.dev/docs",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/pydantic-build-an-mcp-server-in-python-that-exposes-a-com/primary--pydantic-dev-docs-c542d144.md",
+      "raw_path": "data/pydantic-build-an-mcp-server-in-python-that-exposes-a-com/primary--pydantic-dev-docs-c542d144.json",
+      "title": "",
+      "bytes": 1114,
+      "sha256": "b48237a9062e70689c2af2ed44da1e5686cd3db68abe8d4761ffa978492a3d50",
+      "fetched_at": "2026-08-17T18:52:39.341886+00:00",
+      "error": null
+    },
+    {
+      "library": "fastapi",
+      "query": "Build an MCP server in Python that exposes a company's internal wiki as searchable tools for AI coding agents. Use the official MCP Python SDK with streamable HTTP transport, httpx for the wiki's REST API, and Pydantic for tool input schemas. Support tool listing, full-text search, page fetch by ID, and bearer-token auth.",
+      "url": "https://fastapi.tiangolo.com",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/fastapi-build-an-mcp-server-in-python-that-exposes-a-com/primary--fastapi-tiangolo-com-6355c1ab.md",
+      "raw_path": "data/fastapi-build-an-mcp-server-in-python-that-exposes-a-com/primary--fastapi-tiangolo-com-6355c1ab.json",
+      "title": "",
+      "bytes": 22558,
+      "sha256": "5f2319fdf3c6618398daa2cab40bf2b4af2964e6e786a1c77a2b7c67331177a3",
+      "fetched_at": "2026-08-17T18:52:39.575692+00:00",
+      "error": null
+    },
+    {
+      "library": "uvicorn",
+      "query": "Build an MCP server in Python that exposes a company's internal wiki as searchable tools for AI coding agents. Use the official MCP Python SDK with streamable HTTP transport, httpx for the wiki's REST API, and Pydantic for tool input schemas. Support tool listing, full-text search, page fetch by ID, and bearer-token auth.",
+      "url": "https://uvicorn.dev",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/uvicorn-build-an-mcp-server-in-python-that-exposes-a-com/primary--uvicorn-dev-2017fa53.md",
+      "raw_path": "data/uvicorn-build-an-mcp-server-in-python-that-exposes-a-com/primary--uvicorn-dev-2017fa53.json",
+      "title": "",
+      "bytes": 4969,
+      "sha256": "2eb79e0a057bd7feaa67c107c4683108aece3a3e2f4c5f575de77e55fedf3005",
+      "fetched_at": "2026-08-17T18:52:39.679227+00:00",
+      "error": null
+    }
+  ],
+  "errors": []
+}

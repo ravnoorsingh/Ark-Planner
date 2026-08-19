@@ -304,7 +304,3 @@ strings) from colliding after slug truncation.
 updates an entry instead of appending a duplicate. URLs the collector never returned are
 recorded with `status: "failed"` rather than silently dropped.
 
-## Not yet built
-
-Chunking, embedding, vector indexing, and planning-document generation. `data/manifest.json`
-plus the markdown files are the seam those attach to.
