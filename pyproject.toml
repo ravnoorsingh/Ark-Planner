@@ -1,0 +1,64 @@
+[project]
+name = "ark-scrapper"
+version = "0.1.0"
+description = "Citation-backed planning documentation for AI coding agents — phase 1: library to official-docs link discovery"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "langgraph>=0.2.50",
+    "langchain-core>=0.3.0",
+    "langchain-groq>=0.2.0",
+    "langchain-mcp-adapters>=0.1.0",
+    # Imported directly by ark/tracing.py, not just pulled in by langchain-core.
+    "langsmith>=0.3.0",
+    "mcp>=1.2.0",
+    "pydantic>=2.9.0",
+    "pydantic-settings>=2.6.0",
+    "typer>=0.15.0",
+    "rich>=13.9.0",
+    "python-dotenv>=1.0.1",
+    "httpx>=0.28.1",
+    "markdownify>=1.2.3",
+]
+
+[project.scripts]
+ark = "ark.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "ruff>=0.8.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ark"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint.per-file-ignores]
+# B008: typer.Option()/Argument() in defaults is Typer's documented idiom.
+# BLE001: the CLI deliberately catches broad exceptions to print a readable
+#         message instead of dumping a traceback at the user.
+"src/ark/cli.py" = ["B008", "BLE001"]
+# BLE001: synthesis failing must degrade to a plan built from the briefs alone,
+#         not lose the distill work that was already paid for.
+"src/ark/nodes/write_plan.py" = ["BLE001"]
+# BLE001/S110: tracing must never be able to break a run. Every failure path in
+#              ark/tracing.py swallows whatever the telemetry layer raised so the
+#              pipeline continues untraced rather than dying on an observability
+#              call.
+"src/ark/tracing.py" = ["BLE001", "S110"]
+# TRY002: tests raise bare Exception on purpose, to mimic what the Groq SDK
+#         surfaces without importing its exception hierarchy.
+"tests/*" = ["TRY002"]
