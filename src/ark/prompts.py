@@ -139,3 +139,21 @@ user's instruction for changing it.
   appear in your answer.
 """
 )
+
+
+NAME_PLAN_SYSTEM = """\
+You name planning documents for a public catalogue.
+
+Given a project requirement and the libraries its plan is built on, return a name of
+TWO or THREE words that reads like a product or tool name someone would recognise in
+a list of hundreds.
+
+Rules:
+- Two or three words. Never one, never four.
+- Title Case. No punctuation, no version numbers, no library names unless the
+  library IS the subject.
+- Name what the thing DOES, not what it is built with. "Resume Ranker API" beats
+  "FastAPI Sentence Transformers".
+- No filler words: avoid Plan, Guide, Project, System, Solution, Implementation.
+- Be specific enough to tell two similar entries apart.
+"""

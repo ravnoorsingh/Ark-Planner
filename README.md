@@ -56,6 +56,10 @@ them fenced and intact.
 
 ## Setup
 
+> **New here?** [STARTUP.md](STARTUP.md) walks through the whole thing step by step —
+> installing, keys, database, and generating a first plan in the browser. The rest of
+> this section is the short version.
+
 Requires [uv](https://docs.astral.sh/uv/). Python 3.12 is pinned via `.python-version`.
 
 ```bash
@@ -87,6 +91,23 @@ uv run ark chat
 ```
 
 REPL commands: `/list`, `/save`, `/clear`, `/quit`.
+
+In a browser:
+
+```bash
+docker compose up -d      # MongoDB, for the catalogue
+uv run ark serve          # → http://127.0.0.1:8000
+```
+
+The web UI runs the same pipeline with the same questions — open choices, pinned
+documentation URLs, the URL review — as steps in the page, and publishes each finished
+plan to a **public catalogue**: named in two or three words, labelled with the
+libraries it is grounded in, searchable, ranked by trending or lifetime downloads, and
+free for anyone to download. Plans made at the terminal join it with `ark publish`.
+Details in **[docs/web.md](docs/web.md)**.
+
+> `ark serve` binds localhost by default because starting a run spends Bright Data and
+> Groq credits and nothing authenticates that endpoint.
 
 If the requirement names a capability rather than a package — "a vector database", "an
 ORM" — ARK asks which one before researching, offering real candidates and accepting

@@ -16,8 +16,10 @@ from rich.panel import Panel
 
 from .choices import LibraryChoice, apply_choices, describe, detect_choices
 from .config import MissingCredentials, load_settings
+from .errors import explain as _explain
 from .graph import NODE_LABELS, research_session
 from .mongo import connect
+from .naming import name_plan, slugify
 from .nodes.scrape_docs import planned_urls, scrape_to_store
 from .nodes.write_plan import build_plan, refine_plan
 from .plan import build_citations
@@ -48,13 +50,7 @@ app = typer.Typer(
 )
 
 
-def _explain(exc: BaseException) -> str:
-    """Flatten ExceptionGroups so MCP/anyio failures don't surface as 'unhandled errors
-    in a TaskGroup (1 sub-exception)'."""
-    if isinstance(exc, BaseExceptionGroup):
-        return "; ".join(_explain(sub) for sub in exc.exceptions)
-    message = str(exc).strip()
-    return f"{type(exc).__name__}: {message}" if message else type(exc).__name__
+
 
 
 def discovery_credentials(backend: str) -> tuple[str, ...]:
@@ -867,6 +863,81 @@ def refine(
     except Exception as exc:
         console.print(f"[red]Refinement failed:[/red] {_explain(exc)}")
         raise typer.Exit(code=1) from exc
+
+
+@app.command()
+def publish(
+    artifact: Path = typer.Argument(..., exists=True, dir_okay=False,
+                                    help="A doc_sources.json from `ark docs`."),
+    name: str = typer.Option("", "--name", help="Override the generated name."),
+) -> None:
+    """List an already-generated plan in the public catalogue.
+
+    Plans made at the terminal are the same artifact the web UI produces, so they
+    belong in the same catalogue — otherwise the listing only ever shows plans that
+    happened to be generated in a browser.
+    """
+    settings = _settings()
+    payload = json.loads(artifact.read_text(encoding="utf-8"))
+    markdown_path = artifact.parent / "plan.md"
+    if not markdown_path.exists():
+        console.print(f"[red]No plan.md next to[/red] {artifact}. Run `ark plan` first.")
+        raise typer.Exit(code=1)
+    markdown = markdown_path.read_text(encoding="utf-8")
+    libraries = [library["name"] for library in payload.get("libraries", [])]
+    requirement = payload.get("requirement", "")
+
+    async def go() -> None:
+        store = await connect(settings)
+        if store is None:
+            console.print("[red]MongoDB is not configured or not reachable.[/red]")
+            raise typer.Exit(code=1)
+        title = name.strip() or await name_plan(settings, requirement, libraries)
+        slug = slugify(title)
+        run_id = artifact.parent.name
+        base, n = slug, 2
+        while True:
+            existing = await store.get_plan(slug)
+            if existing is None or existing.get("run_id") == run_id:
+                break
+            slug, n = f"{base}-{n}", n + 1
+        await store.publish(slug, {
+            "name": title,
+            "run_id": run_id,
+            "requirement": requirement,
+            "libraries": libraries,
+            "markdown": markdown,
+            "model": payload.get("model", settings.model),
+            "citations": len(payload.get("documents", [])),
+            "phases": markdown.count("\n## "),
+            "bytes": len(markdown.encode()),
+        })
+        await store.close()
+        console.print(f"Published [bold]{title}[/bold] → /plan/{slug}")
+
+    asyncio.run(go())
+
+
+@app.command()
+def serve(
+    host: str = typer.Option("127.0.0.1", help="Interface to bind."),
+    port: int = typer.Option(8000, help="Port to listen on."),
+    reload: bool = typer.Option(False, "--reload", help="Restart on code changes."),
+) -> None:
+    """Serve the web UI: generate plans in a browser and browse the catalogue."""
+    import uvicorn
+
+    # Same credential check the `docs` command makes, so a missing key is a clear
+    # message at startup rather than a 500 on the first run someone tries.
+    settings = _settings(discovery=True, scrape=True)
+    store_note = "MongoDB configured" if settings.mongodb_uri else (
+        "MongoDB not configured — plans will not be catalogued"
+    )
+    console.print(f"[dim]{store_note}.[/dim]")
+    console.print(f"ARK Scrapper → [bold]http://{host}:{port}[/bold]")
+
+    # The app is created by the import string so --reload can re-import it.
+    uvicorn.run("ark.web.app:app", host=host, port=port, reload=reload, log_level="warning")
 
 
 def main() -> None:

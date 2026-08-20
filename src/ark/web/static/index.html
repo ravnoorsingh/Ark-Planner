@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARK Scrapper — citation-backed plans for coding agents</title>
+<link rel="stylesheet" href="/app.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>📄</text></svg>">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/">ark<span>::</span>scrapper</a>
+    <nav class="links">
+      <a href="#build">Build</a>
+      <a href="#catalogue">Catalogue</a>
+      <a href="/api/docs">API</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="hero">
+<pre>    _    ____  _  __
+   / \  |  _ \| |/ /
+  / _ \ | |_) | ' /
+ / ___ \|  _ &lt;| . \
+/_/   \_\_| \_\_|\_\
+ documentation → plans</pre>
+    <h1>Planning documents your coding agent can trust</h1>
+    <p>Describe what you want to build. ARK finds the official docs, scrapes them,
+       and writes a plan that cites every claim back to the page it came from.</p>
+    <div class="cmd">$ <b>ark docs</b> "build a RAG service over PDFs" --plan</div>
+  </section>
+
+  <!-- ---------------- build ---------------- -->
+  <section id="build" class="panel">
+    <h2>New plan</h2>
+    <textarea id="requirement" placeholder="Build a production RAG service that ingests PDF manuals, chunks and embeds them into a vector database, and exposes a FastAPI endpoint that answers questions with citations back to the source page."></textarea>
+    <div class="opts">
+      <label><input type="checkbox" id="opt-choices" checked> Ask about open choices</label>
+      <label><input type="checkbox" id="opt-urls" checked> Let me pin doc URLs</label>
+      <label><input type="checkbox" id="opt-review" checked> Review URLs before scraping</label>
+      <label><input type="checkbox" id="opt-cache" checked> Reuse cached pages</label>
+      <label>Alternates
+        <select id="opt-alts">
+          <option value="0">0</option>
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </label>
+      <button class="primary" id="go" style="margin-left:auto">Generate plan</button>
+    </div>
+    <div id="run" hidden>
+      <hr style="border:none;border-top:1px solid var(--line);margin:20px 0">
+      <ul class="steps" id="steps"></ul>
+      <div id="question"></div>
+      <div id="outcome"></div>
+    </div>
+  </section>
+
+  <!-- ---------------- catalogue ---------------- -->
+  <section id="catalogue" style="margin-top:44px">
+    <div class="row between" style="margin-bottom:14px">
+      <div class="tabs" id="tabs">
+        <button data-sort="trending" class="on">Trending</button>
+        <button data-sort="installs">Most installed</button>
+        <button data-sort="new">Newest</button>
+      </div>
+      <div class="grow" style="max-width:320px">
+        <input type="search" id="search" placeholder="Search plans…" autocomplete="off">
+      </div>
+    </div>
+    <div id="libfilter" class="labels" style="margin-bottom:12px"></div>
+    <div class="plan-list" id="plans"></div>
+  </section>
+
+  <footer class="bottom">
+    Every plan here is free to download. Plans are written by an LLM from documentation
+    scraped at generation time — check the citations before you ship.
+    <span id="stats" style="float:right"></span>
+  </footer>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>

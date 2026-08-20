@@ -17,9 +17,12 @@ Every command, flag and environment variable, and what each one is for.
 | `ark scrape <artifact.json>` | scrape an artifact's URLs — no LLM, no search | Bright Data records only |
 | `ark plan <artifact.json>` | build a plan from already-scraped pages | `N + 1` LLM calls |
 | `ark refine <artifact.json> ["instruction"]` | revise an existing plan | **1** LLM call per instruction |
+| `ark serve` | web UI: run the pipeline in a browser, browse the public catalogue | per run started |
+| `ark publish <artifact.json>` | list an existing plan in the catalogue | **1** LLM call (the name) |
 
 `N` is the number of libraries. `ark refine` with no instruction opens an interactive
-session; `/quit` ends it.
+session; `/quit` ends it. `ark docs --plan` adds **1** call for the plan's name when
+run through the web UI. See [web.md](web.md) for the browser interface.
 
 ---
 
@@ -70,6 +73,15 @@ link you just chose to keep.
 | `--plan` | `docs` | Write a citation-backed `plan.md`. Implies `--scrape`. |
 | `--stdout` | `plan` | Print the plan instead of writing it. |
 | `--out PATH` | all | Where the artifact or plan is written. |
+
+### The web UI
+
+| Flag | Command | What it does |
+|---|---|---|
+| `--host` | `serve` | Interface to bind. Default `127.0.0.1` — see the warning in [web.md](web.md) before changing it. |
+| `--port` | `serve` | Default `8000`. |
+| `--reload` | `serve` | Restart on code changes, for development. |
+| `--name "…"` | `publish` | Use this catalogue name instead of generating one. Skips the naming LLM call. |
 
 ### Output and scripting
 

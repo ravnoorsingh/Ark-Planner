@@ -20,6 +20,8 @@ dependencies = [
     "httpx>=0.28.1",
     "markdownify>=1.2.3",
     "pymongo>=4.17.0",
+    "fastapi>=0.141.1",
+    "uvicorn[standard]>=0.52.3",
 ]
 
 [project.scripts]

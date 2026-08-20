@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-20T15:18:20.453547+00:00",
+  "updated_at": "2026-08-20T17:37:58.894152+00:00",
   "fetched_via": "brightdata-collector:c_msx9i6aq2bz5dznadk",
   "documents": [
     {
@@ -509,6 +509,23 @@
       "bytes": 11027,
       "sha256": "60459c831a274e9c3131ba7f894a5e4224d849ba3149b1d66fe896ba25f41635",
       "fetched_at": "2026-08-18T08:56:28.571657+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "markdown",
+      "query": "Build a CLI tool that converts markdown files to styled PDFs with a table of contents. Use markdown for the markdown parser. Use weasyprint for the pdf generator. Use click for the cli framework.",
+      "url": "https://www.markdownguide.org/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/markdown-build-a-cli-tool-that-converts-markdown-files-to/primary--markdownguide-org-50d5e59d.md",
+      "raw_path": "data/markdown-build-a-cli-tool-that-converts-markdown-files-to/primary--markdownguide-org-50d5e59d.json",
+      "title": "",
+      "bytes": 1550,
+      "sha256": "0ae9b4ba20386b9cc8e136e5b02200d4ead1fe3080c8c30c37c88125dca99574",
+      "fetched_at": "2026-08-20T17:37:58.807386+00:00",
       "from_cache": false,
       "error": null
     },
@@ -2073,6 +2090,23 @@
       "bytes": 5087,
       "sha256": "6828c8b40d69c9ab1352189fcd6a4219575178b273eb82ed9f453bfc0a091417",
       "fetched_at": "2026-08-19T12:36:07.856994+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "weasyprint",
+      "query": "Build a CLI tool that converts markdown files to styled PDFs with a table of contents. Use markdown for the markdown parser. Use weasyprint for the pdf generator. Use click for the cli framework.",
+      "url": "https://weasyprint.org/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/weasyprint-build-a-cli-tool-that-converts-markdown-files-to/primary--weasyprint-org-47ede0b0.md",
+      "raw_path": "data/weasyprint-build-a-cli-tool-that-converts-markdown-files-to/primary--weasyprint-org-47ede0b0.json",
+      "title": "",
+      "bytes": 8336,
+      "sha256": "b0da00dd7433444b70e2854bb44134815a9437dd86920ae17f298f4a9611629e",
+      "fetched_at": "2026-08-20T17:37:58.884272+00:00",
       "from_cache": false,
       "error": null
     },
