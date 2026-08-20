@@ -1,0 +1,634 @@
+{
+  "requirement": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+  "plan_path": "",
+  "model": "openai/gpt-oss-120b",
+  "generated_at": "2026-08-20T15:14:23.457573+00:00",
+  "libraries": [
+    {
+      "name": "fastapi",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Provides the HTTP API endpoints"
+    },
+    {
+      "name": "uvicorn",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Runs the FastAPI app as an ASGI server"
+    },
+    {
+      "name": "python-multipart",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Handles file upload parsing for PDFs"
+    },
+    {
+      "name": "pypdf",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Extracts text from uploaded PDF resumes"
+    },
+    {
+      "name": "sentence-transformers",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Generates embeddings for resume text and job description"
+    },
+    {
+      "name": "faiss-cpu",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Performs efficient similarity search and ranking of embeddings"
+    },
+    {
+      "name": "numpy",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Supports vector operations needed for similarity calculations"
+    }
+  ],
+  "doc_sources": [
+    {
+      "library": "fastapi",
+      "url": "https://fastapi.tiangolo.com/",
+      "title": "FastAPI Documentation",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The URL https://fastapi.tiangolo.com/ is the official documentation site for FastAPI, matching the primary preference for a library's own docs. It is the root landing page, not a deep link, and is directly listed in the search results.",
+      "alternates": [],
+      "user_supplied": false
+    },
+    {
+      "library": "uvicorn",
+      "url": "https://uvicorn.dev/",
+      "title": "",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The uvicorn.dev site is the library's own documentation homepage, providing the index, quickstart, usage, and settings. It is the primary official docs entry point, matching the preferred source hierarchy.",
+      "alternates": [
+        "https://github.com/Kludex/uvicorn",
+        "https://uvicorn.dev/settings/"
+      ],
+      "user_supplied": false
+    },
+    {
+      "library": "python-multipart",
+      "url": "https://multipart.readthedocs.io/",
+      "title": "python-multipart Documentation",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "The Read the Docs site (multipart.readthedocs.io) is the library's dedicated documentation host, matching the preferred first-party docs source. It is the root landing page for the current version, making it the best entry point.",
+      "alternates": [
+        "https://github.com/Kludex/python-multipart"
+      ],
+      "user_supplied": false
+    },
+    {
+      "library": "pypdf",
+      "url": "https://pypdf.readthedocs.io/",
+      "title": "pypdf Documentation",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The Read the Docs site is the official documentation host for pypdf and the root URL is the entry point for the latest version. It is directly linked from the project and not a third\u2011party source.",
+      "alternates": [
+        "https://github.com/py-pdf/pypdf",
+        "https://pypdf.readthedocs.io/en/latest/user/extract-text.html",
+        "https://pypdf.readthedocs.io/en/stable/modules/PdfReader.html"
+      ],
+      "user_supplied": false
+    },
+    {
+      "library": "sentence-transformers",
+      "url": "https://sbert.net/",
+      "title": "SentenceTransformers Documentation",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "sbert.net is the official documentation site for the SentenceTransformers library, providing the root landing page and usage guide. It is the primary first\u2011party source, matching the preferred order. The GitHub repo and HuggingFace hub are secondary.",
+      "alternates": [
+        "https://github.com/huggingface/sentence-transformers"
+      ],
+      "user_supplied": false
+    },
+    {
+      "library": "faiss-cpu",
+      "url": "https://faiss.ai/index.html",
+      "title": "Faiss Documentation",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "The Faiss documentation site (faiss.ai) is the library's own official documentation root, matching the preferred first-party source. It provides installation, usage, and API information for both CPU and GPU variants. Other results are third\u2011party tutorials, PyPI metadata, or GitHub files, making the docs site the best entry point.",
+      "alternates": [],
+      "user_supplied": false
+    },
+    {
+      "library": "numpy",
+      "url": "https://numpy.org/doc/",
+      "title": "NumPy Documentation",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The URL https://numpy.org/doc/ is the official documentation root for NumPy, hosted on the project's own domain and provides the latest stable manual. It is the primary entry point for users.",
+      "alternates": [
+        "https://numpy.org/",
+        "https://numpy.org/doc/stable",
+        "https://numpy.org/devdocs/reference/"
+      ],
+      "user_supplied": false
+    }
+  ],
+  "documents": [
+    {
+      "library": "fastapi",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://fastapi.tiangolo.com/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/fastapi-build-a-fastapi-microservice-that-extracts-text/primary--fastapi-tiangolo-com-c889b628.md",
+      "raw_path": "data/fastapi-build-a-fastapi-microservice-that-extracts-text/primary--fastapi-tiangolo-com-c889b628.json",
+      "title": "",
+      "bytes": 22558,
+      "sha256": "5f2319fdf3c6618398daa2cab40bf2b4af2964e6e786a1c77a2b7c67331177a3",
+      "fetched_at": "2026-08-20T15:09:54.795908+00:00",
+      "from_cache": true,
+      "error": null
+    },
+    {
+      "library": "uvicorn",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://uvicorn.dev/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/uvicorn-build-a-fastapi-microservice-that-extracts-text/primary--uvicorn-dev-a46435f2.md",
+      "raw_path": "data/uvicorn-build-a-fastapi-microservice-that-extracts-text/primary--uvicorn-dev-a46435f2.json",
+      "title": "",
+      "bytes": 4969,
+      "sha256": "2eb79e0a057bd7feaa67c107c4683108aece3a3e2f4c5f575de77e55fedf3005",
+      "fetched_at": "2026-08-20T15:09:54.906944+00:00",
+      "from_cache": true,
+      "error": null
+    },
+    {
+      "library": "uvicorn",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://github.com/Kludex/uvicorn",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/uvicorn-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-kludex-uvicorn-2dc6029f.md",
+      "raw_path": "data/uvicorn-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-kludex-uvicorn-2dc6029f.json",
+      "title": "",
+      "bytes": 5087,
+      "sha256": "6828c8b40d69c9ab1352189fcd6a4219575178b273eb82ed9f453bfc0a091417",
+      "fetched_at": "2026-08-20T15:09:55.037247+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "python-multipart",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://multipart.readthedocs.io/",
+      "resolved_url": "https://multipart.readthedocs.io/en/latest/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/python-multipart-build-a-fastapi-microservice-that-extracts-text/primary--multipart-readthedocs-io-15b8709e.md",
+      "raw_path": "data/python-multipart-build-a-fastapi-microservice-that-extracts-text/primary--multipart-readthedocs-io-15b8709e.json",
+      "title": "",
+      "bytes": 4269,
+      "sha256": "b147b270fee6fede462218b2653b9f1ae6d5f50049a52219ee715ea84dcfa4ae",
+      "fetched_at": "2026-08-20T15:09:55.108803+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "python-multipart",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://github.com/Kludex/python-multipart",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/python-multipart-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-kludex-python-multipart-9dea0d54.md",
+      "raw_path": "data/python-multipart-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-kludex-python-multipart-9dea0d54.json",
+      "title": "",
+      "bytes": 14431,
+      "sha256": "98d4e7a08c1aeebeaeb9cf95ef005f8b313caf88d7722ed571b7457b9fb6fcb0",
+      "fetched_at": "2026-08-20T15:09:55.477103+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "pypdf",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://pypdf.readthedocs.io/",
+      "resolved_url": "https://pypdf.readthedocs.io/en/stable/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/pypdf-build-a-fastapi-microservice-that-extracts-text/primary--pypdf-readthedocs-io-deadc5f9.md",
+      "raw_path": "data/pypdf-build-a-fastapi-microservice-that-extracts-text/primary--pypdf-readthedocs-io-deadc5f9.json",
+      "title": "",
+      "bytes": 3667,
+      "sha256": "6d2fc092d79c814a03942e763c4ad836ff9d2310cc03f7ed96a2524a358cb5eb",
+      "fetched_at": "2026-08-20T15:09:55.562694+00:00",
+      "from_cache": true,
+      "error": null
+    },
+    {
+      "library": "pypdf",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://github.com/py-pdf/pypdf",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/pypdf-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-py-pdf-pypdf-c6f0cfef.md",
+      "raw_path": "data/pypdf-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-py-pdf-pypdf-c6f0cfef.json",
+      "title": "",
+      "bytes": 5418,
+      "sha256": "05c19cbcb141817cab8109e181233cfc222293165db5ef63789ae85477d9f3bb",
+      "fetched_at": "2026-08-20T15:09:55.668729+00:00",
+      "from_cache": true,
+      "error": null
+    },
+    {
+      "library": "sentence-transformers",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://sbert.net/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/sentence-transformers-build-a-fastapi-microservice-that-extracts-text/primary--sbert-net-7b8ec571.md",
+      "raw_path": "data/sentence-transformers-build-a-fastapi-microservice-that-extracts-text/primary--sbert-net-7b8ec571.json",
+      "title": "",
+      "bytes": 16902,
+      "sha256": "1470da3122ea9bc3af71da6826f4671bcd0f923f5740a8907f3d099ed9800c75",
+      "fetched_at": "2026-08-20T15:09:55.998613+00:00",
+      "from_cache": true,
+      "error": null
+    },
+    {
+      "library": "sentence-transformers",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://github.com/huggingface/sentence-transformers",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/sentence-transformers-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-huggingface-sentence-transformers-2a6e1c07.md",
+      "raw_path": "data/sentence-transformers-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-huggingface-sentence-transformers-2a6e1c07.json",
+      "title": "",
+      "bytes": 18119,
+      "sha256": "062b966bb59ce25bb0e22362bdccb9da52021c486de0dcba3c37e8d25ffb7417",
+      "fetched_at": "2026-08-20T15:09:56.285878+00:00",
+      "from_cache": true,
+      "error": null
+    },
+    {
+      "library": "faiss-cpu",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://faiss.ai/index.html",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/faiss-cpu-build-a-fastapi-microservice-that-extracts-text/primary--faiss-ai-index-html-64a59ea8.md",
+      "raw_path": "data/faiss-cpu-build-a-fastapi-microservice-that-extracts-text/primary--faiss-ai-index-html-64a59ea8.json",
+      "title": "",
+      "bytes": 12330,
+      "sha256": "27a2ab708fcea0b98d22f97dcb64071c11781e86be5a765603eb249b1c113a39",
+      "fetched_at": "2026-08-20T15:09:56.388157+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "numpy",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://numpy.org/doc/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/numpy-build-a-fastapi-microservice-that-extracts-text/primary--numpy-org-doc-c3167dc9.md",
+      "raw_path": "data/numpy-build-a-fastapi-microservice-that-extracts-text/primary--numpy-org-doc-c3167dc9.json",
+      "title": "",
+      "bytes": 3308,
+      "sha256": "592992823df3a28e6e90eb98ffc845595d86696215c6591cbb1d44fa79c69093",
+      "fetched_at": "2026-08-20T15:09:56.464840+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "numpy",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://numpy.org/",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/numpy-build-a-fastapi-microservice-that-extracts-text/alt-1--numpy-org-15229522.md",
+      "raw_path": "data/numpy-build-a-fastapi-microservice-that-extracts-text/alt-1--numpy-org-15229522.json",
+      "title": "",
+      "bytes": 13536,
+      "sha256": "696e46c82759a06257ab7e4fbf2626838e331f203bdf677692c78c59b4d1c6c6",
+      "fetched_at": "2026-08-20T15:09:56.602692+00:00",
+      "from_cache": false,
+      "error": null
+    }
+  ],
+  "briefs": [
+    {
+      "library": "fastapi",
+      "install": "uv add \"fastapi[standard]\"",
+      "version": "",
+      "summary": "FastAPI is a modern, fast (high\u2011performance) web framework for building APIs with Python based on standard Python type hints. It combines high performance, easy coding, and standards\u2011based features such as OpenAPI and JSON Schema.",
+      "api": [
+        {
+          "name": "FastAPI",
+          "signature": "FastAPI()",
+          "summary": "The main FastAPI application class.",
+          "example": "from fastapi import FastAPI\n\napp = FastAPI()"
+        },
+        {
+          "name": "@app.get",
+          "signature": "@app.get(\"/\")",
+          "summary": "Decorator to declare a GET endpoint on the FastAPI app.",
+          "example": "@app.get(\"/\")\ndef read_root():\n    return {\"Hello\": \"World\"}"
+        },
+        {
+          "name": "fastapi dev",
+          "signature": "fastapi dev",
+          "summary": "CLI command that reads the main file, detects the FastAPI app, and starts a development server with auto\u2011reload using Uvicorn.",
+          "example": "uv run fastapi dev"
+        },
+        {
+          "name": "uv add",
+          "signature": "uv add \"fastapi[standard]\"",
+          "summary": "Installs FastAPI with the standard set of optional dependencies.",
+          "example": "uv add \"fastapi[standard]\"\n\nuv add \"fastapi[standard]\""
+        }
+      ],
+      "gotchas": [
+        "Make sure to put \"fastapi[standard]\" in quotes when using uv to ensure it works in all terminals.",
+        "If your code uses async/await, define endpoints with async def; otherwise use regular def.",
+        "The `fastapi dev` command enables auto\u2011reload by default, which is intended for local development only."
+      ],
+      "citation_keys": [
+        "fastapi-1"
+      ]
+    },
+    {
+      "library": "uvicorn",
+      "install": "pip install uvicorn",
+      "version": "",
+      "summary": "Uvicorn is an ASGI web server implementation for Python. It currently supports HTTP/1.1 and WebSockets.",
+      "api": [
+        {
+          "name": "uvicorn.run",
+          "signature": "",
+          "summary": "",
+          "example": "import uvicorn\n\nasync def app(scope, receive, send):\n    ...\n\nif __name__ == \"__main__\":\n    uvicorn.run(\"main:app\", port=5000, log_level=\"info\")"
+        },
+        {
+          "name": "uvicorn.Config",
+          "signature": "",
+          "summary": "",
+          "example": "import uvicorn\n\nasync def app(scope, receive, send):\n    ...\n\nif __name__ == \"__main__\":\n    config = uvicorn.Config(\"main:app\", port=5000, log_level=\"info\")\n    server = uvicorn.Server(config)\n    server.run()"
+        },
+        {
+          "name": "uvicorn.Server",
+          "signature": "",
+          "summary": "",
+          "example": "import uvicorn\n\nasync def app(scope, receive, send):\n    ...\n\nif __name__ == \"__main__\":\n    config = uvicorn.Config(\"main:app\", port=5000, log_level=\"info\")\n    server = uvicorn.Server(config)\n    server.run()"
+        },
+        {
+          "name": "uvicorn.Server.serve",
+          "signature": "",
+          "summary": "",
+          "example": "import asyncioimport uvicorn\n\nasync def app(scope, receive, send):\n    ...\n\nasync def main():\n    config = uvicorn.Config(\"main:app\", port=5000, log_level=\"info\")\n    server = uvicorn.Server(config)\n    await server.serve()\n\nif __name__ == \"__main__\":\n    asyncio.run(main())"
+        },
+        {
+          "name": "uvicorn.workers.UvicornWorker",
+          "signature": "",
+          "summary": "",
+          "example": "gunicorn example:app -w 4 -k uvicorn.workers.UvicornWorker"
+        }
+      ],
+      "gotchas": [
+        "The `uvicorn.workers` module is deprecated and will be removed in a future release.",
+        "When using Gunicorn, install the `uvicorn-worker` package (`python -m pip install uvicorn-worker`)."
+      ],
+      "citation_keys": [
+        "uvicorn-1",
+        "uvicorn-2"
+      ]
+    },
+    {
+      "library": "python-multipart",
+      "install": "pip install multipart or uv add multipart",
+      "version": "",
+      "summary": "The python-multipart module provides a fast incremental non\u2011blocking parser for multipart/form\u2011data, as defined by HTML5 and RFC7578. It also offers blocking alternatives for WSGI or CGI applications via a buffered parser and high\u2011level WSGI helper functions.",
+      "api": [],
+      "gotchas": [
+        "Only supports multipart/form-data; multipart/mixed is not supported",
+        "No base64 or quoted\u2011printable transfer encoding is handled",
+        "Encoded\u2011word or name=_charset_ markers are not supported",
+        "The parsers do not handle clearly broken client inputs such as invalid line breaks or headers"
+      ],
+      "citation_keys": [
+        "python-multipart-1",
+        "python-multipart-2"
+      ]
+    },
+    {
+      "library": "pypdf",
+      "install": "pip install pypdf",
+      "version": "3.1.0",
+      "summary": "pypdf is a free and open source pure\u2011python PDF library capable of splitting, merging, cropping, and transforming the pages of PDF files. It can also add custom data, viewing options, passwords, and retrieve text and metadata from PDFs.",
+      "api": [
+        {
+          "name": "PdfReader",
+          "signature": "",
+          "summary": "The PdfReader Class",
+          "example": "from pypdf import PdfReader\n\nreader = PdfReader(\"example.pdf\")number_of_pages = len(reader.pages)page = reader.pages[0]text = page.extract_text()"
+        },
+        {
+          "name": "PdfWriter",
+          "signature": "",
+          "summary": "The PdfWriter Class",
+          "example": ""
+        },
+        {
+          "name": "PageObject",
+          "signature": "",
+          "summary": "The PageObject Class",
+          "example": ""
+        },
+        {
+          "name": "Transformation",
+          "signature": "",
+          "summary": "The Transformation Class",
+          "example": ""
+        },
+        {
+          "name": "PdfDocCommon",
+          "signature": "",
+          "summary": "The PdfDocCommon Class",
+          "example": ""
+        }
+      ],
+      "gotchas": [
+        "For AES encryption or decryption, install extra dependencies with `pip install pypdf[crypto]`.",
+        "`pypdf` 3.1.0 and above include significant improvements; consult the migration guide when upgrading.",
+        "Use `print(pypdf.__version__)` to determine the installed version."
+      ],
+      "citation_keys": [
+        "pypdf-1",
+        "pypdf-2"
+      ]
+    },
+    {
+      "library": "sentence-transformers",
+      "install": "pip install -U sentence-transformers",
+      "version": "",
+      "summary": "Sentence Transformers (a.k.a. SBERT) is the go-to Python module for using and training state-of-the-art embedding and reranker models. It can compute embeddings from text, images, audio, or video, calculate similarity scores with Cross\u2011Encoder models, generate sparse embeddings, and produce token\u2011level embeddings for ColBERT\u2011style retrieval using Multi\u2011Vector Encoder models.",
+      "api": [
+        {
+          "name": "SentenceTransformer",
+          "signature": "",
+          "summary": "",
+          "example": "from sentence_transformers import SentenceTransformer\n\nmodel = SentenceTransformer(\"sentence-transformers/all-MiniLM-L6-v2\")"
+        },
+        {
+          "name": "model.encode",
+          "signature": "",
+          "summary": "",
+          "example": "embeddings = model.encode(sentences)\nprint(embeddings.shape)  # => (3, 384)"
+        },
+        {
+          "name": "model.similarity",
+          "signature": "",
+          "summary": "",
+          "example": "similarities = model.similarity(embeddings, embeddings)\nprint(similarities)  # tensor([[1.0000, 0.6660, 0.1046], ...])"
+        },
+        {
+          "name": "CrossEncoder",
+          "signature": "",
+          "summary": "",
+          "example": "from sentence_transformers import CrossEncoder\n\nmodel = CrossEncoder(\"cross-encoder/ms-marco-MiniLM-L6-v2\")"
+        },
+        {
+          "name": "CrossEncoder.predict",
+          "signature": "",
+          "summary": "",
+          "example": "scores = model.predict([(query, passage) for passage in passages])\nprint(scores)  # => [8.607139 5.506266 6.352977]"
+        },
+        {
+          "name": "CrossEncoder.rank",
+          "signature": "",
+          "summary": "",
+          "example": "ranks = model.rank(query, passages, return_documents=True)\nfor rank in ranks:\n    print(f\"- #{rank['corpus_id']} ({rank['score']:.2f}): {rank['text']}\")"
+        }
+      ],
+      "gotchas": [
+        "Requires Python\u202f3.10+ and PyTorch\u202f2.2+ with transformers\u202fv5.0+.",
+        "Installation extras are available for image, audio, video, training, ONNX, OpenVINO, and development support.",
+        "Version\u202f6.0 introduces MultiVectorEncoder and may require migration steps as described in the migration guide."
+      ],
+      "citation_keys": [
+        "sentence-transformers-1",
+        "sentence-transformers-2"
+      ]
+    },
+    {
+      "library": "faiss-cpu",
+      "install": "$ conda install -c pytorch faiss-cpu",
+      "version": "",
+      "summary": "Faiss is a library for efficient similarity search and clustering of dense vectors. It contains algorithms that search in sets of vectors of any size, up to ones that possibly do not fit in RAM. It also contains supporting code for evaluation and parameter tuning.",
+      "api": [],
+      "gotchas": [
+        "Note that either package should be installed, but not both, as the latter is a superset of the former."
+      ],
+      "citation_keys": [
+        "faiss-cpu-1"
+      ]
+    },
+    {
+      "library": "numpy",
+      "install": "",
+      "version": "2.5.0",
+      "summary": "NumPy is the fundamental package for scientific computing with Python. It provides powerful N-dimensional arrays, vectorized operations, and a comprehensive suite of mathematical functions.",
+      "api": [
+        {
+          "name": "numpy.arange",
+          "signature": "",
+          "summary": "",
+          "example": "x = np.arange(15, dtype=np.int64).reshape(3, 5)"
+        },
+        {
+          "name": "numpy.random.default_rng",
+          "signature": "",
+          "summary": "",
+          "example": "rng = np.random.default_rng()\nsamples = rng.normal(size=2500)"
+        },
+        {
+          "name": "ndarray.max",
+          "signature": "",
+          "summary": "",
+          "example": "x.max(axis=1)"
+        }
+      ],
+      "gotchas": [],
+      "citation_keys": [
+        "numpy-1",
+        "numpy-2"
+      ]
+    }
+  ],
+  "plan_draft": {
+    "title": "FastAPI Resume Ranking Service Plan",
+    "overview": "Create a FastAPI microservice that accepts PDF resumes, extracts their text, embeds the content with a SentenceTransformer model, and ranks the resumes against a job description using a FAISS index. The plan covers environment setup, API implementation, PDF processing, embedding, similarity search, and verification.",
+    "phases": [
+      {
+        "title": "Project Setup",
+        "body": "- Initialize a new project directory and version control.\n- Add FastAPI with standard extras via `uv add \"fastapi[standard]\"`[^fastapi-1].\n- Add python-multipart via `uv add multipart`[^python-multipart-1].\n- Install pypdf, sentence-transformers, faiss-cpu, and numpy using pip or conda as documented[^pypdf-1][^sentence-transformers-1][^faiss-cpu-1][^numpy-1].\n- Create `main.py` as the entry point.\n- Record dependencies in `pyproject.toml` or `requirements.txt`."
+      },
+      {
+        "title": "API Skeleton",
+        "body": "- Import FastAPI and instantiate `app = FastAPI()`[^fastapi-1].\n- Define a GET `/health` endpoint returning `{\"status\":\"ok\"}`.\n- Define an async POST `/extract` endpoint accepting `file: UploadFile = File(...)`[^python-multipart-1].\n- Ensure the endpoint reads the file with `await file.read()`.\n- Return a JSON payload with a placeholder for extracted text.\n- Add `if __name__ == \"__main__\": uvicorn.run(\"main:app\", port=8000, log_level=\"info\")`[^uvicorn-1]."
+      },
+      {
+        "title": "PDF Extraction",
+        "body": "- Write a helper `def extract_text_from_pdf(data: bytes) -> str:`.\n- Inside the helper, create a `BytesIO` stream and instantiate `PdfReader` from pypdf[^pypdf-1].\n- Iterate over `reader.pages`, call `page.extract_text()`, and concatenate non\u2011None results.\n- Return the combined string; raise HTTPException if no text is found.\n- Call this helper from the `/extract` endpoint and include the result in the response.\n- Add appropriate imports from `pypdf` and `io`."
+      },
+      {
+        "title": "Embedding Service",
+        "body": "- At module load, create a global `model = SentenceTransformer(\"sentence-transformers/all-MiniLM-L6-v2\")`[^sentence-transformers-1].\n- Implement `def embed_texts(texts: List[str]) -> np.ndarray:` that returns `model.encode(texts, convert_to_numpy=True)`[^numpy-1].\n- Add a POST `/rank` endpoint receiving JSON with `job_description: str` and `resumes: List[str]`.\n- Inside the endpoint, compute `job_emb = embed_texts([job_description])` and `resume_emb = embed_texts(resumes)`.\n- Store embeddings in memory for the ranking step.\n- Return a response confirming embeddings were generated."
+      },
+      {
+        "title": "Similarity Index & Ranking",
+        "body": "- Import FAISS and create an index: `index = faiss.IndexFlatL2(job_emb.shape[1])`[^faiss-cpu-1].\n- Add resume embeddings to the index via `index.add(resume_emb)`.\n- Perform a search: `distances, ids = index.search(job_emb, k=len(resumes))`.\n- Convert L2 distances to similarity scores (e.g., `scores = -distances.squeeze()`).\n- Build a ranked list of resumes with their scores and return it in the `/rank` response.\n- Validate that the dimension of `job_emb` matches the index dimension; raise an error otherwise."
+      },
+      {
+        "title": "Run & Verify",
+        "body": "- Start the service in development mode with `uv run fastapi dev`[^fastapi-1].\n- Use `curl -F \"file=@sample.pdf\" http://localhost:8000/extract` to test PDF extraction.\n- POST a JSON payload to `/rank` containing a job description and the extracted resume texts; verify the returned order reflects relevance.\n- Add basic logging statements for each request.\n- Document the startup command and required environment variables in a README.\n- Commit all code and ensure the test commands pass."
+      }
+    ],
+    "pitfalls": [
+      "Missing quotes around \"fastapi[standard]\" in the `uv add` command will cause installation errors[^fastapi-1].",
+      "Defining the endpoint with `def` instead of `async def` while using `await file.read()` blocks the event loop[^fastapi-1].",
+      "`page.extract_text()` can return `None` for scanned PDFs; filter out None values to avoid empty strings[^pypdf-1].",
+      "Sentence\u2011Transformer models need PyTorch\u202f2.2+; absence of a compatible torch version raises import errors[^sentence-transformers-1].",
+      "FAISS\u2011CPU is only distributed via conda; installing it with pip may lead to missing native libraries[^faiss-cpu-1].",
+      "Large PDF uploads may exhaust memory; consider imposing size limits or streaming processing."
+    ]
+  },
+  "errors": [
+    "python-multipart: asked for https://multipart.readthedocs.io/ but the collector returned https://multipart.readthedocs.io/en/latest/",
+    "pypdf: asked for https://pypdf.readthedocs.io/ but the collector returned https://pypdf.readthedocs.io/en/stable/"
+  ]
+}

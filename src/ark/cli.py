@@ -17,6 +17,7 @@ from rich.panel import Panel
 from .choices import LibraryChoice, apply_choices, describe, detect_choices
 from .config import MissingCredentials, load_settings
 from .graph import NODE_LABELS, research_session
+from .mongo import connect
 from .nodes.scrape_docs import planned_urls, scrape_to_store
 from .nodes.write_plan import build_plan, refine_plan
 from .plan import build_citations
@@ -325,6 +326,21 @@ def _review_urls(max_alternates: int, status=None):
     return review
 
 
+async def _persist(settings, artifact: Path, payload: dict, markdown: str,
+                   instruction: str | None = None) -> None:
+    """Mirror the run and its plan into MongoDB. Best-effort by design."""
+    store = await connect(settings)
+    if store is None:
+        return
+    run_id = artifact.parent.name
+    await store.save_run(run_id, payload)
+    if markdown:
+        revision = await store.save_plan(run_id, markdown, settings.model, instruction)
+        if revision:
+            console.print(f"[dim]MongoDB →[/dim] run {run_id} · plan revision {revision}")
+    await store.close()
+
+
 def _merge(states: list[DocResearchState]) -> DocResearchState:
     """Fold a REPL session's turns into one state for display and saving."""
     merged: DocResearchState = {
@@ -379,6 +395,9 @@ def docs(
     no_review: bool = typer.Option(
         False, "--no-review", help="Don't show the URL list for approval before scraping."
     ),
+    no_cache: bool = typer.Option(
+        False, "--no-cache", help="Re-scrape even if a page is in the MongoDB cache."
+    ),
 ) -> None:
     """Resolve official documentation links for one requirement and exit."""
     scrape = scrape or plan  # a plan is only grounded if the docs were fetched
@@ -422,6 +441,11 @@ def docs(
                 marker = "" if interactive else " [dim](default)[/dim]"
                 console.print(f"[dim]·[/dim] {line}{marker}")
 
+        # Optional: absent or unreachable, everything below runs filesystem-only.
+        store = await connect(settings)
+        if store is not None:
+            console.print(f"[dim]MongoDB store: {settings.mongodb_db}[/dim]")
+
         pinned = parse_doc_urls(doc_url)
         # Only offer the per-library prompt when there is a terminal to answer on.
         interactive_urls = not no_ask_urls and sys.stdin.isatty() and not as_json
@@ -430,6 +454,7 @@ def docs(
             async with research_session(
                 settings, scrape=scrape, plan=plan,
                 max_alternates=max_alternates, doc_urls=pinned,
+                store=store, use_cache=not no_cache,
             ) as run:
                 return await run(goal)
 
@@ -440,6 +465,7 @@ def docs(
             async with research_session(
                 settings, scrape=scrape, plan=plan,
                 max_alternates=max_alternates, doc_urls=pinned,
+                store=store, use_cache=not no_cache,
                 ask_doc_urls=_ask_doc_urls(status) if interactive_urls else None,
                 review_urls=(
                     _review_urls(
@@ -485,6 +511,9 @@ def docs(
         if markdown:
             canonical, root = save_plan(markdown, artifact.parent, settings.plan_filename)
             render_plan_summary(markdown, canonical, root)
+        asyncio.run(
+            _persist(settings, artifact, to_payload(state, settings.model), markdown)
+        )
     elif state.get("plan_markdown"):
         console.print(state["plan_markdown"])
 
@@ -583,6 +612,9 @@ def scrape(
     ),
     data_dir: Path | None = typer.Option(None, "--data-dir", help="Where to write the store."),
     assume_yes: bool = typer.Option(False, "--yes", "-y", help="Skip the confirmation."),
+    no_cache: bool = typer.Option(
+        False, "--no-cache", help="Re-scrape even if a page is in the MongoDB cache."
+    ),
 ) -> None:
     """Scrape the doc URLs in an artifact via Bright Data into the data/ store.
 
@@ -616,18 +648,27 @@ def scrape(
         raise typer.Exit(code=1)
 
     async def go():
+        store = await connect(settings)
+        if store is not None:
+            console.print(f"[dim]MongoDB store: {settings.mongodb_db}[/dim]")
         with console.status("[bold]Triggering Bright Data collector…[/bold]", spinner="dots") as s:
 
             def on_tick(remaining: float) -> None:
                 s.update(f"[bold]Waiting for snapshot…[/bold] [dim]{remaining:.0f}s left[/dim]")
 
-            return await scrape_to_store(
-                settings,
-                sources,
-                query=payload.get("requirement", ""),
-                max_alternates=limit,
-                on_tick=on_tick,
-            )
+            try:
+                return await scrape_to_store(
+                    settings,
+                    sources,
+                    query=payload.get("requirement", ""),
+                    max_alternates=limit,
+                    on_tick=on_tick,
+                    store=store,
+                    use_cache=not no_cache,
+                )
+            finally:
+                if store is not None:
+                    await store.close()
 
     with trace_run(
         "ark scrape",
@@ -734,6 +775,7 @@ def plan(
     payload["plan_draft"] = draft.model_dump()
     artifact.write_text(json.dumps(payload, indent=2), encoding="utf-8")
 
+    asyncio.run(_persist(settings, artifact, payload, markdown))
     render_plan_summary(markdown, canonical, root)
 
 
@@ -789,6 +831,7 @@ def refine(
         # Keep the artifact in step so the next refinement builds on this revision.
         payload["plan_draft"] = draft.model_dump()
         artifact.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        await _persist(settings, artifact, payload, markdown, instruction=text)
         render_plan_summary(markdown, canonical, root)
 
     async def go() -> None:

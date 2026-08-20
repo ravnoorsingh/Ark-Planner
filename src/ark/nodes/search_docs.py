@@ -168,7 +168,7 @@ def _match_provided(
 
 async def search_docs(state: DocResearchState, config: RunnableConfig) -> dict:
     settings: Settings = config["configurable"]["settings"]
-    tools: dict[str, BaseTool] = config["configurable"]["tools"]
+    provider = config["configurable"]["tools"]
     libraries = state.get("libraries", [])
     if not libraries:
         return {"hits": {}}
@@ -201,6 +201,9 @@ async def search_docs(state: DocResearchState, config: RunnableConfig) -> dict:
     if not to_search:
         return {"hits": hits, "provided": provided, "libraries": libraries}
 
+    # Only now is a search backend needed at all. Tests pass a plain dict of tools;
+    # the pipeline passes a LazyTools that connects on this first call.
+    tools = provider if isinstance(provider, dict) else await provider.get()
     tool = require_tool(tools, search_tool_name(settings))
     outcomes = await asyncio.gather(
         *(_search_one(tool, library, settings) for library in to_search),

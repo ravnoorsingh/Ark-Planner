@@ -5,7 +5,7 @@ url: "https://pypdf.readthedocs.io/"
 resolved_url: "https://pypdf.readthedocs.io/en/stable/"
 role: "primary"
 rank: 0
-fetched_at: "2026-08-19T19:23:44.846780+00:00"
+fetched_at: "2026-08-20T14:33:54.157547+00:00"
 fetched_via: "brightdata-collector:c_msx9i6aq2bz5dznadk"
 sha256: "6d2fc092d79c814a03942e763c4ad836ff9d2310cc03f7ed96a2524a358cb5eb"
 ---

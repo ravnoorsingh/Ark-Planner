@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import inspect
 from collections.abc import Callable
+from datetime import UTC, datetime
 
 from langchain_core.runnables import RunnableConfig
 
@@ -58,6 +59,8 @@ async def scrape_to_store(
     query: str = "",
     max_alternates: int | None = None,
     on_tick: Callable[[float], None] | None = None,
+    store: object | None = None,
+    use_cache: bool = True,
 ) -> tuple[list[ScrapedDoc], list[str]]:
     """Scrape every planned URL and persist it. Returns (documents, errors)."""
     limit = settings.max_alternates if max_alternates is None else max_alternates
@@ -67,8 +70,18 @@ async def scrape_to_store(
 
     urls = [url for _, url, _, _ in plan]
     annotate(urls=len(urls), backend=settings.scrape_backend, max_alternates=limit)
+
+    # Pages another run already fetched are reused rather than paid for again. The
+    # cache is keyed by URL, not by query, which is what makes it shareable.
+    cached: dict[str, dict] = {}
+    if store is not None and use_cache:
+        cached = await store.cached(urls, settings.doc_cache_ttl_days)
+    to_fetch = [url for url in urls if url not in cached]
+
+    rows: dict[str, dict | None] = {url: doc["raw"] for url, doc in cached.items()}
     try:
-        rows = await scrape_urls(settings, urls, on_tick=on_tick)
+        if to_fetch:
+            rows.update(await scrape_urls(settings, to_fetch, on_tick=on_tick))
     except BrightDataError as exc:
         # The whole snapshot failed: record every URL as failed rather than
         # returning nothing, so the manifest reflects what was attempted.
@@ -80,6 +93,8 @@ async def scrape_to_store(
             ],
             [f"Bright Data scrape failed: {message}"],
         )
+
+    reused = len(cached)
 
     provenance = (
         f"brightdata-collector:{settings.brightdata_collector_id}"
@@ -122,11 +137,32 @@ async def scrape_to_store(
             fetched_via=provenance,
             resolved_url=actual if drifted else "",
             query=query,
+            from_cache=url in cached,
         )
         if doc.status == "empty":
             errors.append(
                 f"{library}: no content field found in the row for {url}. "
                 "Run scripts/check_brightdata.py and set BRIGHT_DATA_CONTENT_FIELD."
+            )
+        # Only successful pages are cached: a transient hiccup must not be served
+        # back for the whole TTL.
+        elif store is not None and url in cached:
+            # Already stored — just note that this query used it too, so the reuse
+            # is visible in the store rather than only in this run's console output.
+            await store.reused(url, query)
+        elif store is not None:
+            await store.remember(
+                url,
+                {
+                    "markdown": markdown,
+                    "raw": row,
+                    "sha256": doc.sha256,
+                    "bytes": doc.bytes,
+                    "resolved_url": doc.resolved_url,
+                    "fetched_via": provenance,
+                    "fetched_at": datetime.now(UTC),
+                },
+                query,
             )
         documents.append(doc)
 
@@ -139,6 +175,8 @@ async def scrape_to_store(
         empty=sum(1 for doc in documents if doc.status == "empty"),
         failed=sum(1 for doc in documents if doc.status == "failed"),
         bytes_stored=sum(doc.bytes for doc in documents),
+        cache_hits=reused,
+        fetched=len(to_fetch),
     )
     return documents, errors
 
@@ -166,6 +204,8 @@ async def scrape_docs(state: DocResearchState, config: RunnableConfig) -> dict:
         doc_sources,
         query=state.get("requirement", ""),
         max_alternates=config["configurable"].get("max_alternates"),
+        store=config["configurable"].get("store"),
+        use_cache=config["configurable"].get("use_cache", True),
     )
     # Return the reviewed sources so the artifact records what was actually
     # scraped rather than what curation originally proposed.

@@ -4,7 +4,7 @@ query: "Build a production RAG service that ingests PDF manuals, chunks and embe
 url: "https://pydantic.dev/docs/validation/latest/get-started/"
 role: "primary"
 rank: 0
-fetched_at: "2026-08-19T19:23:45.239938+00:00"
+fetched_at: "2026-08-20T14:33:54.865710+00:00"
 fetched_via: "brightdata-collector:c_msx9i6aq2bz5dznadk"
 sha256: "9668c668f58a508c3211c4a53c5d0c76a0d7c7eb52790f50310ead369cc77e43"
 ---

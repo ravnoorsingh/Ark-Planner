@@ -110,6 +110,7 @@ def write_document(
     fetched_via: str = "",
     resolved_url: str = "",
     query: str = "",
+    from_cache: bool = False,
 ) -> ScrapedDoc:
     """Write one page's markdown (with front matter) and its raw row sidecar."""
     md_path, raw_path = doc_paths(data_dir, library, role, rank, url, query)
@@ -161,6 +162,7 @@ def write_document(
         bytes=len(body.encode()),
         sha256=digest,
         fetched_at=fetched_at,
+        from_cache=from_cache,
         error=None if body else "Collector returned no usable page content",
     )
 

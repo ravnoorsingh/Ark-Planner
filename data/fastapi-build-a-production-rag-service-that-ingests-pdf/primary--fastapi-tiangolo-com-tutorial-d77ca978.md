@@ -4,7 +4,7 @@ query: "Build a production RAG service that ingests PDF manuals, chunks and embe
 url: "https://fastapi.tiangolo.com/tutorial/"
 role: "primary"
 rank: 0
-fetched_at: "2026-08-19T19:23:43.771636+00:00"
+fetched_at: "2026-08-20T14:33:51.820460+00:00"
 fetched_via: "brightdata-collector:c_msx9i6aq2bz5dznadk"
 sha256: "36f4cf02ee46345b5444ba59a1ddc8ee899e68345b9f95b14d0a91775e96988f"
 ---

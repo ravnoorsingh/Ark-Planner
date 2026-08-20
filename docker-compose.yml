@@ -1,0 +1,37 @@
+name: ark
+
+services:
+  mongo:
+    image: mongo:8.0
+    container_name: ark-mongo
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - ark-mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  mongo-express:
+    image: mongo-express:1.0.2-20
+    container_name: ark-mongo-express
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://mongo:27017
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+      # No auth: the UI is reachable from this machine only (see the port bind above).
+      ME_CONFIG_BASICAUTH: "false"
+      # The UI can drop the whole document cache in one click — make deletes deliberate.
+      ME_CONFIG_OPTIONS_CONFIRM_DELETE: "true"
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+volumes:
+  ark-mongo-data:

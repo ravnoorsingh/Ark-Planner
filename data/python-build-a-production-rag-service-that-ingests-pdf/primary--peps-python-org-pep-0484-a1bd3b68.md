@@ -4,7 +4,7 @@ query: "Build a production RAG service that ingests PDF manuals, chunks and embe
 url: "https://peps.python.org/pep-0484/"
 role: "primary"
 rank: 0
-fetched_at: "2026-08-19T19:23:46.974354+00:00"
+fetched_at: "2026-08-20T14:33:57.513784+00:00"
 fetched_via: "brightdata-collector:c_msx9i6aq2bz5dznadk"
 sha256: "386e0a4a87909e083d9167cf345fc3d201748d304f2885833f4af9b24a39fa99"
 ---

@@ -4,9 +4,9 @@ query: "Build a production RAG service that ingests PDF manuals, chunks and embe
 url: "https://docs.weaviate.io/weaviate/client-libraries/python"
 role: "primary"
 rank: 0
-fetched_at: "2026-08-19T19:23:44.163161+00:00"
+fetched_at: "2026-08-20T14:33:53.619705+00:00"
 fetched_via: "brightdata-collector:c_msx9i6aq2bz5dznadk"
-sha256: "a391cb8a41ee740a46722b6d5580586cd22dd434ce32d96124109d4358c950b9"
+sha256: "3b49b9da58e6b38a6100e64beecd79cd79760cc8192ae0e218c19b7096952aaa"
 ---
 
 Python client (SDK)
@@ -463,7 +463,7 @@ The Weaviate API reference pages for [search](/weaviate/api) and [REST](/weaviat
 
 A hands-on course where you will build a movie recommendation API with Weaviate and FastAPI.
 
- [Open Academy Course](https://academy.weaviate.io/courses/wa180-py?__hstc=214173698.6ab9ed1d6adfd8df03b5969accdd7619.1787167407826.1787167407826.1787167407826.1&__hssc=214173698.1.1787167407826&__hsfp=9f9ff25a3161d35141b4b6d668709f17)
+ [Open Academy Course](https://academy.weaviate.io/courses/wa180-py)
 
 ## Questions and feedback [​](#questions-and-feedback "Direct link to Questions and feedback")
 

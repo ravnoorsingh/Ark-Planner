@@ -15,7 +15,7 @@ from contextlib import asynccontextmanager
 from langgraph.graph import END, START, StateGraph
 
 from .config import Settings
-from .mcp_client import search_tools
+from .mcp_client import LazyTools
 from .nodes import curate_links, parse_libraries, scrape_docs, search_docs, write_plan
 from .state import DocResearchState
 from .tracing import traced
@@ -67,15 +67,19 @@ async def research_session(
     doc_urls: dict[str, str] | None = None,
     ask_doc_urls: Callable | None = None,
     review_urls: Callable | None = None,
+    store: object | None = None,
+    use_cache: bool = True,
 ) -> AsyncGenerator[Callable]:
-    """Yield a `run(requirement, on_step=None)` coroutine backed by one MCP session.
+    """Yield a `run(requirement, on_step=None)` coroutine.
 
-    The session is held open for the lifetime of the context so a REPL can run many
-    requirements without reconnecting to Tavily each time.
+    The search session is opened lazily, on the first library that actually needs a
+    search, and then reused for the rest of the run — so a REPL still connects once,
+    and a run whose libraries are all pinned never connects at all.
     """
     app = build_graph(scrape=scrape, plan=plan)
 
-    async with search_tools(settings) as tools:
+    tools = LazyTools(settings)
+    try:
 
         async def run(requirement: str, on_step: Callable[[str], None] | None = None):
             # run_name/tags/metadata are LangChain's own tracing controls: they name
@@ -103,6 +107,8 @@ async def research_session(
                     "doc_urls": dict(doc_urls or {}),
                     "ask_doc_urls": ask_doc_urls,
                     "review_urls": review_urls,
+                    "store": store,
+                    "use_cache": use_cache,
                 },
             }
             state: DocResearchState = {
@@ -130,3 +136,5 @@ async def research_session(
             return state
 
         yield run
+    finally:
+        await tools.aclose()

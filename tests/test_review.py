@@ -182,7 +182,7 @@ def test_the_cli_override_decides_what_the_list_shows():
     def fake_input(*a, **k):
         return ""
 
-    import ark.cli as cli
+    from ark import cli
 
     cli.console.input = fake_input
     cli.console.print = lambda *a, **k: captured.setdefault("printed", []).append(a)

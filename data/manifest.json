@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-19T19:23:47.037204+00:00",
+  "updated_at": "2026-08-20T15:18:20.453547+00:00",
   "fetched_via": "brightdata-collector:c_msx9i6aq2bz5dznadk",
   "documents": [
     {
@@ -16,6 +16,7 @@
       "bytes": 36594,
       "sha256": "0857a541ea89a842a34b73b88ad9399fc58c82d72d022aac0fd4d12f52d67558",
       "fetched_at": "2026-08-18T14:21:14.345844+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -32,6 +33,7 @@
       "bytes": 5528,
       "sha256": "728944e233d97d5aef29f5bf89e95003d334f611c7f46e863189260fd5f3e02e",
       "fetched_at": "2026-08-18T14:21:14.428745+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -48,6 +50,7 @@
       "bytes": 6825,
       "sha256": "e7b2eeeda0b7e9762de7859e5e9a31207d9258c8fdcbd29ca6f2ade3e46bf1b9",
       "fetched_at": "2026-08-18T14:21:14.716334+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -64,6 +67,7 @@
       "bytes": 5353,
       "sha256": "1794d259fdb8a737bd98cbc0fc54053dae3fabc98a4b7aa5c57fd75fa18da124",
       "fetched_at": "2026-08-18T14:21:14.841475+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -80,6 +84,7 @@
       "bytes": 14822,
       "sha256": "184e2928c6c79fbd0e898c9fe0f4c8e776ce624574d25f4e58f5e3fcb8446b65",
       "fetched_at": "2026-08-18T14:21:15.130213+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -96,6 +101,24 @@
       "bytes": 16086,
       "sha256": "0c56b145d8c1fcd9167535c1e6f4d2249103c3418a19a1c4ff4d5655fcabfdfc",
       "fetched_at": "2026-08-18T08:56:28.853382+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "faiss-cpu",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://faiss.ai/index.html",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/faiss-cpu-build-a-fastapi-microservice-that-extracts-text/primary--faiss-ai-index-html-64a59ea8.md",
+      "raw_path": "data/faiss-cpu-build-a-fastapi-microservice-that-extracts-text/primary--faiss-ai-index-html-64a59ea8.json",
+      "title": "",
+      "bytes": 12330,
+      "sha256": "27a2ab708fcea0b98d22f97dcb64071c11781e86be5a765603eb249b1c113a39",
+      "fetched_at": "2026-08-20T15:09:56.388157+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -112,6 +135,7 @@
       "bytes": 22558,
       "sha256": "5f2319fdf3c6618398daa2cab40bf2b4af2964e6e786a1c77a2b7c67331177a3",
       "fetched_at": "2026-08-17T18:50:48.456943+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -128,6 +152,7 @@
       "bytes": 22558,
       "sha256": "5f2319fdf3c6618398daa2cab40bf2b4af2964e6e786a1c77a2b7c67331177a3",
       "fetched_at": "2026-08-17T18:52:39.575692+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -144,6 +169,7 @@
       "bytes": 22558,
       "sha256": "5f2319fdf3c6618398daa2cab40bf2b4af2964e6e786a1c77a2b7c67331177a3",
       "fetched_at": "2026-08-17T19:28:20.794703+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -160,6 +186,7 @@
       "bytes": 22558,
       "sha256": "5f2319fdf3c6618398daa2cab40bf2b4af2964e6e786a1c77a2b7c67331177a3",
       "fetched_at": "2026-08-18T08:56:28.252687+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -176,6 +203,7 @@
       "bytes": 22558,
       "sha256": "5f2319fdf3c6618398daa2cab40bf2b4af2964e6e786a1c77a2b7c67331177a3",
       "fetched_at": "2026-08-18T11:02:10.535191+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -192,6 +220,7 @@
       "bytes": 22558,
       "sha256": "5f2319fdf3c6618398daa2cab40bf2b4af2964e6e786a1c77a2b7c67331177a3",
       "fetched_at": "2026-08-18T14:21:12.723836+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -208,6 +237,24 @@
       "bytes": 22558,
       "sha256": "5f2319fdf3c6618398daa2cab40bf2b4af2964e6e786a1c77a2b7c67331177a3",
       "fetched_at": "2026-08-19T12:36:05.121362+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "fastapi",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://fastapi.tiangolo.com/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/fastapi-build-a-fastapi-microservice-that-extracts-text/primary--fastapi-tiangolo-com-c889b628.md",
+      "raw_path": "data/fastapi-build-a-fastapi-microservice-that-extracts-text/primary--fastapi-tiangolo-com-c889b628.json",
+      "title": "",
+      "bytes": 22558,
+      "sha256": "5f2319fdf3c6618398daa2cab40bf2b4af2964e6e786a1c77a2b7c67331177a3",
+      "fetched_at": "2026-08-20T15:09:54.795908+00:00",
+      "from_cache": true,
       "error": null
     },
     {
@@ -224,6 +271,7 @@
       "bytes": 5643,
       "sha256": "48eb5a1f10311b2aaf749830b695626af83c89bee3db00d62204920eafae853a",
       "fetched_at": "2026-08-19T10:02:23.629284+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -240,6 +288,7 @@
       "bytes": 5642,
       "sha256": "36f4cf02ee46345b5444ba59a1ddc8ee899e68345b9f95b14d0a91775e96988f",
       "fetched_at": "2026-08-19T12:46:16.553850+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -255,7 +304,8 @@
       "title": "",
       "bytes": 5642,
       "sha256": "36f4cf02ee46345b5444ba59a1ddc8ee899e68345b9f95b14d0a91775e96988f",
-      "fetched_at": "2026-08-19T19:23:43.771636+00:00",
+      "fetched_at": "2026-08-20T14:33:51.820460+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -272,6 +322,7 @@
       "bytes": 8032,
       "sha256": "6d0573660e06ee9c691ac52204d9f6414b501b8a26ec5d31e74ad10ef1c7f3d1",
       "fetched_at": "2026-08-19T12:46:16.695948+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -288,6 +339,7 @@
       "bytes": 3801,
       "sha256": "26a037a68e5db8f2e7a6b9a95dd77893c5d2c4c20b65e6c60c98e5c8f5e79868",
       "fetched_at": "2026-08-17T18:52:39.311723+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -304,6 +356,7 @@
       "bytes": 3801,
       "sha256": "26a037a68e5db8f2e7a6b9a95dd77893c5d2c4c20b65e6c60c98e5c8f5e79868",
       "fetched_at": "2026-08-17T19:28:28.799640+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -319,7 +372,8 @@
       "title": "",
       "bytes": 3801,
       "sha256": "26a037a68e5db8f2e7a6b9a95dd77893c5d2c4c20b65e6c60c98e5c8f5e79868",
-      "fetched_at": "2026-08-19T19:23:47.032589+00:00",
+      "fetched_at": "2026-08-20T14:33:57.589193+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -336,6 +390,7 @@
       "bytes": 21140,
       "sha256": "58dee35e730744db291213058c432cf121f367dd960d40cb2c2b3657e2b86481",
       "fetched_at": "2026-08-17T19:28:29.095752+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -352,6 +407,7 @@
       "bytes": 1171,
       "sha256": "04be3a08d0cb3fcd31daa9850d0acd754c3b1a116d87bd076ffb0531deae708b",
       "fetched_at": "2026-08-17T19:28:29.416225+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -368,6 +424,7 @@
       "bytes": 5839,
       "sha256": "4333a9de88d331638eb25cff20c7e52202e12eaba068182b7c81a316601dbc5f",
       "fetched_at": "2026-08-17T19:28:29.680281+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -384,6 +441,7 @@
       "bytes": 4575,
       "sha256": "afef40d37fb564b78e37a18b0bb47e17e8c49445dde234a796a12d449b45aeca",
       "fetched_at": "2026-08-17T19:28:29.809136+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -400,6 +458,7 @@
       "bytes": 1987,
       "sha256": "7988a62d163145b1ef48c76bdb08f6c6f404a2a505d4aafa705e9dcc26549a86",
       "fetched_at": "2026-08-18T11:02:11.485583+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -416,6 +475,7 @@
       "bytes": 6987,
       "sha256": "3f27facf894b3604ab3fce36ea861c6e22c47364ecfd4f6d485543cfd7d403d1",
       "fetched_at": "2026-08-18T08:56:28.385202+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -432,6 +492,7 @@
       "bytes": 22592,
       "sha256": "258a877031343dbf67a7f5dd44fda82a852f9a218e82d5cb1a9ef61e5fe02bca",
       "fetched_at": "2026-08-19T12:36:07.352014+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -448,6 +509,7 @@
       "bytes": 11027,
       "sha256": "60459c831a274e9c3131ba7f894a5e4224d849ba3149b1d66fe896ba25f41635",
       "fetched_at": "2026-08-18T08:56:28.571657+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -464,6 +526,41 @@
       "bytes": 1566,
       "sha256": "94412f5c561623b172971c3d652b258832b0b5dec55491a23a739f6c297cd9c9",
       "fetched_at": "2026-08-17T18:52:39.256565+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "numpy",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://numpy.org/doc/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/numpy-build-a-fastapi-microservice-that-extracts-text/primary--numpy-org-doc-c3167dc9.md",
+      "raw_path": "data/numpy-build-a-fastapi-microservice-that-extracts-text/primary--numpy-org-doc-c3167dc9.json",
+      "title": "",
+      "bytes": 3308,
+      "sha256": "592992823df3a28e6e90eb98ffc845595d86696215c6591cbb1d44fa79c69093",
+      "fetched_at": "2026-08-20T15:09:56.464840+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "numpy",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://numpy.org/",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/numpy-build-a-fastapi-microservice-that-extracts-text/alt-1--numpy-org-15229522.md",
+      "raw_path": "data/numpy-build-a-fastapi-microservice-that-extracts-text/alt-1--numpy-org-15229522.json",
+      "title": "",
+      "bytes": 13536,
+      "sha256": "696e46c82759a06257ab7e4fbf2626838e331f203bdf677692c78c59b4d1c6c6",
+      "fetched_at": "2026-08-20T15:09:56.602692+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -480,6 +577,7 @@
       "bytes": 5260,
       "sha256": "7ee6e72224a4329d7105816074bf9c87b2001d0654f70aa90d1bb0bc00356365",
       "fetched_at": "2026-08-18T08:56:29.063258+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -496,6 +594,7 @@
       "bytes": 43674,
       "sha256": "548485b874e9cbe610bea91d5095963d1ec65f966e475d72489b8b4c76c282a5",
       "fetched_at": "2026-08-18T08:56:29.621787+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -512,6 +611,7 @@
       "bytes": 8030,
       "sha256": "6de6c96def200132efe0204ccb1e43cac9be5425429bf2bad312599f19ec89b8",
       "fetched_at": "2026-08-18T08:56:29.818542+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -528,6 +628,7 @@
       "bytes": 13523,
       "sha256": "bf8ce181578e5fc0d38d209d90b99c3e97900a6d399ddae1a62fd76277a2d13d",
       "fetched_at": "2026-08-18T11:02:12.015424+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -544,6 +645,7 @@
       "bytes": 1114,
       "sha256": "b48237a9062e70689c2af2ed44da1e5686cd3db68abe8d4761ffa978492a3d50",
       "fetched_at": "2026-08-17T18:50:48.492666+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -560,6 +662,7 @@
       "bytes": 1114,
       "sha256": "b48237a9062e70689c2af2ed44da1e5686cd3db68abe8d4761ffa978492a3d50",
       "fetched_at": "2026-08-17T18:52:39.341886+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -576,6 +679,7 @@
       "bytes": 1145,
       "sha256": "4af583e74f24fa1a5b17560635127f580bc37114345a3a7e2e6e7b663f2684b4",
       "fetched_at": "2026-08-18T08:56:30.631650+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -592,6 +696,7 @@
       "bytes": 1145,
       "sha256": "4af583e74f24fa1a5b17560635127f580bc37114345a3a7e2e6e7b663f2684b4",
       "fetched_at": "2026-08-18T11:02:11.523111+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -608,6 +713,7 @@
       "bytes": 1364,
       "sha256": "7f28bd28fb2d3081591197db28229507cbf34d1996ebe7ac410557c144246496",
       "fetched_at": "2026-08-19T10:02:23.812891+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -624,6 +730,7 @@
       "bytes": 1364,
       "sha256": "7f28bd28fb2d3081591197db28229507cbf34d1996ebe7ac410557c144246496",
       "fetched_at": "2026-08-19T12:46:16.738729+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -640,6 +747,7 @@
       "bytes": 10743,
       "sha256": "7a9fadda94ca3ac720684542592539950b4971fc5dfeab46e73eae7620a0f8fc",
       "fetched_at": "2026-08-19T12:36:07.481772+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -655,7 +763,8 @@
       "title": "",
       "bytes": 10745,
       "sha256": "9668c668f58a508c3211c4a53c5d0c76a0d7c7eb52790f50310ead369cc77e43",
-      "fetched_at": "2026-08-19T19:23:45.239938+00:00",
+      "fetched_at": "2026-08-20T14:33:54.865710+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -672,6 +781,7 @@
       "bytes": 10745,
       "sha256": "9668c668f58a508c3211c4a53c5d0c76a0d7c7eb52790f50310ead369cc77e43",
       "fetched_at": "2026-08-18T08:56:30.751022+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -688,6 +798,7 @@
       "bytes": 10745,
       "sha256": "9668c668f58a508c3211c4a53c5d0c76a0d7c7eb52790f50310ead369cc77e43",
       "fetched_at": "2026-08-18T11:02:11.641385+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -704,6 +815,7 @@
       "bytes": 10743,
       "sha256": "7a9fadda94ca3ac720684542592539950b4971fc5dfeab46e73eae7620a0f8fc",
       "fetched_at": "2026-08-19T10:02:23.939023+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -720,6 +832,7 @@
       "bytes": 10743,
       "sha256": "7a9fadda94ca3ac720684542592539950b4971fc5dfeab46e73eae7620a0f8fc",
       "fetched_at": "2026-08-19T12:46:16.860446+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -736,6 +849,7 @@
       "bytes": 4944,
       "sha256": "1721d40b4ee89d6ac877e412a275082c0452bc9b68ceac87747ff4030a237e6d",
       "fetched_at": "2026-08-18T08:56:30.861541+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -752,6 +866,7 @@
       "bytes": 4944,
       "sha256": "1721d40b4ee89d6ac877e412a275082c0452bc9b68ceac87747ff4030a237e6d",
       "fetched_at": "2026-08-18T11:02:11.752862+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -768,6 +883,7 @@
       "bytes": 4944,
       "sha256": "1721d40b4ee89d6ac877e412a275082c0452bc9b68ceac87747ff4030a237e6d",
       "fetched_at": "2026-08-19T10:02:24.054304+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -784,6 +900,7 @@
       "bytes": 52223,
       "sha256": "fe9a073358422fb76eab0235218d04b78226157cfad70d5a39799f160e52ec15",
       "fetched_at": "2026-08-19T09:55:58.578109+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -800,6 +917,7 @@
       "bytes": 4727,
       "sha256": "aaee8ecb1caf590dc9ce4824dc9eea66f3fca1d8d4465e7a91050c744f512100",
       "fetched_at": "2026-08-18T14:21:14.505045+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -816,6 +934,7 @@
       "bytes": 2355,
       "sha256": "061f360c5f91b80198dab394d451ee7323390f0d657a829a0be42080d6b22aa9",
       "fetched_at": "2026-08-18T14:21:14.600136+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -832,6 +951,7 @@
       "bytes": 3352,
       "sha256": "3a452791e02f4205df41029151a77f103725fb5d79af0a61c0843a7f1cb8eeea",
       "fetched_at": "2026-08-19T12:36:05.238478+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -848,6 +968,7 @@
       "bytes": 5815,
       "sha256": "caf55975ac9ccab2deefd14fa2429234416f09db21438887d3866166de90d019",
       "fetched_at": "2026-08-19T12:36:05.378738+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -864,6 +985,7 @@
       "bytes": 2870,
       "sha256": "cfbff0a355d845a89de06fafebd945513ae58dfbc2d1e9d04ef771e0712753be",
       "fetched_at": "2026-08-19T12:36:05.483812+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -880,6 +1002,7 @@
       "bytes": 3667,
       "sha256": "6d2fc092d79c814a03942e763c4ad836ff9d2310cc03f7ed96a2524a358cb5eb",
       "fetched_at": "2026-08-18T08:56:29.882027+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -896,6 +1019,7 @@
       "bytes": 3667,
       "sha256": "6d2fc092d79c814a03942e763c4ad836ff9d2310cc03f7ed96a2524a358cb5eb",
       "fetched_at": "2026-08-18T11:02:10.662353+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -912,6 +1036,7 @@
       "bytes": 3667,
       "sha256": "6d2fc092d79c814a03942e763c4ad836ff9d2310cc03f7ed96a2524a358cb5eb",
       "fetched_at": "2026-08-19T12:36:05.550316+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -927,7 +1052,25 @@
       "title": "",
       "bytes": 3667,
       "sha256": "6d2fc092d79c814a03942e763c4ad836ff9d2310cc03f7ed96a2524a358cb5eb",
-      "fetched_at": "2026-08-19T19:23:44.846780+00:00",
+      "fetched_at": "2026-08-20T14:33:54.157547+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "pypdf",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://pypdf.readthedocs.io/",
+      "resolved_url": "https://pypdf.readthedocs.io/en/stable/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/pypdf-build-a-fastapi-microservice-that-extracts-text/primary--pypdf-readthedocs-io-deadc5f9.md",
+      "raw_path": "data/pypdf-build-a-fastapi-microservice-that-extracts-text/primary--pypdf-readthedocs-io-deadc5f9.json",
+      "title": "",
+      "bytes": 3667,
+      "sha256": "6d2fc092d79c814a03942e763c4ad836ff9d2310cc03f7ed96a2524a358cb5eb",
+      "fetched_at": "2026-08-20T15:09:55.562694+00:00",
+      "from_cache": true,
       "error": null
     },
     {
@@ -944,6 +1087,7 @@
       "bytes": 5418,
       "sha256": "05c19cbcb141817cab8109e181233cfc222293165db5ef63789ae85477d9f3bb",
       "fetched_at": "2026-08-18T11:02:10.781518+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -960,6 +1104,7 @@
       "bytes": 5418,
       "sha256": "05c19cbcb141817cab8109e181233cfc222293165db5ef63789ae85477d9f3bb",
       "fetched_at": "2026-08-19T12:36:05.661603+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -975,7 +1120,25 @@
       "title": "",
       "bytes": 5418,
       "sha256": "05c19cbcb141817cab8109e181233cfc222293165db5ef63789ae85477d9f3bb",
-      "fetched_at": "2026-08-19T19:23:44.953105+00:00",
+      "fetched_at": "2026-08-20T14:33:54.338733+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "pypdf",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://github.com/py-pdf/pypdf",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/pypdf-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-py-pdf-pypdf-c6f0cfef.md",
+      "raw_path": "data/pypdf-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-py-pdf-pypdf-c6f0cfef.json",
+      "title": "",
+      "bytes": 5418,
+      "sha256": "05c19cbcb141817cab8109e181233cfc222293165db5ef63789ae85477d9f3bb",
+      "fetched_at": "2026-08-20T15:09:55.668729+00:00",
+      "from_cache": true,
       "error": null
     },
     {
@@ -992,6 +1155,7 @@
       "bytes": 12954,
       "sha256": "959abaacc7f91bcdcc811f891c31b6a63374d31acaf5ffaa886bf3f9d0c84fd4",
       "fetched_at": "2026-08-18T08:56:30.038295+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1008,6 +1172,7 @@
       "bytes": 26429,
       "sha256": "5dde1f955d23a85075b817acaa780e3daec6121bb09a568a333f7ac425e56115",
       "fetched_at": "2026-08-18T08:56:30.600115+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1024,6 +1189,7 @@
       "bytes": 26429,
       "sha256": "5dde1f955d23a85075b817acaa780e3daec6121bb09a568a333f7ac425e56115",
       "fetched_at": "2026-08-18T11:02:11.346482+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1040,6 +1206,7 @@
       "bytes": 26429,
       "sha256": "5dde1f955d23a85075b817acaa780e3daec6121bb09a568a333f7ac425e56115",
       "fetched_at": "2026-08-19T12:36:06.290378+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1056,6 +1223,7 @@
       "bytes": 21044,
       "sha256": "7b6f6d187e4398cf91b9609837ed8d8d74720ca84aafc1e4e0ca29cd39030379",
       "fetched_at": "2026-08-17T19:28:20.996509+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1072,6 +1240,7 @@
       "bytes": 351258,
       "sha256": "6e6423d5dbfe969323bccf6792c5f23e467a90bc5273f710b28fadcc2ee944dc",
       "fetched_at": "2026-08-17T19:28:28.596787+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1088,6 +1257,7 @@
       "bytes": 8888,
       "sha256": "140f113db8b53501643d39e443af58bb1d305b7c7b2ae0e58fa9fab920cf91b0",
       "fetched_at": "2026-08-17T19:28:28.745498+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1104,6 +1274,7 @@
       "bytes": 1065,
       "sha256": "e92405bd7a86067b27a25f25ec0a195128ee0678e97b0f9381336248b44b0974",
       "fetched_at": "2026-08-17T19:28:29.118692+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1120,6 +1291,7 @@
       "bytes": 2315,
       "sha256": "6f6cd29b950a3662708b5a5002b40ab67c218a334c76024b3cedca8f3b66fb71",
       "fetched_at": "2026-08-17T19:28:29.201799+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1136,6 +1308,7 @@
       "bytes": 3055,
       "sha256": "78750b833cffe44c180bb8fe4a3b8294c4b3ca26710057c5f90a6b5cbb4605c4",
       "fetched_at": "2026-08-17T19:28:29.263429+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1152,6 +1325,7 @@
       "bytes": 4011,
       "sha256": "ca66047cc44aa2bfdaee0aaf09606974e1ca857c4c604c68d3ac50bbdd298066",
       "fetched_at": "2026-08-17T19:28:29.366224+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1167,7 +1341,8 @@
       "title": "",
       "bytes": 91546,
       "sha256": "386e0a4a87909e083d9167cf345fc3d201748d304f2885833f4af9b24a39fa99",
-      "fetched_at": "2026-08-19T19:23:46.974354+00:00",
+      "fetched_at": "2026-08-20T14:33:57.513784+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1183,7 +1358,8 @@
       "title": "",
       "bytes": 5964,
       "sha256": "93e329a84a01891f777854d4c49a653c3e92e7d0ee6dcf02a0a740e516233e06",
-      "fetched_at": "2026-08-19T19:23:45.115537+00:00",
+      "fetched_at": "2026-08-20T14:33:54.712482+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1200,6 +1376,24 @@
       "bytes": 4269,
       "sha256": "b147b270fee6fede462218b2653b9f1ae6d5f50049a52219ee715ea84dcfa4ae",
       "fetched_at": "2026-08-19T12:36:07.915817+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "python-multipart",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://multipart.readthedocs.io/",
+      "resolved_url": "https://multipart.readthedocs.io/en/latest/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/python-multipart-build-a-fastapi-microservice-that-extracts-text/primary--multipart-readthedocs-io-15b8709e.md",
+      "raw_path": "data/python-multipart-build-a-fastapi-microservice-that-extracts-text/primary--multipart-readthedocs-io-15b8709e.json",
+      "title": "",
+      "bytes": 4269,
+      "sha256": "b147b270fee6fede462218b2653b9f1ae6d5f50049a52219ee715ea84dcfa4ae",
+      "fetched_at": "2026-08-20T15:09:55.108803+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1216,6 +1410,24 @@
       "bytes": 14425,
       "sha256": "97a75e1257b19a4d95c32b2f953c0bcd16e12852617a2aec11a71a56122fe006",
       "fetched_at": "2026-08-19T12:36:08.227635+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "python-multipart",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://github.com/Kludex/python-multipart",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/python-multipart-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-kludex-python-multipart-9dea0d54.md",
+      "raw_path": "data/python-multipart-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-kludex-python-multipart-9dea0d54.json",
+      "title": "",
+      "bytes": 14431,
+      "sha256": "98d4e7a08c1aeebeaeb9cf95ef005f8b313caf88d7722ed571b7457b9fb6fcb0",
+      "fetched_at": "2026-08-20T15:09:55.477103+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1232,6 +1444,7 @@
       "bytes": 4437,
       "sha256": "def4e8dc5f760486c3691aadada4d90ca31cd064ee5a1c1d26fc90c16e24a500",
       "fetched_at": "2026-08-18T14:21:13.223753+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1248,6 +1461,7 @@
       "bytes": 29090,
       "sha256": "e6b5aa1a6b6e68d7ea8dbe253bcc0c2e6d0febf8fc5c1698d421a36c52456126",
       "fetched_at": "2026-08-18T14:21:13.584925+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1264,6 +1478,7 @@
       "bytes": 2571,
       "sha256": "03c8b984f6272f4c24a72d11116d9ee7b843d79b0a60ff591f8ed880d4bc273b",
       "fetched_at": "2026-08-18T14:21:13.726903+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1280,6 +1495,7 @@
       "bytes": 6347,
       "sha256": "80a25a877272097f6a56ed747939c1ca3c463763566b1e2041541429c4e6aee4",
       "fetched_at": "2026-08-17T18:50:31.977058+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1296,6 +1512,7 @@
       "bytes": 24335,
       "sha256": "cdecc6d2fa3a7fa21e62b8adb26c333642f33a961448adf9d0b68110a051af09",
       "fetched_at": "2026-08-17T18:50:32.317077+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1312,6 +1529,7 @@
       "bytes": 24424,
       "sha256": "3a9c670ea4d32f83c7f64deab377818818b0c90eda5e0e8d4a12b8760b39a464",
       "fetched_at": "2026-08-17T19:28:30.137447+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1328,7 +1546,42 @@
       "bytes": 6333,
       "sha256": "cca4d8da56441c45a9d10cdebe02f0a6897c7002dd2a82a52c2092805889150b",
       "fetched_at": "2026-08-17T19:28:30.248207+00:00",
+      "from_cache": false,
       "error": null
+    },
+    {
+      "library": "scikit-learn",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "http://scikit-learn.org/",
+      "resolved_url": "https://scikit-learn.org/stable/",
+      "role": "primary",
+      "rank": 0,
+      "status": "empty",
+      "path": "data/scikit-learn-build-a-fastapi-microservice-that-extracts-text/primary--scikit-learn-org-2bef9160.md",
+      "raw_path": "data/scikit-learn-build-a-fastapi-microservice-that-extracts-text/primary--scikit-learn-org-2bef9160.json",
+      "title": "",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "fetched_at": "2026-08-20T15:04:05.644760+00:00",
+      "from_cache": false,
+      "error": "Collector returned no usable page content"
+    },
+    {
+      "library": "scikit-learn",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://scikit-learn.org/",
+      "resolved_url": "https://scikit-learn.org/stable/",
+      "role": "alternate",
+      "rank": 1,
+      "status": "empty",
+      "path": "data/scikit-learn-build-a-fastapi-microservice-that-extracts-text/alt-1--scikit-learn-org-1fa6f485.md",
+      "raw_path": "data/scikit-learn-build-a-fastapi-microservice-that-extracts-text/alt-1--scikit-learn-org-1fa6f485.json",
+      "title": "",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "fetched_at": "2026-08-20T15:04:05.650464+00:00",
+      "from_cache": false,
+      "error": "Collector returned no usable page content"
     },
     {
       "library": "sentence-transformers",
@@ -1344,6 +1597,7 @@
       "bytes": 16902,
       "sha256": "1470da3122ea9bc3af71da6826f4671bcd0f923f5740a8907f3d099ed9800c75",
       "fetched_at": "2026-08-19T12:36:06.627544+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1359,7 +1613,25 @@
       "title": "",
       "bytes": 16902,
       "sha256": "1470da3122ea9bc3af71da6826f4671bcd0f923f5740a8907f3d099ed9800c75",
-      "fetched_at": "2026-08-19T19:23:44.509121+00:00",
+      "fetched_at": "2026-08-20T14:33:54.080163+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "sentence-transformers",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://sbert.net/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/sentence-transformers-build-a-fastapi-microservice-that-extracts-text/primary--sbert-net-7b8ec571.md",
+      "raw_path": "data/sentence-transformers-build-a-fastapi-microservice-that-extracts-text/primary--sbert-net-7b8ec571.json",
+      "title": "",
+      "bytes": 16902,
+      "sha256": "1470da3122ea9bc3af71da6826f4671bcd0f923f5740a8907f3d099ed9800c75",
+      "fetched_at": "2026-08-20T15:09:55.998613+00:00",
+      "from_cache": true,
       "error": null
     },
     {
@@ -1376,6 +1648,7 @@
       "bytes": 18119,
       "sha256": "062b966bb59ce25bb0e22362bdccb9da52021c486de0dcba3c37e8d25ffb7417",
       "fetched_at": "2026-08-19T12:36:06.864099+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1392,6 +1665,24 @@
       "bytes": 18119,
       "sha256": "062b966bb59ce25bb0e22362bdccb9da52021c486de0dcba3c37e8d25ffb7417",
       "fetched_at": "2026-08-19T19:23:44.789038+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "sentence-transformers",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://github.com/huggingface/sentence-transformers",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/sentence-transformers-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-huggingface-sentence-transformers-2a6e1c07.md",
+      "raw_path": "data/sentence-transformers-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-huggingface-sentence-transformers-2a6e1c07.json",
+      "title": "",
+      "bytes": 18119,
+      "sha256": "062b966bb59ce25bb0e22362bdccb9da52021c486de0dcba3c37e8d25ffb7417",
+      "fetched_at": "2026-08-20T15:09:56.285878+00:00",
+      "from_cache": true,
       "error": null
     },
     {
@@ -1408,6 +1699,7 @@
       "bytes": 7127,
       "sha256": "01189e865712f8fcc7a1fa4be04edefb362d20308b5ce3cc12fb5294d8256348",
       "fetched_at": "2026-08-18T14:21:13.815541+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1424,6 +1716,7 @@
       "bytes": 7616,
       "sha256": "72b57f586cfdc80e5557dda9700fc99bfb7a5244c45430b89454db519096ce3e",
       "fetched_at": "2026-08-17T19:28:30.412046+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1440,6 +1733,7 @@
       "bytes": 7616,
       "sha256": "72b57f586cfdc80e5557dda9700fc99bfb7a5244c45430b89454db519096ce3e",
       "fetched_at": "2026-08-17T19:28:30.530704+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1456,6 +1750,7 @@
       "bytes": 7616,
       "sha256": "0c8c5f6de480ecc9d80f235e02d39b113600b26ee69a1c022f4c7f7ca8e78885",
       "fetched_at": "2026-08-17T19:28:30.650820+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1472,6 +1767,7 @@
       "bytes": 27611,
       "sha256": "6a26d20049d71247a8f16613ff61ac756aafbb9e7e3b79ba2723e27970906b86",
       "fetched_at": "2026-08-18T14:21:15.574395+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1488,6 +1784,7 @@
       "bytes": 14663,
       "sha256": "6b040498ac5223fa9c9b2212b75f7fcf55be0a9e32cfc30ef416f422d0e65872",
       "fetched_at": "2026-08-17T18:50:31.804246+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1504,6 +1801,7 @@
       "bytes": 425,
       "sha256": "f44ef72ec197d10e37d300053d3c2bb8b30248c5bd05e4228d86838153af0360",
       "fetched_at": "2026-08-17T18:50:31.876504+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1520,6 +1818,7 @@
       "bytes": 91546,
       "sha256": "386e0a4a87909e083d9167cf345fc3d201748d304f2885833f4af9b24a39fa99",
       "fetched_at": "2026-08-19T12:46:18.780467+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1536,6 +1835,7 @@
       "bytes": 4969,
       "sha256": "2eb79e0a057bd7feaa67c107c4683108aece3a3e2f4c5f575de77e55fedf3005",
       "fetched_at": "2026-08-17T18:50:48.595224+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1552,6 +1852,7 @@
       "bytes": 4969,
       "sha256": "2eb79e0a057bd7feaa67c107c4683108aece3a3e2f4c5f575de77e55fedf3005",
       "fetched_at": "2026-08-17T18:52:39.679227+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1568,6 +1869,7 @@
       "bytes": 4969,
       "sha256": "2eb79e0a057bd7feaa67c107c4683108aece3a3e2f4c5f575de77e55fedf3005",
       "fetched_at": "2026-08-18T08:56:30.967874+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1584,6 +1886,7 @@
       "bytes": 4969,
       "sha256": "2eb79e0a057bd7feaa67c107c4683108aece3a3e2f4c5f575de77e55fedf3005",
       "fetched_at": "2026-08-18T11:02:12.128774+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1600,6 +1903,7 @@
       "bytes": 4969,
       "sha256": "2eb79e0a057bd7feaa67c107c4683108aece3a3e2f4c5f575de77e55fedf3005",
       "fetched_at": "2026-08-19T10:02:23.738431+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1616,6 +1920,7 @@
       "bytes": 4969,
       "sha256": "2eb79e0a057bd7feaa67c107c4683108aece3a3e2f4c5f575de77e55fedf3005",
       "fetched_at": "2026-08-19T12:36:07.637394+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1632,6 +1937,24 @@
       "bytes": 4969,
       "sha256": "2eb79e0a057bd7feaa67c107c4683108aece3a3e2f4c5f575de77e55fedf3005",
       "fetched_at": "2026-08-19T12:46:16.964177+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "uvicorn",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://uvicorn.dev/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/uvicorn-build-a-fastapi-microservice-that-extracts-text/primary--uvicorn-dev-a46435f2.md",
+      "raw_path": "data/uvicorn-build-a-fastapi-microservice-that-extracts-text/primary--uvicorn-dev-a46435f2.json",
+      "title": "",
+      "bytes": 4969,
+      "sha256": "2eb79e0a057bd7feaa67c107c4683108aece3a3e2f4c5f575de77e55fedf3005",
+      "fetched_at": "2026-08-20T15:09:54.906944+00:00",
+      "from_cache": true,
       "error": null
     },
     {
@@ -1648,6 +1971,24 @@
       "bytes": 5087,
       "sha256": "6828c8b40d69c9ab1352189fcd6a4219575178b273eb82ed9f453bfc0a091417",
       "fetched_at": "2026-08-18T08:56:31.080763+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "uvicorn",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://github.com/Kludex/uvicorn",
+      "resolved_url": "",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/uvicorn-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-kludex-uvicorn-2dc6029f.md",
+      "raw_path": "data/uvicorn-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-kludex-uvicorn-2dc6029f.json",
+      "title": "",
+      "bytes": 5087,
+      "sha256": "6828c8b40d69c9ab1352189fcd6a4219575178b273eb82ed9f453bfc0a091417",
+      "fetched_at": "2026-08-20T15:09:55.037247+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1664,6 +2005,24 @@
       "bytes": 5087,
       "sha256": "6828c8b40d69c9ab1352189fcd6a4219575178b273eb82ed9f453bfc0a091417",
       "fetched_at": "2026-08-18T11:02:12.286097+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "uvicorn",
+      "query": "Build a FastAPI microservice that extracts text from uploaded PDF resumes, embeds them with sentence-transformers, and ranks them against a job description",
+      "url": "https://github.com/encode/uvicorn",
+      "resolved_url": "https://github.com/Kludex/uvicorn",
+      "role": "alternate",
+      "rank": 1,
+      "status": "ok",
+      "path": "data/uvicorn-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-encode-uvicorn-5a627fe4.md",
+      "raw_path": "data/uvicorn-build-a-fastapi-microservice-that-extracts-text/alt-1--github-com-encode-uvicorn-5a627fe4.json",
+      "title": "",
+      "bytes": 5087,
+      "sha256": "6828c8b40d69c9ab1352189fcd6a4219575178b273eb82ed9f453bfc0a091417",
+      "fetched_at": "2026-08-20T15:04:04.864238+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1680,6 +2039,7 @@
       "bytes": 12146,
       "sha256": "688960a0f40ee3314a2c80c432a2ac583febf23cd6a7787a33f89149b960107c",
       "fetched_at": "2026-08-19T12:36:07.739378+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1696,6 +2056,7 @@
       "bytes": 12146,
       "sha256": "688960a0f40ee3314a2c80c432a2ac583febf23cd6a7787a33f89149b960107c",
       "fetched_at": "2026-08-19T12:46:17.062446+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1712,6 +2073,7 @@
       "bytes": 5087,
       "sha256": "6828c8b40d69c9ab1352189fcd6a4219575178b273eb82ed9f453bfc0a091417",
       "fetched_at": "2026-08-19T12:36:07.856994+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1725,9 +2087,10 @@
       "path": "data/weaviate-client-build-a-production-rag-service-that-ingests-pdf/primary--docs-weaviate-io-weaviate-client-libraries-python-ef3fe905.md",
       "raw_path": "data/weaviate-client-build-a-production-rag-service-that-ingests-pdf/primary--docs-weaviate-io-weaviate-client-libraries-python-ef3fe905.json",
       "title": "",
-      "bytes": 27140,
-      "sha256": "a391cb8a41ee740a46722b6d5580586cd22dd434ce32d96124109d4358c950b9",
-      "fetched_at": "2026-08-19T19:23:44.163161+00:00",
+      "bytes": 26973,
+      "sha256": "3b49b9da58e6b38a6100e64beecd79cd79760cc8192ae0e218c19b7096952aaa",
+      "fetched_at": "2026-08-20T14:33:53.619705+00:00",
+      "from_cache": false,
       "error": null
     },
     {
@@ -1744,6 +2107,7 @@
       "bytes": 1913,
       "sha256": "61e38def0bdaa1d10c1dbb34b2805a6a8d56b99095e97a90a9990b39a3df98ad",
       "fetched_at": "2026-08-19T19:23:44.216341+00:00",
+      "from_cache": false,
       "error": null
     }
   ]

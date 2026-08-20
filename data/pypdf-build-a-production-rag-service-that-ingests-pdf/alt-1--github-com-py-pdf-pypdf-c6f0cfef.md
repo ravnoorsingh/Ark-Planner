@@ -4,7 +4,7 @@ query: "Build a production RAG service that ingests PDF manuals, chunks and embe
 url: "https://github.com/py-pdf/pypdf"
 role: "alternate"
 rank: 1
-fetched_at: "2026-08-19T19:23:44.953105+00:00"
+fetched_at: "2026-08-20T14:33:54.338733+00:00"
 fetched_via: "brightdata-collector:c_msx9i6aq2bz5dznadk"
 sha256: "05c19cbcb141817cab8109e181233cfc222293165db5ef63789ae85477d9f3bb"
 ---

@@ -4,7 +4,7 @@ query: "Build a production RAG service that ingests PDF manuals, chunks and embe
 url: "https://www.python-httpx.org"
 role: "primary"
 rank: 0
-fetched_at: "2026-08-19T19:23:47.032589+00:00"
+fetched_at: "2026-08-20T14:33:57.589193+00:00"
 fetched_via: "brightdata-collector:c_msx9i6aq2bz5dznadk"
 sha256: "26a037a68e5db8f2e7a6b9a95dd77893c5d2c4c20b65e6c60c98e5c8f5e79868"
 ---

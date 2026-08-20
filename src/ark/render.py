@@ -113,13 +113,18 @@ def render_scrape_results(documents: list[ScrapedDoc], errors: list[str] | None 
             doc.library,
             role,
             f"[{_STATUS_STYLE.get(doc.status, 'dim')}]{doc.status}[/]",
+            "[green]cache[/green]" if doc.from_cache else "[dim]fetch[/dim]",
             _human_bytes(doc.bytes) if doc.bytes else "—",
             doc.path or "—",
         )
     console.print(table)
 
     ok = sum(1 for doc in documents if doc.status == "ok")
-    console.print(f"[dim]{ok}/{len(documents)} pages stored.[/dim]")
+    reused = sum(1 for doc in documents if doc.from_cache)
+    # Reuse is the whole point of the cache, so say when it happened — silently
+    # saving records looks identical to silently failing to scrape them.
+    saved = f" [green]{reused} reused from cache[/green]," if reused else ""
+    console.print(f"[dim]{ok}/{len(documents)} pages stored.{saved}[/dim]".replace(",[/dim]", "[/dim]"))
 
     if errors:
         console.print(

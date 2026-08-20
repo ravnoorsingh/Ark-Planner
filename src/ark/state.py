@@ -77,6 +77,9 @@ class ScrapedDoc(BaseModel):
     bytes: int = 0
     sha256: str = ""
     fetched_at: str = ""
+    from_cache: bool = Field(
+        default=False, description="Served from the MongoDB cache instead of scraped"
+    )
     error: str | None = None
 
     @property

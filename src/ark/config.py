@@ -94,6 +94,15 @@ class Settings(BaseSettings):
         default="https://api.smith.langchain.com", alias="LANGSMITH_ENDPOINT"
     )
 
+    # --- MongoDB (optional) ----------------------------------------------------------
+    # Unset means filesystem-only: the pipeline behaves exactly as it did before.
+    mongodb_uri: str = Field(default="", alias="MONGODB_URI")
+    mongodb_db: str = Field(default="ark", alias="MONGODB_DB")
+    mongodb_timeout_ms: int = Field(default=3000, gt=0, alias="MONGODB_TIMEOUT_MS")
+    # Documentation goes stale — that is the premise of this project — so a cached
+    # page is reused only while it is younger than this.
+    doc_cache_ttl_days: int = Field(default=14, ge=0, alias="ARK_DOC_CACHE_TTL_DAYS")
+
     # --- plan generation ------------------------------------------------------------
     # Characters of documentation fed to one distill call. The full corpus does not
     # fit in a single context window, which is why plans are built map-reduce.

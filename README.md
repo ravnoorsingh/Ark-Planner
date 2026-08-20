@@ -36,6 +36,7 @@ tool-call it — one deterministic search per library. The LLM's judgment is app
 `curate_links`, where it actually matters (telling `fastapi.tiangolo.com` apart from a
 Medium tutorial that ranks well).
 
+Every command, flag and setting is listed in **[docs/reference.md](docs/reference.md)**.
 A diagram of the whole flow, traced through a real query, is in
 **[docs/architecture.md](docs/architecture.md)**.
 
@@ -160,6 +161,9 @@ When scraping ran, the artifact also carries a `documents` array mirroring the m
 | `ARK_MAX_ALTERNATES` | `2` | alternate URLs scraped per library |
 | `BRIGHT_DATA_POLL_INTERVAL` | `5` | seconds between snapshot polls |
 | `BRIGHT_DATA_TIMEOUT` | `600` | seconds before giving up on a snapshot |
+| `MONGODB_URI` | — | optional; unset = filesystem only. See [docs/mongodb.md](docs/mongodb.md) |
+| `MONGODB_DB` | `ark` | database name |
+| `ARK_DOC_CACHE_TTL_DAYS` | `14` | reuse a cached page while it is younger than this |
 | `ARK_MODEL` | `openai/gpt-oss-20b` | Groq model ID |
 | `ARK_TEMPERATURE` | `0.1` | |
 | `ARK_MAX_LIBRARIES` | `8` | cap per run |

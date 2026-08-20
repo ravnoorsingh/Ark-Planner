@@ -4,7 +4,7 @@ query: "Build a production RAG service that ingests PDF manuals, chunks and embe
 url: "https://sbert.net/"
 role: "primary"
 rank: 0
-fetched_at: "2026-08-19T19:23:44.509121+00:00"
+fetched_at: "2026-08-20T14:33:54.080163+00:00"
 fetched_via: "brightdata-collector:c_msx9i6aq2bz5dznadk"
 sha256: "1470da3122ea9bc3af71da6826f4671bcd0f923f5740a8907f3d099ed9800c75"
 ---
