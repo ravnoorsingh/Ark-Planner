@@ -26,8 +26,10 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from ..config import Settings, load_settings
+from ..errors import explain
 from ..mongo import connect
 from ..naming import slugify
+from ..revise import NotRevisable, revise_stored_plan
 from .runner import Jobs
 
 STATIC = Path(__file__).parent / "static"
@@ -50,6 +52,10 @@ class RunRequest(BaseModel):
 class AnswerRequest(BaseModel):
     question_id: str
     answer: Any = None
+
+
+class RefineRequest(BaseModel):
+    instruction: str = Field(min_length=3, max_length=2000)
 
 
 @asynccontextmanager
@@ -186,6 +192,30 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         trend = (await current.recent_installs([slug], days=14)).get(slug, [])
         return {**_card(row, trend), "markdown": row.get("markdown", ""), "trend_days": 14}
 
+    @app.post("/api/plans/{slug}/refine")
+    async def refine_plan_endpoint(slug: str, body: RefineRequest):
+        """Revise an open plan in place. One LLM call; no re-scraping.
+
+        Synchronous rather than a streamed job: it is a single call, and the page has
+        nothing useful to show between sending the instruction and getting the plan.
+        """
+        try:
+            result = await revise_stored_plan(
+                app.state.settings, store(), slug, body.instruction
+            )
+        except NotRevisable as exc:
+            raise HTTPException(400, str(exc)) from exc
+        except Exception as exc:
+            raise HTTPException(502, explain(exc)) from exc
+        entry = result["entry"] or {}
+        trend = (await store().recent_installs([slug], days=14)).get(slug, [])
+        return {
+            **_card(entry, trend),
+            "markdown": result["markdown"],
+            "revision": result["revision"],
+            "trend_days": 14,
+        }
+
     @app.get("/api/plans/{slug}/download")
     async def download_plan(slug: str):
         """Hand over the markdown and count it. Open to anyone, by design."""
@@ -226,9 +256,26 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return FileResponse(STATIC / "plan.html")
 
     if STATIC.is_dir():
-        app.mount("/", StaticFiles(directory=STATIC, html=True), name="static")
+        app.mount("/", _Assets(directory=STATIC, html=True), name="static")
 
     return app
+
+
+class _Assets(StaticFiles):
+    """Static files that always revalidate.
+
+    Without an explicit `Cache-Control`, browsers apply heuristic caching to a
+    response carrying only `last-modified` — Chrome will serve `app.js` from disk
+    cache without asking the server at all. The symptom is a UI change that is
+    genuinely deployed and genuinely invisible until someone thinks to hard-reload.
+    `no-cache` means "ask every time", not "do not store": the ETag still makes the
+    answer a 304 when nothing changed.
+    """
+
+    def file_response(self, *args: Any, **kwargs: Any):
+        response = super().file_response(*args, **kwargs)
+        response.headers["Cache-Control"] = "no-cache"
+        return response
 
 
 def _card(row: dict[str, Any], trend: list[int]) -> dict[str, Any]:

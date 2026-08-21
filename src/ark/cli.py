@@ -14,12 +14,12 @@ from dotenv import load_dotenv
 from pydantic import ValidationError
 from rich.panel import Panel
 
+from .catalog import publish_plan
 from .choices import LibraryChoice, apply_choices, describe, detect_choices
 from .config import MissingCredentials, load_settings
 from .errors import explain as _explain
 from .graph import NODE_LABELS, research_session
 from .mongo import connect
-from .naming import name_plan, slugify
 from .nodes.scrape_docs import planned_urls, scrape_to_store
 from .nodes.write_plan import build_plan, refine_plan
 from .plan import build_citations
@@ -324,7 +324,13 @@ def _review_urls(max_alternates: int, status=None):
 
 async def _persist(settings, artifact: Path, payload: dict, markdown: str,
                    instruction: str | None = None) -> None:
-    """Mirror the run and its plan into MongoDB. Best-effort by design."""
+    """Mirror the run and its plan into MongoDB. Best-effort by design.
+
+    A plan made at the terminal is the same artifact the web UI produces, so it is
+    published to the catalogue too — otherwise the listing would only ever show plans
+    that happened to be generated in a browser, and a `refine` would leave the public
+    copy stale while the file on disk moved on.
+    """
     store = await connect(settings)
     if store is None:
         return
@@ -334,6 +340,21 @@ async def _persist(settings, artifact: Path, payload: dict, markdown: str,
         revision = await store.save_plan(run_id, markdown, settings.model, instruction)
         if revision:
             console.print(f"[dim]MongoDB →[/dim] run {run_id} · plan revision {revision}")
+        try:
+            slug, name = await publish_plan(
+                settings,
+                store,
+                run_id=run_id,
+                requirement=payload.get("requirement", ""),
+                libraries=[lib["name"] for lib in payload.get("libraries", [])],
+                markdown=markdown,
+                model=payload.get("model", ""),
+                citations=len(payload.get("documents", [])),
+            )
+            if slug:
+                console.print(f"[dim]Catalogue →[/dim] [bold]{name}[/bold] · /plan/{slug}")
+        except Exception as exc:  # publishing must never lose a finished plan
+            console.print(f"[yellow]Could not publish to the catalogue:[/yellow] {_explain(exc)}")
     await store.close()
 
 
@@ -892,26 +913,17 @@ def publish(
         if store is None:
             console.print("[red]MongoDB is not configured or not reachable.[/red]")
             raise typer.Exit(code=1)
-        title = name.strip() or await name_plan(settings, requirement, libraries)
-        slug = slugify(title)
-        run_id = artifact.parent.name
-        base, n = slug, 2
-        while True:
-            existing = await store.get_plan(slug)
-            if existing is None or existing.get("run_id") == run_id:
-                break
-            slug, n = f"{base}-{n}", n + 1
-        await store.publish(slug, {
-            "name": title,
-            "run_id": run_id,
-            "requirement": requirement,
-            "libraries": libraries,
-            "markdown": markdown,
-            "model": payload.get("model", settings.model),
-            "citations": len(payload.get("documents", [])),
-            "phases": markdown.count("\n## "),
-            "bytes": len(markdown.encode()),
-        })
+        slug, title = await publish_plan(
+            settings,
+            store,
+            run_id=artifact.parent.name,
+            requirement=requirement,
+            libraries=libraries,
+            markdown=markdown,
+            model=payload.get("model", ""),
+            citations=len(payload.get("documents", [])),
+            name=name,
+        )
         await store.close()
         console.print(f"Published [bold]{title}[/bold] → /plan/{slug}")
 

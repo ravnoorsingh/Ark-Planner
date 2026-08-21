@@ -107,7 +107,7 @@
   ],
   "plan_draft": {
     "title": "",
-    "overview": "The plan creates a Click\u2011based command\u2011line interface that reads a Markdown file, converts it to HTML with the markdown library, and renders a styled PDF using WeasyPrint. It also adds a generated table of contents and verifies the output.",
+    "overview": "The plan creates a Click\u2011based CLI that reads Markdown, converts it to HTML, generates a WeasyPrint table of contents, and renders a styled PDF. It adds error handling and testing to ensure reliable output.",
     "phases": [
       {
         "title": "Project setup and dependencies",
@@ -130,8 +130,8 @@
         "body": "- Implement `process_file` to orchestrate markdown conversion then PDF rendering.\n- Wrap file I/O in `try/except` blocks and emit clear `click.ClickException` messages on failure.\n- Validate that the output directory exists or create it.\n- Return exit code 0 on success.\n- Add a `if __name__ == '__main__':` guard to invoke the Click CLI."
       },
       {
-        "title": "Verification and testing",
-        "body": "- Write a sample `sample.md` containing multiple headings to test TOC generation.\n- Run the CLI: `python cli.py sample.md sample.pdf --style style.css`.\n- Open `sample.pdf` to confirm styled content and a functional table of contents.\n- Test error paths: missing input file, invalid CSS path, and permission errors.\n- Optionally add a basic unit test using `pytest` that checks the PDF file size > 0."
+        "title": "Shipping as a GitHub Action",
+        "body": "- Create a workflow file at `.github/workflows/markdown2pdf.yml`.\n- Define triggers (`on: push` and/or `workflow_dispatch`).\n- Use `actions/setup-python` to install a specific Python version.\n- Add a step to install project dependencies with `pip install .` (or `pip install -r requirements.txt`).\n- Add a step that runs the CLI, e.g., `markdown2pdf input.md output.pdf --style style.css`.\n- Add a step to upload the generated PDF as an artifact using `actions/upload-artifact`.\n- Document the workflow in `README.md` with usage instructions."
       }
     ],
     "pitfalls": [
@@ -140,7 +140,7 @@
       "Click will not auto\u2011create missing directories; the script must ensure the output path\u2019s parent exists",
       "Embedding a CSS file via a relative `<link>` works only if the path is accessible to WeasyPrint; use absolute paths or `CSS(filename=\u2026)`",
       "Temporary HTML strings are kept in memory; very large documents may require streaming to avoid high RAM usage",
-      "Failure to activate the virtual environment can lead to importing system\u2011wide packages with incompatible versions"
+      "WeasyPrint\u2019s CSS page\u2011break properties (`page-break-before`, `page-break-after`, `page-break-inside`) are deprecated; use `break-before`, `break-after`, `break-inside` on block\u2011level elements and ensure proper `@page` margins for reliable pagination"
     ]
   },
   "errors": []

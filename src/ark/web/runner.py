@@ -19,6 +19,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from ..catalog import publish_plan
 from ..choices import apply_choices, describe, detect_choices
 from ..config import Settings
 from ..errors import explain
@@ -273,35 +274,24 @@ async def _publish(
         return
 
     job.emit("step", node="name_plan", label="Naming the plan")
-    name = await name_plan(settings, job.requirement, libraries)
-
-    slug = slugify(name)
+    slug = name = ""
     if store is not None:
         await store.save_run(run_id, payload)
         await store.save_plan(run_id, markdown, settings.model)
-        # A name collision must not overwrite somebody else's entry, so the slug
-        # gains a suffix rather than the publish silently replacing a plan.
-        base, n = slug, 2
-        while True:
-            existing = await store.get_plan(slug)
-            if existing is None or existing.get("run_id") == run_id:
-                break
-            slug, n = f"{base}-{n}", n + 1
-        await store.publish(
-            slug,
-            {
-                "name": name,
-                "run_id": run_id,
-                "requirement": job.requirement,
-                "resolved_requirement": state.get("requirement", ""),
-                "libraries": libraries,
-                "markdown": markdown,
-                "model": settings.model,
-                "citations": len(state.get("documents", [])),
-                "phases": markdown.count("\n## "),
-                "bytes": len(markdown.encode()),
-            },
+        slug, name = await publish_plan(
+            settings,
+            store,
+            run_id=run_id,
+            requirement=job.requirement,
+            libraries=libraries,
+            markdown=markdown,
+            model=settings.model,
+            citations=len(state.get("documents", [])),
         )
+    if not name:
+        # No catalogue to publish to, but the tab still needs something to call it.
+        name = await name_plan(settings, job.requirement, libraries)
+        slug = slugify(name)
 
     job.status = "done"
     job.result = {

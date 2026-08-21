@@ -109,6 +109,15 @@ Details in **[docs/web.md](docs/web.md)**.
 > `ark serve` binds localhost by default because starting a run spends Bright Data and
 > Groq credits and nothing authenticates that endpoint.
 
+Plans can be pulled into any project from the terminal, once a catalogue is deployed:
+
+```bash
+npx ark-plans add short-url-tracker    # → ./.ark/plans/short-url-tracker.md
+```
+
+That CLI lives in [`ark-plans-cli/`](ark-plans-cli); publishing it is covered in
+**[docs/npx-publishing.md](docs/npx-publishing.md)**.
+
 If the requirement names a capability rather than a package — "a vector database", "an
 ORM" — ARK asks which one before researching, offering real candidates and accepting
 anything you type instead. See

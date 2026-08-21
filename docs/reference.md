@@ -16,13 +16,14 @@ Every command, flag and environment variable, and what each one is for.
 | `ark chat` | interactive discovery; results accumulate across turns | as above, per turn |
 | `ark scrape <artifact.json>` | scrape an artifact's URLs — no LLM, no search | Bright Data records only |
 | `ark plan <artifact.json>` | build a plan from already-scraped pages | `N + 1` LLM calls |
-| `ark refine <artifact.json> ["instruction"]` | revise an existing plan | **1** LLM call per instruction |
+| `ark refine <artifact.json> ["instruction"]` | revise an existing plan, and update its catalogue entry | **1** LLM call per instruction |
 | `ark serve` | web UI: run the pipeline in a browser, browse the public catalogue | per run started |
-| `ark publish <artifact.json>` | list an existing plan in the catalogue | **1** LLM call (the name) |
+| `ark publish <artifact.json>` | list an existing plan in the catalogue | **1** LLM call (the name), or 0 if already listed |
 
 `N` is the number of libraries. `ark refine` with no instruction opens an interactive
-session; `/quit` ends it. `ark docs --plan` adds **1** call for the plan's name when
-run through the web UI. See [web.md](web.md) for the browser interface.
+session; `/quit` ends it. Any command that writes a plan also publishes it to the
+catalogue when MongoDB is configured, which adds **1** call the first time a run is
+named and none thereafter. See [web.md](web.md) for the browser interface.
 
 ---
 
@@ -99,6 +100,31 @@ ark docs "…" --no-choices --no-ask-urls --no-review --yes
 
 Prompts are also skipped automatically when stdin is not a terminal, so piped and CI
 use needs no flags.
+
+---
+
+## The `ark-plans` npm CLI
+
+A separate, dependency-free package in [`ark-plans-cli/`](../ark-plans-cli) that pulls
+plans out of a running catalogue and into a project:
+
+```bash
+npx ark-plans list
+npx ark-plans add <slug>          # → ./.ark/plans/<slug>.md
+npx ark-plans search <query>
+npx ark-plans info <slug>
+```
+
+| Flag | Applies to | Meaning |
+|---|---|---|
+| `--url <url>` | all | Catalogue to talk to; also read from `$ARK_URL` |
+| `--sort <order>` | `list` | `trending` (default), `installs`, `new` |
+| `--limit <n>` | `list` | How many to show. Default 20 |
+| `--dir <path>` | `add` | Where to write. Default `.ark/plans` |
+| `--force` | `add` | Overwrite an existing file |
+
+Publishing it is documented in [npx-publishing.md](npx-publishing.md) — note that it
+requires a publicly deployed backend first.
 
 ---
 

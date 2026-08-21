@@ -595,7 +595,7 @@
     "phases": [
       {
         "title": "Project Setup",
-        "body": "- Initialize a new project directory and version control.\n- Add FastAPI with standard extras via `uv add \"fastapi[standard]\"`[^fastapi-1].\n- Add python-multipart via `uv add multipart`[^python-multipart-1].\n- Install pypdf, sentence-transformers, faiss-cpu, and numpy using pip or conda as documented[^pypdf-1][^sentence-transformers-1][^faiss-cpu-1][^numpy-1].\n- Create `main.py` as the entry point.\n- Record dependencies in `pyproject.toml` or `requirements.txt`."
+        "body": "- Initialize a new project directory and version control.\n- Add FastAPI with standard extras via `uv add \"fastapi[standard]\"`[^fastapi-1].\n- Add python-multipart via `uv add multipart`[^python-multipart-1].\n- pip install uvicorn[^uvicorn-1].\n- Install pypdf, sentence-transformers, faiss-cpu, and numpy using pip or conda as documented[^pypdf-1][^sentence-transformers-1][^faiss-cpu-1][^numpy-1].\n- Create `main.py` as the entry point.\n- Record dependencies in `pyproject.toml` or `requirements.txt`."
       },
       {
         "title": "API Skeleton",

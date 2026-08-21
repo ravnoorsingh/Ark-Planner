@@ -9,3 +9,7 @@ __pycache__/
 uv.lock
 .claude/
 tests/
+
+# npm pack output
+ark-plans-cli/*.tgz
+ark-plans-cli/node_modules/

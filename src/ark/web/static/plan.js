@@ -168,10 +168,14 @@ async function load() {
       ? "The catalogue is offline." : "No such plan."));
     return;
   }
-  const plan = await response.json();
+  let plan = await response.json();
   document.title = `${plan.name} — ARK Scrapper`;
 
   const installs = el("div", {}, el("span", {}, "Installs"), compact(plan.installs));
+  const phases = el("div", {}, el("span", {}, "Phases"), String(plan.phases));
+  const size = el("div", {}, el("span", {}, "Size"), `${Math.round(plan.bytes / 1024)} KB`);
+  const body = el("div", { class: "md", style: "margin-top:24px",
+                           html: markdown(plan.markdown || "") });
   page.append(
     el("div", { class: "detail-head" },
       el("div", { class: "grow" },
@@ -187,13 +191,65 @@ async function load() {
       installs,
       el("div", {}, el("span", {}, "Last 14d"), compact(plan.recent)),
       el("div", {}, el("span", {}, "Citations"), String(plan.citations)),
-      el("div", {}, el("span", {}, "Phases"), String(plan.phases)),
-      el("div", {}, el("span", {}, "Size"), `${Math.round(plan.bytes / 1024)} KB`),
+      phases,
+      size,
       el("div", {}, el("span", {}, "Model"), plan.model || "—")),
     el("div", { class: "panel", style: "margin-top:24px" },
       el("h3", {}, "Downloads"),
       chart(plan.trend.length ? plan.trend : new Array(14).fill(0))),
-    el("div", { class: "md", style: "margin-top:24px", html: markdown(plan.markdown || "") }));
+    body,
+    el("div", { style: "height:96px" }),   // clearance for the docked bar
+    refineBar());
+
+  function refineBar() {
+    const input = el("input", { type: "text", placeholder: "Modify this plan…",
+                                autocomplete: "off" });
+    const button = el("button", { class: "primary" }, "Refine plan");
+    const bar = el("div", { class: "refine" }, el("span", { class: "caret" }, ">"), input, button);
+    const note = el("div", { class: "revision-note" });
+
+    async function send() {
+      const instruction = input.value.trim();
+      if (instruction.length < 3) return input.focus();
+      bar.classList.add("busy");
+      button.disabled = input.disabled = true;
+      button.textContent = "Revising…";
+      try {
+        const response = await fetch(`/api/plans/${encodeURIComponent(slug)}/refine`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ instruction }),
+        });
+        if (!response.ok) {
+          const detail = await response.json().catch(() => ({}));
+          throw new Error(detail.detail || "Could not revise the plan.");
+        }
+        const revised = await response.json();
+        // Swap the plan and the stats it changed; the download count and the chart
+        // belong to the entry, not the revision, so they stay as they are.
+        plan = { ...plan, ...revised };
+        body.innerHTML = markdown(revised.markdown || "");
+        phases.replaceChildren(el("span", {}, "Phases"), String(revised.phases));
+        size.replaceChildren(el("span", {}, "Size"),
+          `${Math.round(revised.bytes / 1024)} KB`);
+        note.replaceChildren(el("b", {}, `revision ${revised.revision}`),
+          ` · ${instruction}`);
+        input.value = "";
+        window.scrollTo({ top: body.offsetTop - 80, behavior: "smooth" });
+      } catch (error) {
+        note.replaceChildren(el("span", { style: "color:var(--danger)" }, error.message));
+      } finally {
+        bar.classList.remove("busy");
+        button.disabled = input.disabled = false;
+        button.textContent = "Refine plan";
+        input.focus();
+      }
+    }
+
+    button.addEventListener("click", send);
+    input.addEventListener("keydown", (event) => { if (event.key === "Enter") send(); });
+    return el("div", { class: "refine-dock" }, bar, note);
+  }
 
   async function download() {
     // Going through the API endpoint is what counts the install; a blob built from

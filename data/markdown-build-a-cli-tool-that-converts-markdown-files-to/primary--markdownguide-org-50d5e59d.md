@@ -4,7 +4,7 @@ query: "Build a CLI tool that converts markdown files to styled PDFs with a tabl
 url: "https://www.markdownguide.org/"
 role: "primary"
 rank: 0
-fetched_at: "2026-08-20T17:37:58.807386+00:00"
+fetched_at: "2026-08-21T07:20:23.771472+00:00"
 fetched_via: "brightdata-collector:c_msx9i6aq2bz5dznadk"
 sha256: "0ae9b4ba20386b9cc8e136e5b02200d4ead1fe3080c8c30c37c88125dca99574"
 ---

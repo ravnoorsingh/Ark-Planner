@@ -372,6 +372,7 @@ $("go").addEventListener("click", async () => {
   $("question").replaceChildren();
   $("outcome").replaceChildren();
   stepNodes.clear();
+  $("running-req").textContent = requirement;
 
   const response = await fetch("/api/runs", {
     method: "POST",
@@ -390,8 +391,9 @@ $("go").addEventListener("click", async () => {
     return toast("Could not start the run.");
   }
   jobId = (await response.json()).job_id;
-  // Put the job in the URL so a reload rejoins the run instead of losing it: the
-  // pipeline keeps going server-side either way, and it can be several minutes long.
+  // Clear the box: the run is now shown below with its own copy of the requirement,
+  // and leaving the text sitting there invites a second identical (billable) run.
+  $("requirement").value = "";
   history.replaceState(null, "", `?job=${jobId}`);
   listen();
 });
@@ -406,7 +408,7 @@ async function resume() {
   const state = await response.json();
   jobId = wanted;
   $("run").hidden = false;
-  $("requirement").value = state.requirement;
+  $("running-req").textContent = state.requirement;
   setStep("resumed", `Rejoined run ${wanted}`, true);
 
   if (state.status === "done") return showResult(state.result);

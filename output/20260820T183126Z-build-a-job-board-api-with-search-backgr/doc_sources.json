@@ -1,0 +1,241 @@
+{
+  "requirement": "Build a job board API with search, background email digests and a vector database for semantic matching. Use qdrant-client for the vector database. Use elasticsearch for the search. Use celery for the task queue.",
+  "plan_path": "",
+  "model": "openai/gpt-oss-120b",
+  "generated_at": "2026-08-20T18:31:26.790355+00:00",
+  "libraries": [
+    {
+      "name": "fastapi",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Provides the HTTP API endpoints for the job board"
+    },
+    {
+      "name": "qdrant-client",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Interfaces with Qdrant for semantic vector matching"
+    },
+    {
+      "name": "elasticsearch",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Enables full\u2011text search over job listings"
+    },
+    {
+      "name": "celery",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Runs background tasks such as email digests"
+    },
+    {
+      "name": "sqlalchemy",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "ORM for persisting job and user data"
+    },
+    {
+      "name": "aiosmtplib",
+      "ecosystem": "python",
+      "version_hint": null,
+      "reason": "Sends email digests asynchronously"
+    }
+  ],
+  "doc_sources": [
+    {
+      "library": "fastapi",
+      "url": "https://fastapi.tiangolo.com/",
+      "title": "FastAPI",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The official documentation site fastapi.tiangolo.com is the primary entry point for FastAPI docs, matching the preferred source hierarchy. It is the root landing page, not a deep link, and is directly owned by the project.",
+      "alternates": [],
+      "user_supplied": false
+    },
+    {
+      "library": "qdrant-client",
+      "url": "https://qdrant.tech/documentation/",
+      "title": "Qdrant Documentation",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "The Qdrant documentation site (https://qdrant.tech/documentation/) is the official first\u2011party documentation hub for the Qdrant vector search engine and includes sections for the Python client. It is the root landing page, matching the preferred source type. The GitHub repo is a fallback but the docs site is more appropriate as the canonical entry point.",
+      "alternates": [],
+      "user_supplied": true
+    },
+    {
+      "library": "elasticsearch",
+      "url": "https://elasticsearch-py.readthedocs.io/",
+      "title": "Elasticsearch Python client documentation",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "Read the Docs site is the official documentation for the Python client, directly maintained by Elastic and provides the full API reference and usage guides. It is the primary entry point for the library's docs.",
+      "alternates": [],
+      "user_supplied": false
+    },
+    {
+      "library": "celery",
+      "url": "https://docs.celeryq.dev/",
+      "title": "Celery Documentation",
+      "kind": "official_docs",
+      "confidence": 0.95,
+      "rationale": "The root of the official documentation site (docs.celeryq.dev) is the primary entry point for Celery's docs, matching the highest priority rule. It is the current stable docs host and not a third\u2011party source.",
+      "alternates": [],
+      "user_supplied": true
+    },
+    {
+      "library": "sqlalchemy",
+      "url": "https://docs.sqlalchemy.org/",
+      "title": "SQLAlchemy Documentation",
+      "kind": "official_docs",
+      "confidence": 0.99,
+      "rationale": "The docs.sqlalchemy.org site is the official documentation root for SQLAlchemy, matching the preferred first-party docs source. It is the main landing page for the current version (2.0) and is directly linked from the project's homepage.",
+      "alternates": [],
+      "user_supplied": true
+    },
+    {
+      "library": "aiosmtplib",
+      "url": "https://aiosmtplib.readthedocs.io/",
+      "title": "aiosmtplib documentation",
+      "kind": "official_docs",
+      "confidence": 0.98,
+      "rationale": "Read the Docs site is the library's own documentation host and serves as the primary entry point for users. It is directly linked from the project and is the most authoritative source.",
+      "alternates": [],
+      "user_supplied": true
+    }
+  ],
+  "documents": [
+    {
+      "library": "fastapi",
+      "query": "Build a job board API with search, background email digests and a vector database for semantic matching. Use qdrant-client for the vector database. Use elasticsearch for the search. Use celery for the task queue.",
+      "url": "https://fastapi.tiangolo.com/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/fastapi-build-a-job-board-api-with-search-background-ema/primary--fastapi-tiangolo-com-c889b628.md",
+      "raw_path": "data/fastapi-build-a-job-board-api-with-search-background-ema/primary--fastapi-tiangolo-com-c889b628.json",
+      "title": "",
+      "bytes": 22558,
+      "sha256": "5f2319fdf3c6618398daa2cab40bf2b4af2964e6e786a1c77a2b7c67331177a3",
+      "fetched_at": "2026-08-20T18:31:23.268107+00:00",
+      "from_cache": true,
+      "error": null
+    },
+    {
+      "library": "qdrant-client",
+      "query": "Build a job board API with search, background email digests and a vector database for semantic matching. Use qdrant-client for the vector database. Use elasticsearch for the search. Use celery for the task queue.",
+      "url": "https://qdrant.tech/documentation/",
+      "resolved_url": "",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/qdrant-client-build-a-job-board-api-with-search-background-ema/primary--qdrant-tech-documentation-e993e73c.md",
+      "raw_path": "data/qdrant-client-build-a-job-board-api-with-search-background-ema/primary--qdrant-tech-documentation-e993e73c.json",
+      "title": "",
+      "bytes": 2269,
+      "sha256": "4fa40d59d1a4f7d948aa06cbb1590c443953e1678898ae8b865c0f2cb1474e8a",
+      "fetched_at": "2026-08-20T18:31:23.363526+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "elasticsearch",
+      "query": "Build a job board API with search, background email digests and a vector database for semantic matching. Use qdrant-client for the vector database. Use elasticsearch for the search. Use celery for the task queue.",
+      "url": "https://elasticsearch-py.readthedocs.io/",
+      "resolved_url": "https://elasticsearch-py.readthedocs.io/en/stable/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/elasticsearch-build-a-job-board-api-with-search-background-ema/primary--elasticsearch-py-readthedocs-io-7ce5a8e7.md",
+      "raw_path": "data/elasticsearch-build-a-job-board-api-with-search-background-ema/primary--elasticsearch-py-readthedocs-io-7ce5a8e7.json",
+      "title": "",
+      "bytes": 3982,
+      "sha256": "0b9e8dd661fab6da28cf72c842c59f71290ddb0b42727ae16af4d894477a6e18",
+      "fetched_at": "2026-08-20T18:31:23.431834+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "celery",
+      "query": "Build a job board API with search, background email digests and a vector database for semantic matching. Use qdrant-client for the vector database. Use elasticsearch for the search. Use celery for the task queue.",
+      "url": "https://docs.celeryq.dev/",
+      "resolved_url": "https://docs.celeryq.dev/en/stable/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/celery-build-a-job-board-api-with-search-background-ema/primary--docs-celeryq-dev-43cc2540.md",
+      "raw_path": "data/celery-build-a-job-board-api-with-search-background-ema/primary--docs-celeryq-dev-43cc2540.json",
+      "title": "",
+      "bytes": 1497,
+      "sha256": "078e3f00255b5321e1d9e9ffc40c2d47f6bfa438eec4cfacf56eb950bfd935e4",
+      "fetched_at": "2026-08-20T18:31:23.476745+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "sqlalchemy",
+      "query": "Build a job board API with search, background email digests and a vector database for semantic matching. Use qdrant-client for the vector database. Use elasticsearch for the search. Use celery for the task queue.",
+      "url": "https://docs.sqlalchemy.org/",
+      "resolved_url": "https://docs.sqlalchemy.org/en/20/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/sqlalchemy-build-a-job-board-api-with-search-background-ema/primary--docs-sqlalchemy-org-17a3b4c4.md",
+      "raw_path": "data/sqlalchemy-build-a-job-board-api-with-search-background-ema/primary--docs-sqlalchemy-org-17a3b4c4.json",
+      "title": "",
+      "bytes": 4371,
+      "sha256": "a0dc0c03d3eb4e9f3ffef22e0475093cd5bcd50d4336d47506a5fe41791fcc5b",
+      "fetched_at": "2026-08-20T18:31:23.632749+00:00",
+      "from_cache": false,
+      "error": null
+    },
+    {
+      "library": "aiosmtplib",
+      "query": "Build a job board API with search, background email digests and a vector database for semantic matching. Use qdrant-client for the vector database. Use elasticsearch for the search. Use celery for the task queue.",
+      "url": "https://aiosmtplib.readthedocs.io/",
+      "resolved_url": "https://aiosmtplib.readthedocs.io/en/latest/",
+      "role": "primary",
+      "rank": 0,
+      "status": "ok",
+      "path": "data/aiosmtplib-build-a-job-board-api-with-search-background-ema/primary--aiosmtplib-readthedocs-io-2df642c1.md",
+      "raw_path": "data/aiosmtplib-build-a-job-board-api-with-search-background-ema/primary--aiosmtplib-readthedocs-io-2df642c1.json",
+      "title": "",
+      "bytes": 2857,
+      "sha256": "8af25c8c13d30d177e97d751c79fa12f69f061bb36195219f5a180b6168cfea8",
+      "fetched_at": "2026-08-20T18:31:23.698841+00:00",
+      "from_cache": false,
+      "error": null
+    }
+  ],
+  "briefs": [
+    {
+      "library": "qdrant-client",
+      "install": "",
+      "version": "",
+      "summary": "Qdrant is an AI-native vector search and a semantic search engine. You can use it to extract meaningful information from unstructured data.",
+      "api": [],
+      "gotchas": [],
+      "citation_keys": [
+        "qdrant-client-1"
+      ]
+    }
+  ],
+  "plan_draft": {
+    "title": "Implementation plan: Build a job board API with search, background email digests ",
+    "overview": "",
+    "phases": [],
+    "pitfalls": []
+  },
+  "errors": [
+    "elasticsearch: asked for https://elasticsearch-py.readthedocs.io/ but the collector returned https://elasticsearch-py.readthedocs.io/en/stable/",
+    "celery: asked for https://docs.celeryq.dev/ but the collector returned https://docs.celeryq.dev/en/stable/",
+    "sqlalchemy: asked for https://docs.sqlalchemy.org/ but the collector returned https://docs.sqlalchemy.org/en/20/",
+    "aiosmtplib: asked for https://aiosmtplib.readthedocs.io/ but the collector returned https://aiosmtplib.readthedocs.io/en/latest/",
+    "fastapi: could not distill docs \u2014 Groq daily token quota (TPD) exhausted. Resets in about 12 min.",
+    "elasticsearch: could not distill docs \u2014 Groq daily token quota (TPD) exhausted. Resets in about 10 min.",
+    "celery: could not distill docs \u2014 Groq daily token quota (TPD) exhausted. Resets in about 5 min.",
+    "sqlalchemy: could not distill docs \u2014 Groq daily token quota (TPD) exhausted. Resets in about 10 min.",
+    "aiosmtplib: could not distill docs \u2014 Groq daily token quota (TPD) exhausted. Resets in about 9 min.",
+    "Plan synthesis failed: Groq daily token quota (TPD) exhausted. Resets in about 1 min."
+  ]
+}
