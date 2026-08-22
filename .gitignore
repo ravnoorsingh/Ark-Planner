@@ -13,3 +13,10 @@ tests/
 # npm pack output
 ark-plans-cli/*.tgz
 ark-plans-cli/node_modules/
+
+# Kept locally, not published to the repo
+docs/
+scripts/
+tests/
+STARTUP.md
+npm_publish.md
