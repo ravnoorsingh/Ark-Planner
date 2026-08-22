@@ -10,6 +10,27 @@ npx ark-plans add short-url-tracker
 
 ---
 
+## Does this need a domain?
+
+No. npm publishing involves no DNS at all — an account, `npm login`, and a free name is
+the whole requirement. A domain matters for exactly one line (`DEFAULT_URL` in
+`index.js`), and changing it later is a patch release.
+
+Worth separating two things that get conflated:
+
+| | Needed to publish? | Notes |
+|---|---|---|
+| A custom domain (`ark.yourname.dev`) | **No** | Cosmetic. Never required. |
+| A reachable backend | Not to *publish*, but yes to be *useful* | Every host hands you a free subdomain — `*.onrender.com`, `*.fly.dev`, `*.railway.app` |
+
+So you can publish `0.1.0` today purely to claim the name, deploy afterwards, then
+ship `0.1.1` pointing at the deployment. `npx ark-plans` resolves to `latest`, so
+everyone picks up the working version immediately — nobody is stranded on the first
+one. The only cost is that anyone trying it in between gets the connection error.
+
+Publishing first is worth doing if you care about holding the name; deploying first is
+worth doing if you would rather the package work the first time anyone runs it.
+
 ## Step 1 — Deploy the backend first (this is the blocker)
 
 **`npx ark-plans` is useless until the catalogue is reachable from the public

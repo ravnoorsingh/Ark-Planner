@@ -231,9 +231,11 @@ async function load() {
         el("div", { class: "labels", style: "margin-top:10px" },
           plan.libraries.map((name) =>
             el("a", { class: "label", href: `/#catalogue` }, name)))),
-      el("div", { class: "row" },
-        el("button", { class: "primary", onclick: () => download(plan) }, "Download .md"),
-        el("button", { onclick: () => copy(plan) }, "Copy"))),
+      el("div", {},
+        el("div", { class: "row" },
+          el("button", { class: "primary", onclick: () => download(plan) }, "Download .md"),
+          el("button", { onclick: () => copy(plan) }, "Copy")),
+        installCommand())),
     el("div", { class: "stat-strip" },
       installs,
       el("div", {}, el("span", {}, "Last 14d"), compact(plan.recent)),
@@ -339,6 +341,25 @@ async function load() {
     button.addEventListener("click", send);
     input.addEventListener("keydown", (event) => { if (event.key === "Enter") send(); });
     return el("div", { class: "refine-dock" }, bar, note);
+  }
+
+  function installCommand() {
+    const command = `npx ark-plans add ${slug}`;
+    const button = el("button", { class: "copy", type: "button" }, "copy");
+    const node = el("div", { class: "install-cmd", "data-copy": command },
+      el("code", {}, command), button);
+
+    node.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(command);
+        button.textContent = "copied";
+      } catch {
+        // Refused on an insecure origin or by permissions; the text stays selectable.
+        button.textContent = "select it";
+      }
+      setTimeout(() => (button.textContent = "copy"), 1600);
+    });
+    return node;
   }
 
   async function download() {

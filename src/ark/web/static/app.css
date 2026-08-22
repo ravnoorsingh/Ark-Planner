@@ -66,9 +66,13 @@ nav.links a.active { color: var(--text); }
 }
 .hero h1 { font-size: 28px; font-weight: 600; margin: 0 0 10px; letter-spacing: -0.02em; }
 .hero p { color: var(--dim); margin: 0 auto; max-width: 620px; }
+/* Two commands, one per job: making a plan, and using one someone already made.
+   Labels are aligned in their own column so the commands line up under each other. */
+.hero .cmds { display: inline-flex; flex-direction: column; gap: 8px; margin-top: 22px; }
 .hero .cmd {
-  display: inline-block;
-  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   font-family: var(--mono);
   font-size: 13px;
   color: var(--dim);
@@ -76,7 +80,18 @@ nav.links a.active { color: var(--text); }
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 8px 14px;
+  text-align: left;
 }
+.hero .cmd .lbl {
+  flex: none;
+  width: 62px;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dimmer);
+}
+.hero .cmd code { font-family: inherit; white-space: nowrap; }
+.hero .cmd .copy { margin-left: auto; }
 .hero .cmd b { color: var(--accent); font-weight: 500; }
 
 /* --- panels & forms ---------------------------------------------------------- */
@@ -405,3 +420,40 @@ footer.bottom { border-top: 1px solid var(--line); margin-top: 64px; padding: 28
 .banner-sub { color: var(--dim); }
 .banner-warn { margin-top: 6px; color: var(--warn); font-size: 13px; }
 .revision-note .bad { color: var(--danger); }
+
+/* --- install command on a plan page ------------------------------------------- */
+
+.install-cmd {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  cursor: pointer;
+}
+.install-cmd:hover { border-color: var(--line-bright); }
+.install-cmd code { color: var(--accent); }
+/* Shared by the hero rows and a plan's install line, so both read the same. */
+.cmd .copy,
+.install-cmd .copy {
+  margin-left: auto;
+  flex: none;
+  padding: 3px 9px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dimmer);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  user-select: none;
+  cursor: pointer;
+}
+.cmd .copy:hover,
+.install-cmd .copy:hover { color: var(--accent); border-color: var(--accent-dim); }

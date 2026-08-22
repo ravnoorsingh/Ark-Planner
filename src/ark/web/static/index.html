@@ -32,7 +32,23 @@
     <h1>Planning documents your coding agent can trust</h1>
     <p>Describe what you want to build. ARK finds the official docs, scrapes them,
        and writes a plan that cites every claim back to the page it came from.</p>
-    <div class="cmd">$ <b>ark docs</b> "build a RAG service over PDFs" --plan</div>
+    <div class="cmds">
+      <div class="cmd" data-copy='ark docs "build a RAG service over PDFs" --plan'>
+        <span class="lbl">generate</span>
+        <code>$ <b>ark docs</b> "build a RAG service over PDFs" --plan</code>
+        <button class="copy" type="button">copy</button>
+      </div>
+      <div class="cmd" data-copy="npx ark-plans list">
+        <span class="lbl">browse</span>
+        <code>$ <b>npx ark-plans</b> list</code>
+        <button class="copy" type="button">copy</button>
+      </div>
+      <div class="cmd" data-copy="npx ark-plans add &lt;slug&gt;">
+        <span class="lbl">use</span>
+        <code>$ <b>npx ark-plans</b> add &lt;slug&gt;</code>
+        <button class="copy" type="button">copy</button>
+      </div>
+    </div>
   </section>
 
   <!-- ---------------- build ---------------- -->

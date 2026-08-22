@@ -430,6 +430,22 @@ async function resume() {
 
 resume();
 
+/* Copy buttons on the hero commands. Delegated, because the commands are static
+   markup — the button only ever copies the `data-copy` text next to it. */
+document.addEventListener("click", async (event) => {
+  const button = event.target.closest(".cmd .copy");
+  if (!button) return;
+  const row = button.closest(".cmd");
+  try {
+    await navigator.clipboard.writeText(row.dataset.copy || row.textContent.trim());
+    button.textContent = "copied";
+  } catch {
+    // Refused on an insecure origin or by permissions; the text is still selectable.
+    button.textContent = "select it";
+  }
+  setTimeout(() => (button.textContent = "copy"), 1600);
+});
+
 loadPlans();
 loadLibraries();
 loadStats();
