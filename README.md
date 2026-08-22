@@ -1,152 +1,293 @@
-# ARK Scrapper
+# ARK Planner
 
-Citation-backed planning documentation for AI coding agents.
+**Citation-backed planning documents for AI coding agents.**
 
-AI coding agents plan against memorized, often stale API knowledge. The fix is to ground
-the planning document in freshly-fetched official docs, with every claim carrying a
-citation. The full pipeline:
-
-```
-user requirement → identify libraries → find official doc URLs (Firecrawl MCP)
-                 → scrape docs (Bright Data) → md/json store
-                 → LLM writes a planning doc grounded in + citing those docs
-```
-
-**Implemented so far**: requirement → libraries → curated official doc links (phase 1),
-and scraping those pages into a local `data/` store (phase 2).
-
-## Pipeline
+Coding agents plan against memorised, often stale API knowledge. ARK fixes that by
+grounding the plan in documentation fetched *at generation time*: it reads a
+requirement, works out which libraries it needs, finds their official docs, scrapes
+them, and writes a plan where every claim carries a citation back to the page it came
+from.
 
 ```
-START
-  ↓
-parse_libraries   ← Groq LLM (JSON mode)          → state.libraries
-  ↓
-search_docs       ← Firecrawl MCP `firecrawl_search` → state.hits    (concurrent)
-  ↓
-curate_links      ← Groq LLM ranks + classifies   → state.doc_sources
-  ↓
-scrape_docs       ← Bright Data (Unlocker/Studio)  → state.documents  (opt-in)
-  ↓
-END → Rich tables + output/<run>/doc_sources.json + data/ store
+npx ark-plans add <slug>      # pull a finished plan into your project
 ```
 
-`search_docs` calls the MCP tool directly by name rather than letting the model
-tool-call it — one deterministic search per library. The LLM's judgment is applied in
-`curate_links`, where it actually matters (telling `fastapi.tiangolo.com` apart from a
-Medium tutorial that ranks well).
-
-Every command, flag and setting is listed in **[docs/reference.md](docs/reference.md)**.
-A diagram of the whole flow, traced through a real query, is in
-**[docs/architecture.md](docs/architecture.md)**.
-
-`scrape_docs` has two Bright Data backends, chosen with `ARK_SCRAPE_BACKEND`:
-
-- **`unlocker`** (default) — the Web Unlocker API, one request per URL. Page-exact by
-  construction, nothing to build or maintain.
-- **`collector`** — a Scraper Studio collector. Sends **every URL in one
-  `/dca/trigger` call**, since it accepts an array of inputs and bills per record
-  either way: one snapshot and one poll loop rather than a request per page. Needs
-  `BRIGHT_DATA_COLLECTOR_ID`.
-
-Both ask Bright Data for **raw HTML** and convert it here. That is deliberate: both
-products' own markdown converters flatten `<pre>` blocks onto a single line, which
-turns documentation code samples into syntactically broken text. `markdownify` keeps
-them fenced and intact.
+---
 
 ## Setup
 
-> **New here?** [STARTUP.md](STARTUP.md) walks through the whole thing step by step —
-> installing, keys, database, and generating a first plan in the browser. The rest of
-> this section is the short version.
+Requires [uv](https://docs.astral.sh/uv/) and Docker. Python is installed by `uv`
+(3.12, pinned in `.python-version`) — you do not need it beforehand.
 
-Requires [uv](https://docs.astral.sh/uv/). Python 3.12 is pinned via `.python-version`.
+### 1. Install
 
 ```bash
+git clone https://github.com/ravnoorsingh/Ark-Scrapper.git
+cd Ark-Scrapper
 uv sync
-cp .env.example .env   # then fill in your keys
 ```
 
-- Groq key: <https://console.groq.com/keys> — required for `docs` / `chat`
-- Firecrawl key: <https://firecrawl.dev/app/api-keys> — required for `docs` / `chat`
-- Tavily key: <https://app.tavily.com> — only when `ARK_SEARCH_BACKEND=tavily`
-- Bright Data token: <https://brightdata.com/cp/setting> — required for scraping
-- Collector ID: <https://brightdata.com/cp/scrapers> — only for
-  `ARK_SCRAPE_BACKEND=collector`; the default `unlocker` backend needs no collector
+### 2. Add your keys
+
+```bash
+cp .env.example .env
+```
+
+Fill in three lines:
+
+```bash
+GROQ_API_KEY=gsk_...          # https://console.groq.com/keys
+FIRECRAWL_API_KEY=fc-...      # https://firecrawl.dev/app/api-keys
+BRIGHT_DATA_API_TOKEN=...     # https://brightdata.com/cp/setting
+```
+
+Using Bright Data **Scraper Studio** rather than the default Web Unlocker? Add:
+
+```bash
+ARK_SCRAPE_BACKEND=collector
+BRIGHT_DATA_COLLECTOR_ID=c_...   # https://brightdata.com/cp/scrapers
+```
+
+### 3. Start MongoDB
+
+Holds the scraped-page cache, the run history, and the public plan catalogue.
+
+```bash
+docker compose up -d          # mongo on :27017, mongo-express UI on :8081
+```
+
+Then uncomment in `.env`:
+
+```bash
+MONGODB_URI=mongodb://localhost:27017
+MONGODB_DB=ark
+```
+
+Leave `MONGODB_URI` unset and everything still runs — you just lose the cache and the
+catalogue, and plans are written to `output/` only.
+
+### 4. Run it
+
+```bash
+uv run ark serve                                        # web UI → http://127.0.0.1:8000
+uv run ark docs "build a RAG service over PDFs" --plan  # or from the terminal
+```
+
+> `ark serve` binds localhost deliberately: starting a run spends Groq and Bright Data
+> credits, and nothing authenticates that endpoint. Put auth in front of it before
+> exposing it.
+
+---
+
+## Features
+
+**Grounding**
+
+- **Every claim is cited.** Citations are assigned in code, never by the model, and
+  each one resolves to a local copy with a sha256.
+- **Docs are fetched per run**, so the plan reflects the library as it is today rather
+  than as the model remembers it.
+- **Alternates too** — a library's runner-up pages are scraped alongside the primary,
+  filtered structurally so an unrelated same-named project never gets cited.
+
+**Getting the right sources**
+
+- **Capability disambiguation.** "A vector database" becomes a choice between real
+  packages, with a suggested default and a box to type one nobody offered.
+- **Pin your own URLs** per library, which skips search and curation entirely — plus
+  extra links the requirement never mentioned (an internal spec, a design doc).
+- **Review before spending.** Every URL about to be scraped is listed and editable:
+  change one, drop one, add one, or cancel. Each row is one Bright Data record.
+
+**Cost control**
+
+- **URL-keyed cache.** A page scraped for one query is reused by every later query
+  that needs it, across runs. A warm run costs nothing at Bright Data.
+- **Refinement is one LLM call.** `ark refine` re-runs synthesis from stored briefs —
+  no re-searching, re-scraping or re-distilling.
+- **Map-reduce planning**: distil each library once, synthesise once.
+
+**Sharing**
+
+- **Public catalogue.** Every plan is named in two or three words, labelled with its
+  libraries, searchable, ranked by trending or lifetime installs, free to download.
+- **`npx ark-plans`** pulls any plan into a project as `.ark/plans/<slug>.md`, ready to
+  hand to an agent.
+- **Revision history.** Each refinement is appended with the instruction that produced
+  it, so how a plan evolved stays inspectable.
+
+**Operational**
+
+- Failures degrade rather than abort — a library that fails to scrape becomes a
+  recorded error, not a lost run.
+- Rate limits, truncated generations and oversized prompts are each handled
+  differently, because waiting helps for one and never helps for the others.
+- Optional LangSmith tracing for every run.
+
+---
+
+## How a query flows
+
+```mermaid
+flowchart LR
+    subgraph FIND["1 · Decide what to read"]
+        direction TB
+        Q["<b>Requirement</b><br/><i>build a RAG service over PDFs</i>"]
+        --> P["<b>parse_libraries</b> · Groq<br/>open capabilities are asked about,<br/>not guessed at"]
+        --> F["<b>search_docs</b> · Firecrawl MCP<br/><b>curate_links</b> · Groq picks<br/>the official page"]
+        --> REV["<b>Review</b><br/>every URL, editable — the last<br/>point before anything is spent"]
+    end
+
+    subgraph FETCH["2 · Read it"]
+        direction TB
+        CACHE{"already in<br/>MongoDB?"}
+        CACHE -->|"miss"| BD["<b>Bright Data</b><br/>Scraper Studio / Web Unlocker"]
+        BD --> CLEAN["<b>clean</b><br/>HTML → markdown, chrome stripped,<br/>code blocks repaired"]
+        CLEAN --> STORE[("<b>data/</b> + MongoDB<br/>markdown · raw row · sha256")]
+        CACHE -->|"hit · costs nothing"| STORE
+    end
+
+    subgraph WRITE["3 · Write and share it"]
+        direction TB
+        W["<b>write_plan</b> · Groq<br/>distil each library, synthesise once<br/>citations assigned in code"]
+        --> OUT["<b>plan.md</b><br/>every [^lib-1] resolves to a<br/>local file with a sha256"]
+        --> CAT[("<b>Catalogue</b><br/>named · labelled · ranked")]
+        --> NPX["<b>npx ark-plans add &lt;slug&gt;</b><br/>→ .ark/plans/&lt;slug&gt;.md"]
+    end
+
+    REV --> CACHE
+    STORE --> W
+    CAT -.->|"refine · one call, reuses the briefs"| W
+
+    style Q fill:#1f6feb,stroke:#1f6feb,color:#fff
+    style OUT fill:#238636,stroke:#238636,color:#fff
+    style BD fill:#8957e5,stroke:#8957e5,color:#fff
+    style STORE fill:#161616,stroke:#8b8b8b,color:#eee
+    style CAT fill:#161616,stroke:#8b8b8b,color:#eee
+    style NPX fill:#161616,stroke:#8b8b8b,color:#eee
+    %% Neutral cluster boxes: GitHub renders mermaid in the reader's own theme, and
+    %% the default cluster fill is a pale yellow that only works on a light page.
+    style FIND fill:transparent,stroke:#8b8b8b,color:#8b8b8b
+    style FETCH fill:transparent,stroke:#8b8b8b,color:#8b8b8b
+    style WRITE fill:transparent,stroke:#8b8b8b,color:#8b8b8b
+```
+
+The model is used where judgment is needed — deciding which libraries a requirement
+implies, telling `fastapi.tiangolo.com` apart from a Medium post, writing prose. The
+search tool is called directly by name rather than through tool-calling, and citations
+are assembled in code, because neither benefits from a model's discretion.
+
+---
+
+## Example: what Scraper Studio returns
+
+A collector is triggered with a batch of URLs and polled until the snapshot is ready.
+The interaction code is a single-stage fetch — no crawling, because we want exactly the
+page that was asked for:
+
+```js
+navigate(input.url);
+wait_page_idle(2000);
+collect(parse());          // parser returns the page HTML as `main_content`
+```
+
+**The row that comes back** — the real one behind this repo's FastAPI plan, truncated
+here at `main_content`, which is 443,858 characters of HTML:
+
+```json
+{
+  "url": "https://fastapi.tiangolo.com/",
+  "main_content": "<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n  <meta name=\"description\" content=\"FastAPI framework, high performance, easy to …",
+  "input": { "url": "https://fastapi.tiangolo.com/" }
+}
+```
+
+Two fields do real work beyond the content itself:
+
+- **`input`** echoes what the collector was asked for. Rows come back unordered and a
+  snapshot can hold hundreds, so this is what matches each row to the URL that
+  requested it.
+- **`main_content`** is found by auto-detection — collectors name their content field
+  differently, so ARK tries `markdown`, `content`, `text`, `main_content`, `body`,
+  `html` in turn, and `BRIGHT_DATA_CONTENT_FIELD` overrides it outright.
+
+**After cleaning** — navigation, sidebars, badges and theme chrome removed, code blocks
+repaired: **443,858 characters of HTML become 22,332 of markdown**, carrying front
+matter so the file still describes itself once separated from the manifest:
+
+```markdown
+---
+library: "fastapi"
+query: "Build a production RAG service that ingests PDF manuals, chunks and embeds …"
+url: "https://fastapi.tiangolo.com/"
+role: "primary"
+rank: 0
+fetched_at: "2026-08-19T12:36:05.121362+00:00"
+fetched_via: "brightdata-collector:c_msx9i6aq2bz5dznadk"
+sha256: "5f2319fdf3c6618398daa2cab40bf2b4af2964e6e786a1c77a2b7c67331177a3"
+---
+
+# FastAPI
+
+*FastAPI framework, high performance, easy to learn, fast to code, ready for production*
+
+**Documentation** : <https://fastapi.tiangolo.com>
+
+FastAPI is a modern, fast (high-performance), web framework for building APIs with
+Python based on standard Python type hints.
+
+…22,000 more characters
+```
+
+**Where it lands** — paths are a pure function of `(library, role, url)`, so a
+re-scrape overwrites in place and "latest docs" stays latest:
+
+```
+data/fastapi-build-a-production-rag-service-that-ingests-pdf/
+├── primary--fastapi-tiangolo-com-c889b628.md      ← cleaned markdown, shown above
+└── primary--fastapi-tiangolo-com-c889b628.json    ← the raw row, kept verbatim
+```
+
+That markdown is what the planner reads, and what `[^fastapi-1]` in the finished plan
+resolves to — via the `sha256` in the front matter, so a citation can be checked
+against the exact bytes it was written from.
+
+> Both Bright Data backends produce equivalent text — a sampled comparison put them at
+> ~95% semantic similarity. Web Unlocker (`ARK_SCRAPE_BACKEND=unlocker`) needs only a
+> token; Scraper Studio (`collector`) needs a collector that fetches the exact input
+> URL rather than crawling from it.
 
 ## Usage
 
-One-shot:
-
 ```bash
-uv run ark docs "get me the latest docs for LangGraph, Tavily and FastAPI"
-uv run ark docs "build a RAG chatbot over PDFs with FastAPI" --json | jq '.doc_sources'
-uv run ark docs "..." --model openai/gpt-oss-120b --out ./artifacts --no-save
-```
+# Web UI — questions, review, catalogue, refinement
+uv run ark serve
 
-Interactive:
+# One-shot
+uv run ark docs "build a REST API with FastAPI and Pydantic" --plan
+uv run ark docs "..." --doc-url fastapi=https://fastapi.tiangolo.com/ --max-alternates 0
 
-```bash
+# Work from an artifact you already have (no LLM, no search)
+uv run ark scrape output/2026*-build-a-rest-api*/doc_sources.json
+uv run ark plan   output/2026*-build-a-rest-api*/doc_sources.json
+uv run ark refine output/2026*-build-a-rest-api*/doc_sources.json "add a section on auth"
+
+# Publish a terminal-made plan to the catalogue
+uv run ark publish output/2026*-build-a-rest-api*/doc_sources.json
+
+# Interactive discovery
 uv run ark chat
 ```
 
-REPL commands: `/list`, `/save`, `/clear`, `/quit`.
-
-In a browser:
+Consume plans from anywhere with the published npm package:
 
 ```bash
-docker compose up -d      # MongoDB, for the catalogue
-uv run ark serve          # → http://127.0.0.1:8000
+npx ark-plans list
+npx ark-plans search fastapi
+npx ark-plans add short-url-tracker     # → ./.ark/plans/short-url-tracker.md
 ```
 
-The web UI runs the same pipeline with the same questions — open choices, pinned
-documentation URLs, the URL review — as steps in the page, and publishes each finished
-plan to a **public catalogue**: named in two or three words, labelled with the
-libraries it is grounded in, searchable, ranked by trending or lifetime downloads, and
-free for anyone to download. Plans made at the terminal join it with `ark publish`.
-Details in **[docs/web.md](docs/web.md)**.
-
-> `ark serve` binds localhost by default because starting a run spends Bright Data and
-> Groq credits and nothing authenticates that endpoint.
-
-Plans can be pulled into any project from the terminal, once a catalogue is deployed:
-
-```bash
-npx ark-plans add short-url-tracker    # → ./.ark/plans/short-url-tracker.md
-```
-
-That CLI lives in [`ark-plans-cli/`](ark-plans-cli); publishing it is covered in
-**[docs/npx-publishing.md](docs/npx-publishing.md)**.
-
-If the requirement names a capability rather than a package — "a vector database", "an
-ORM" — ARK asks which one before researching, offering real candidates and accepting
-anything you type instead. See
-[docs/example-queries.md](docs/example-queries.md#when-you-leave-a-choice-open).
-Non-interactive runs take the recommended option and say so; `--no-choices` skips it.
-
-Scrape the discovered pages into `data/`:
-
-```bash
-# Scrape an artifact you already produced (no LLM or search calls)
-uv run ark scrape output/20260817T120952Z-*/doc_sources.json --max-alternates 1
-
-# Only certain libraries
-uv run ark scrape output/*/doc_sources.json --library fastapi --library langgraph
-
-# Or discover and scrape in one pass
-uv run ark docs "build a RAG chatbot over PDFs with FastAPI" --scrape
-```
-
-`ark scrape` prints the URL list and asks before triggering, since **each URL is one
-billed Bright Data record**. `--yes` skips the prompt; a non-TTY stdin proceeds
-automatically. `--max-alternates 0` scrapes primary URLs only.
-
-Check connectivity without spending tokens or credits:
-
-```bash
-uv run python scripts/check_mcp.py                              # search MCP
-uv run python scripts/check_brightdata.py https://fastapi.tiangolo.com   # Bright Data
-```
+---
 
 ## Output contract
 
@@ -155,186 +296,76 @@ uv run python scripts/check_brightdata.py https://fastapi.tiangolo.com   # Brigh
 ```json
 {
   "requirement": "...",
-  "model": "openai/gpt-oss-20b",
-  "generated_at": "2026-08-17T12:00:00+00:00",
-  "libraries": [{"name": "fastapi", "ecosystem": "python", "version_hint": null, "reason": "..."}],
+  "model": "openai/gpt-oss-120b",
+  "generated_at": "2026-08-22T09:00:00+00:00",
+  "libraries": [{"name": "pypdf", "ecosystem": "python", "reason": "..."}],
   "doc_sources": [{
-    "library": "fastapi",
-    "url": "https://fastapi.tiangolo.com/",
-    "title": "FastAPI",
+    "library": "pypdf",
+    "url": "https://pypdf.readthedocs.io/",
     "kind": "official_docs",
     "confidence": 0.95,
-    "rationale": "...",
-    "alternates": ["https://github.com/fastapi/fastapi"]
+    "alternates": ["https://github.com/py-pdf/pypdf"]
   }],
+  "documents": [{"library": "pypdf", "status": "ok", "path": "data/...", "sha256": "..."}],
+  "briefs": [],
+  "plan_draft": {},
   "errors": []
 }
 ```
 
-`doc_sources` is what the scrape phase consumes — `ark scrape` takes this file directly.
-When scraping ran, the artifact also carries a `documents` array mirroring the manifest.
+`doc_sources` is the input contract for scraping; `briefs` and `plan_draft` are what
+make `ark refine` a single call.
+
+---
 
 ## Configuration
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `GROQ_API_KEY` | — | required for `docs` / `chat` |
-| `FIRECRAWL_API_KEY` | — | required for `docs` / `chat` (default search backend) |
-| `TAVILY_API_KEY` | — | required only when `ARK_SEARCH_BACKEND=tavily` |
+| `GROQ_API_KEY` | — | required for any command that uses an LLM |
+| `FIRECRAWL_API_KEY` | — | required for search (default backend) |
+| `TAVILY_API_KEY` | — | only when `ARK_SEARCH_BACKEND=tavily` |
 | `ARK_SEARCH_BACKEND` | `firecrawl` | `firecrawl` or `tavily` |
-| `BRIGHT_DATA_API_TOKEN` | — | required for `scrape` / `--scrape` |
+| `BRIGHT_DATA_API_TOKEN` | — | required for scraping |
 | `ARK_SCRAPE_BACKEND` | `unlocker` | `unlocker` (Web Unlocker) or `collector` (Scraper Studio) |
-| `BRIGHT_DATA_UNLOCKER_ZONE` | `cli_unlocker` | unlocker backend only |
 | `BRIGHT_DATA_COLLECTOR_ID` | — | **collector backend only**; starts with `c_` |
+| `BRIGHT_DATA_UNLOCKER_ZONE` | `cli_unlocker` | unlocker backend only |
 | `BRIGHT_DATA_CONTENT_FIELD` | *auto-detect* | set only if detection picks the wrong field |
-| `ARK_DATA_DIR` | `data` | where the doc store is written |
-| `ARK_MAX_ALTERNATES` | `2` | alternate URLs scraped per library |
 | `BRIGHT_DATA_POLL_INTERVAL` | `5` | seconds between snapshot polls |
 | `BRIGHT_DATA_TIMEOUT` | `600` | seconds before giving up on a snapshot |
-| `MONGODB_URI` | — | optional; unset = filesystem only. See [docs/mongodb.md](docs/mongodb.md) |
+| `MONGODB_URI` | — | unset = filesystem only, no cache, no catalogue |
 | `MONGODB_DB` | `ark` | database name |
 | `ARK_DOC_CACHE_TTL_DAYS` | `14` | reuse a cached page while it is younger than this |
 | `ARK_MODEL` | `openai/gpt-oss-20b` | Groq model ID |
-| `ARK_TEMPERATURE` | `0.1` | |
+| `ARK_TEMPERATURE` | `0.1` | low — these are extraction tasks |
 | `ARK_MAX_LIBRARIES` | `8` | cap per run |
-| `ARK_SEARCH_MAX_RESULTS` | `5` | Tavily results per library |
+| `ARK_MAX_ALTERNATES` | `2` | alternate URLs scraped per library |
+| `ARK_SEARCH_MAX_RESULTS` | `5` | search results per library |
 | `ARK_LLM_CONCURRENCY` | `3` | parallel curation calls; lower it if you hit rate limits |
-| `ARK_OUTPUT_DIR` | `output` | |
-| `ARK_TAVILY_MCP_URL` | `https://mcp.tavily.com/mcp/` | |
-| `LANGSMITH_TRACING` | `false` | set to `true` to trace runs to LangSmith |
+| `ARK_DATA_DIR` / `ARK_OUTPUT_DIR` | `data` / `output` | where the store and artifacts are written |
+| `LANGSMITH_TRACING` | `false` | `true` traces runs to LangSmith |
 | `LANGSMITH_API_KEY` | — | required when tracing is on; tracing stays off without it |
-| `LANGSMITH_PROJECT` | `ark-scrapper` | project traces are filed under |
-| `LANGSMITH_ENDPOINT` | `https://api.smith.langchain.com` | self-hosted LangSmith |
-| `ARK_TRACE_MAX_CHARS` | `2000` | per-value truncation before upload |
 
-## Tracing
-
-Off by default. Turn it on with two lines in `.env`:
-
-```ini
-LANGSMITH_TRACING=true
-LANGSMITH_API_KEY=lsv2_pt_...
-```
-
-Every command then prints its trace URL to **stderr** (so `--json` output stays
-pipeable) and the whole run lands in LangSmith as a single tree:
-
-```
-ark docs
-├── load_mcp_tools                  which tools the search server exposed
-└── docs-research                   the LangGraph run
-    ├── parse_libraries             → kept, names
-    │   └── structured → groq.invoke → ChatGroq
-    ├── search_docs                 → hits_per_library, failed
-    │   └── search_one_library      → the exact query sent
-    │       ├── firecrawl_search
-    │       └── normalize_search_results
-    └── curate_links                → curated, failed
-        ├── curate_one_library      → chosen, kind, confidence
-        └── finalize_doc_source     → hallucinated_url, if the model invented one
-```
-
-`--scrape` adds `scrape_urls` and per-URL Bright Data spans; `--plan` (and
-`ark plan`) adds `build_plan` with one `distill_library` per library.
-
-Two layers produce that tree. LangGraph, ChatGroq and the MCP tools trace
-themselves as soon as the environment is configured; `ark/tracing.py` adds
-`@traced` to the code LangChain knows nothing about — Bright Data, the document
-store, HTML cleaning, citation assembly, plan rendering — so those stop showing up
-as unexplained gaps between two model calls.
-
-**What is uploaded.** Every traced value passes through `tracing.safe()` first,
-which redacts anything whose key looks like a credential, dumps Pydantic models
-and truncates long strings to `ARK_TRACE_MAX_CHARS`. This matters because nodes
-take a `Settings` object holding every API key in the process, and a scraped page
-runs to hundreds of kilobytes. Prompts, search results and doc excerpts *are*
-uploaded — which is why tracing is opt-in rather than on whenever a key happens to
-be in the shell.
-
-**Cost.** Runs are billed per span ingested. A three-library discovery run is ~40
-spans; a scrape-and-plan run over eight libraries is several hundred.
-
-### A note on structured output
-
-Groq's strict `json_schema` response format is only supported on the `openai/gpt-oss-*`
-models. JSON Object Mode *is* supported on every Groq model, so `ark.llm.structured()`
-takes the universal route: request a JSON object, inject the Pydantic schema into the
-prompt, validate, and repair once on failure. That is why the code does not use
-LangChain's `with_structured_output()` default path.
-
-The default model (`openai/gpt-oss-20b`) happens to support strict mode, but keeping the
-single json_mode path means swapping `ARK_MODEL` to any other Groq model — Qwen,
-Llama, MiniMax — works without touching code.
-
-## Troubleshooting
-
-**`model ... is blocked at the organization level`** — Groq gates preview models per
-org, and `qwen/qwen3.6-27b` is blocked by default. Enable it at
-<https://console.groq.com/settings/limits> before setting `ARK_MODEL=qwen/qwen3.6-27b`.
-
-**Rate limits** — the free tier caps tokens per minute. `structured()` reads the wait
-Groq states in its 429 and retries, and curation runs at most `ARK_LLM_CONCURRENCY`
-calls at once. Lower that value if you still see 429s.
-
-**No collector needed** on the default `unlocker` backend — only
-`BRIGHT_DATA_API_TOKEN`, plus a Web Unlocker zone (`bdata login` creates
-`cli_unlocker` automatically).
-
-**Collector returns the wrong page, or zero rows** — Scraper Studio's AI tends to
-generate a two-stage *crawler* (`next_stage()` over discovered links) rather than a
-single-page fetch, and hard-codes one theme's CSS selectors. Symptoms: a different
-page than you requested, hundreds of billed rows for one input URL, or nothing at all
-on a site using a different docs framework. Fix the collector to be single-stage
-(`collect(parse())`), or just use the default `unlocker` backend.
-
-**`no content field found in the row`** — a collector's output schema is whatever you
-defined when you built it, so the field holding page content can't be known in advance.
-Run `scripts/check_brightdata.py <url>`; it prints the real row keys and which field
-auto-detection chose. Set `BRIGHT_DATA_CONTENT_FIELD` if it guessed wrong. HTML content
-is converted to markdown automatically.
-
-**`422 Unprocessable Entity`** — this client sends `[{"url": ...}]`. Check your
-collector's Inputs tab expects a `url` field.
-
-**Tavily tool naming** — the published docs write the tools hyphenated
-(`tavily-search`), but the live server exposes them underscored (`tavily_search`).
-`require_tool` normalizes both, so either convention resolves. `scripts/check_mcp.py`
-prints what the server actually offers.
-
-## Tests
-
-```bash
-uv run pytest
-```
-
-Fully mocked — no network, no API keys needed. Covers Tavily response normalization,
-the structured-output repair retry, Bright Data's poll loop and error mapping, content-field
-detection, URL slug collisions, chrome stripping, and manifest idempotence.
-
-For manual end-to-end checks — connectivity probes, real scrapes, store inspection,
-idempotence and failure paths, ordered cheapest-first — see
-**[docs/testing.md](docs/testing.md)**.
+---
 
 ## The `data/` store
 
 ```
 data/
-├─ manifest.json                                  ← index of every stored page
-├─ fastapi/
-│   ├─ primary--fastapi-tiangolo-com-6355c1ab.md  ← markdown + YAML front matter
-│   ├─ primary--fastapi-tiangolo-com-6355c1ab.json ← raw Bright Data row
-│   └─ alt-1--github-com-fastapi-fastapi-f9ecc9a5.md
-└─ langgraph/
-    └─ primary--docs-langchain-com-langgraph-0bd806a5.md
+├── manifest.json                              keyed by (library, url), merged across runs
+└── pypdf-build-a-rag-service-over-pdfs/
+    ├── primary--pypdf-readthedocs-io-*.md     cleaned markdown + YAML front matter
+    ├── primary--pypdf-readthedocs-io-*.json   the raw Bright Data row
+    └── alt-1--github-com-py-pdf-pypdf.md
 ```
 
-Paths are a pure function of `(library, role, rank, url)`, so **re-scraping overwrites in
-place** — "latest docs" stays latest, and a future RAG index gets stable identifiers.
-Freshness lives in the manifest and each file's front matter, never in the path. The
-8-character hash suffix prevents distinct URLs (long doc paths, `?version=` query
-strings) from colliding after slug truncation.
+Paths are a pure function of `(library, role, url)`, so a re-scrape overwrites in place
+and "latest docs" stays latest. Freshness lives in the manifest, never in the path.
 
-`manifest.json` is keyed on `(library, url)` and merged across runs, so a re-scrape
-updates an entry instead of appending a duplicate. URLs the collector never returned are
-recorded with `status: "failed"` rather than silently dropped.
+---
 
+## Stack
+
+LangGraph · Groq (`openai/gpt-oss-*`, JSON mode) · Firecrawl MCP over streamable HTTP ·
+Bright Data Scraper Studio / Web Unlocker · MongoDB · FastAPI · Typer + Rich ·
+LangSmith · pytest
