@@ -249,6 +249,41 @@ async def _run(job: Job, settings: Settings, options: dict[str, Any]) -> None:
         job.emit("error", message=job.error)
 
 
+# Errors that only restate the outcome. Surfacing one of these as *the* reason is how
+# "your Groq quota ran out" turns into an unexplained blank failure.
+_RESTATEMENTS = ("no plan written", "produced no plan", "failed to distill")
+
+# Phrases that mean "the model refused, and here is why" — these already carry a
+# humanised explanation from `explain_quota`.
+_DIAGNOSTIC = ("quota", "rate limit", "tpd", "too large", "429")
+
+# Wording the pipeline uses when it degraded but carried on.
+_RECOVERED = ("used top search result", "fell back", "substituted")
+
+
+def why_no_plan(errors: list[str]) -> str:
+    """Explain why a run ended without a plan, in the words the user needs.
+
+    The pipeline records everything that went wrong, but the last entry is usually a
+    summary ("Every library failed to distill") rather than a cause. A quota message
+    naming the reset time is worth far more than knowing a plan is missing.
+    """
+    # A step that recovered is not why the run failed, even though it logged the same
+    # 429 — blaming it would point at curation when the plan died at distillation.
+    fatal = [e for e in errors if not any(w in e.lower() for w in _RECOVERED)]
+
+    # Prefer the already-humanised form ("… — Groq daily token quota exhausted.
+    # Resets in about 26 min.") over the raw provider JSON that says the same thing.
+    for error in sorted(fatal, key=lambda e: ("—" not in e, len(e))):
+        if any(word in error.lower() for word in _DIAGNOSTIC):
+            reason = error.split("—", 1)[-1].strip() if "—" in error else error
+            return f"No plan was written. {reason}"
+    for error in fatal or errors:
+        if not any(word in error.lower() for word in _RESTATEMENTS):
+            return f"No plan was written. {error}"
+    return "The run produced no plan."
+
+
 async def _publish(
     job: Job,
     settings: Settings,
@@ -268,9 +303,10 @@ async def _publish(
         plan_path.write_text(markdown, encoding="utf-8")
 
     if not markdown:
+        errors = state.get("errors", [])
         job.status = "error"
-        job.error = "The run produced no plan."
-        job.emit("error", message=job.error, errors=state.get("errors", []))
+        job.error = why_no_plan(errors)
+        job.emit("error", message=job.error, errors=errors)
         return
 
     job.emit("step", node="name_plan", label="Naming the plan")

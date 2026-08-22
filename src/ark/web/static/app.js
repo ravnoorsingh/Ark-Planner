@@ -351,13 +351,20 @@ function listen() {
         source.close();
         $("go").disabled = false;
         break;
-      case "error":
+      case "error": {
         $("question").replaceChildren();
+        // The headline says what stopped the run; the rest is every warning the
+        // pipeline recorded, because "no plan" alone leaves nothing to act on.
+        const detail = (data.errors || []).filter((line) => line !== data.message);
         $("outcome").replaceChildren(el("div", { class: "panel", style: "margin-top:18px;border-color:var(--danger)" },
-          el("div", { style: "color:var(--danger)" }, data.message)));
+          el("div", { style: "color:var(--danger);font-weight:600" }, data.message),
+          detail.length
+            ? el("ul", { class: "err-detail" }, detail.map((line) => el("li", {}, line)))
+            : null));
         source.close();
         $("go").disabled = false;
         break;
+      }
     }
   };
   source.onerror = () => { source.close(); $("go").disabled = false; };
