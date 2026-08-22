@@ -5,8 +5,7 @@
 Coding agents plan against memorised, often stale API knowledge. ARK fixes that by
 grounding the plan in documentation fetched *at generation time*: it reads a
 requirement, works out which libraries it needs, finds their official docs, scrapes
-them, and writes a plan where every claim carries a citation back to the page it came
-from.
+them using Bright Data Scraper Studio API, and writes a plan where every claim carries a citation back to the page it came from.
 
 ```
 npx ark-plans add <slug>      # pull a finished plan into your project
