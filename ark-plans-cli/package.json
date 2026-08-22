@@ -1,6 +1,6 @@
 {
   "name": "ark-plans",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Pull citation-backed planning documents into your project for your AI coding agent to follow.",
   "keywords": [
     "ai",
@@ -29,7 +29,7 @@
     "url": "git+https://github.com/ravnoorsingh/Ark-Scrapper.git",
     "directory": "ark-plans-cli"
   },
-  "homepage": "https://github.com/ravnoorsingh/Ark-Scrapper#readme",
+  "homepage": "https://planner.arksolution.eu",
   "bugs": {
     "url": "https://github.com/ravnoorsingh/Ark-Scrapper/issues"
   }

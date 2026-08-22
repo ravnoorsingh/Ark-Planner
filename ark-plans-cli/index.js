@@ -23,7 +23,7 @@ const { version } = require("./package.json");
  * must point at a publicly reachable deployment before the package is published —
  * a localhost default means `npx ark-plans add` fails for everyone but its author.
  */
-const DEFAULT_URL = "http://127.0.0.1:8000";
+const DEFAULT_URL = "https://planner.arksolution.eu";
 const PLANS_DIR = path.join(".ark", "plans");
 const TIMEOUT_MS = 20000;
 
