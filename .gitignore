@@ -20,3 +20,6 @@ scripts/
 tests/
 STARTUP.md
 npm_publish.md
+
+# Never commit the VM SSH key
+*.pem

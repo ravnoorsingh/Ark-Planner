@@ -1,0 +1,53 @@
+# Production stack for planner.arksolution.eu.
+#
+# No host ports are published. The app joins `ark_default` — the network the existing
+# Caddy already sits on — so Caddy reaches it by container name and nothing new is
+# exposed on the VM's public interface.
+name: ark-planner
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: ark-planner
+    restart: unless-stopped
+    env_file: ../.env
+    environment:
+      # Overrides whatever .env says: inside the compose network Mongo is a service
+      # name, never localhost.
+      MONGODB_URI: mongodb://mongo:27017
+      MONGODB_DB: ark
+    volumes:
+      # The plan artifacts and the scraped-page store outlive the container.
+      - planner_data:/app/data
+      - planner_output:/app/output
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks: [internal, ark_default]
+
+  mongo:
+    image: mongo:8.0
+    container_name: ark-planner-mongo
+    restart: unless-stopped
+    volumes:
+      - planner_mongo:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    # Deliberately not on ark_default: only the app needs to reach the database.
+    networks: [internal]
+
+networks:
+  internal:
+  ark_default:
+    external: true
+
+volumes:
+  planner_data:
+  planner_output:
+  planner_mongo:
