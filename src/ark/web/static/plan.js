@@ -160,6 +160,49 @@ function chart(values) {
 
 /* --- page -------------------------------------------------------------------- */
 
+/** Words in the instruction that name something the revised plan cannot cite.
+
+    Only a hint, and deliberately conservative: it looks at package-shaped words the
+    user typed and keeps the ones absent from the plan's citation refs. Being told
+    "pydantic is not in this plan's sources" is the difference between trusting a
+    phase and checking it. */
+function uncitedFrom(instruction, grounded) {
+  const known = new Set(grounded.map((name) => name.toLowerCase()));
+  const stop = new Set((
+    "add also as well to this plan the a an and or for with use using make more " +
+    "detail details section phase phases about on in of it that please can you " +
+    "expand include remove drop rewrite shorter longer step steps code example"
+  ).split(" "));
+  return [...new Set(
+    (instruction.toLowerCase().match(/[a-z][a-z0-9._-]{2,}/g) || [])
+      .filter((word) => !stop.has(word) && !known.has(word))
+  )].slice(0, 4);
+}
+
+/** Show what the last refinement did, once, after the reroute. */
+function revisionBanner(slug) {
+  let saved = null;
+  try {
+    const raw = sessionStorage.getItem(`ark:revised:${slug}`);
+    if (raw) saved = JSON.parse(raw);
+    sessionStorage.removeItem(`ark:revised:${slug}`);
+  } catch { return null; }
+  if (!saved) return null;
+
+  const warn = (saved.uncited || []).length
+    ? el("div", { class: "banner-warn" },
+        `${saved.uncited.join(", ")} ${saved.uncited.length === 1 ? "is" : "are"} not in this plan's `
+        + "scraped sources, so anything it says about "
+        + `${saved.uncited.length === 1 ? "it" : "them"} carries no citation.`)
+    : null;
+
+  return el("div", { class: "banner" },
+    el("div", {},
+      el("b", {}, `Revision ${saved.revision} applied`),
+      el("span", { class: "banner-sub" }, ` · ${saved.instruction}`)),
+    warn);
+}
+
 async function load() {
   const page = document.getElementById("page");
   const response = await fetch(`/api/plans/${encodeURIComponent(slug)}`);
@@ -169,13 +212,17 @@ async function load() {
     return;
   }
   let plan = await response.json();
+  const banner = revisionBanner(slug);
+  if (banner) page.append(banner);
   document.title = `${plan.name} — ARK Scrapper`;
 
   const installs = el("div", {}, el("span", {}, "Installs"), compact(plan.installs));
   const phases = el("div", {}, el("span", {}, "Phases"), String(plan.phases));
   const size = el("div", {}, el("span", {}, "Size"), `${Math.round(plan.bytes / 1024)} KB`);
-  const body = el("div", { class: "md", style: "margin-top:24px",
-                           html: markdown(plan.markdown || "") });
+  const body = el("div", { class: "md", html: markdown(plan.markdown || "") });
+  // Positioned so the "rewriting" overlay can cover exactly the plan, making it
+  // obvious which part of the page is being replaced.
+  const bodyWrap = el("div", { class: "md-wrap", style: "margin-top:24px" }, body);
   page.append(
     el("div", { class: "detail-head" },
       el("div", { class: "grow" },
@@ -197,23 +244,63 @@ async function load() {
     el("div", { class: "panel", style: "margin-top:24px" },
       el("h3", {}, "Downloads"),
       chart(plan.trend.length ? plan.trend : new Array(14).fill(0))),
-    body,
-    el("div", { style: "height:96px" }),   // clearance for the docked bar
+    bodyWrap,
+    el("div", { style: "height:112px" }),   // clearance for the docked bar
     refineBar());
 
+  /** Libraries this plan can actually cite, read from its own footnote refs.
+
+      Refinement reuses the documentation already scraped for the run, so asking for a
+      library that was never scraped produces guidance the model wrote from memory —
+      indistinguishable from the cited parts unless we say so. */
+  function groundedLibraries(md) {
+    const refs = md.match(/\[\^([a-z0-9][a-z0-9._-]*)-\d+\]/gi) || [];
+    return [...new Set(refs.map((ref) => ref.replace(/^\[\^/, "").replace(/-\d+\]$/, "")))];
+  }
+
   function refineBar() {
+    const grounded = groundedLibraries(plan.markdown || "");
     const input = el("input", { type: "text", placeholder: "Modify this plan…",
                                 autocomplete: "off" });
     const button = el("button", { class: "primary" }, "Refine plan");
     const bar = el("div", { class: "refine" }, el("span", { class: "caret" }, ">"), input, button);
-    const note = el("div", { class: "revision-note" });
+    const note = el("div", { class: "revision-note" },
+      grounded.length
+        ? el("span", {}, `Grounded in ${grounded.join(", ")} — refining reuses those docs, it does not scrape new ones.`)
+        : null);
+
+    // The overlay covers the plan while it is being rewritten. Without it the old
+    // plan sits there unchanged for the length of an LLM call and the page looks
+    // broken; the elapsed counter is what tells you it is still working.
+    function overlay(instruction) {
+      const elapsed = el("span", { class: "elapsed" }, "0s");
+      const node = el("div", { class: "rewriting" },
+        el("div", { class: "rewriting-card" },
+          el("div", { class: "spinner" }),
+          el("div", {},
+            el("div", { class: "rewriting-title" }, "Rewriting the plan…"),
+            el("div", { class: "rewriting-sub" }, instruction),
+            el("div", { class: "rewriting-meta" },
+              "One model call over the documentation already scraped · ", elapsed))));
+      const started = Date.now();
+      const timer = setInterval(() => {
+        elapsed.textContent = `${Math.round((Date.now() - started) / 1000)}s`;
+      }, 1000);
+      node.stop = () => { clearInterval(timer); node.remove(); };
+      return node;
+    }
 
     async function send() {
       const instruction = input.value.trim();
       if (instruction.length < 3) return input.focus();
+
+      const veil = overlay(instruction);
+      bodyWrap.append(veil);
       bar.classList.add("busy");
       button.disabled = input.disabled = true;
       button.textContent = "Revising…";
+      note.replaceChildren();
+
       try {
         const response = await fetch(`/api/plans/${encodeURIComponent(slug)}/refine`, {
           method: "POST",
@@ -225,20 +312,23 @@ async function load() {
           throw new Error(detail.detail || "Could not revise the plan.");
         }
         const revised = await response.json();
-        // Swap the plan and the stats it changed; the download count and the chart
-        // belong to the entry, not the revision, so they stay as they are.
-        plan = { ...plan, ...revised };
-        body.innerHTML = markdown(revised.markdown || "");
-        phases.replaceChildren(el("span", {}, "Phases"), String(revised.phases));
-        size.replaceChildren(el("span", {}, "Size"),
-          `${Math.round(revised.bytes / 1024)} KB`);
-        note.replaceChildren(el("b", {}, `revision ${revised.revision}`),
-          ` · ${instruction}`);
-        input.value = "";
-        window.scrollTo({ top: body.offsetTop - 80, behavior: "smooth" });
+
+        // Hand the banner to the reloaded page. sessionStorage rather than a query
+        // parameter: the instruction is free text and belongs nowhere near a URL.
+        try {
+          sessionStorage.setItem(`ark:revised:${slug}`, JSON.stringify({
+            revision: revised.revision,
+            instruction,
+            uncited: uncitedFrom(instruction, groundedLibraries(revised.markdown || "")),
+          }));
+        } catch { /* private mode; the plan still loads, just without the banner */ }
+
+        // Reroute to the plan rather than patching the DOM: the page then renders
+        // exactly what the catalogue stored, so what you read is what was saved.
+        location.replace(`/plan/${encodeURIComponent(revised.slug || slug)}`);
       } catch (error) {
-        note.replaceChildren(el("span", { style: "color:var(--danger)" }, error.message));
-      } finally {
+        veil.stop();
+        note.replaceChildren(el("span", { class: "bad" }, error.message));
         bar.classList.remove("busy");
         button.disabled = input.disabled = false;
         button.textContent = "Refine plan";

@@ -95,6 +95,20 @@ What changes and what does not:
 | Slug, name, install count, download history | The plan text, phase count and size |
 | The libraries and their scraped pages | The stored draft, so the *next* refinement builds on this one |
 
+While it runs, the plan is covered by a card naming the instruction and counting the
+seconds — a model call takes tens of seconds, and a page that sits unchanged for that
+long reads as broken. When it finishes the page **reloads onto the revised plan**
+rather than patching the DOM, so what you read is exactly what the catalogue stored,
+and a banner names the revision that was just applied.
+
+The bar also says what the plan is grounded in (*"Grounded in numpy"*). This matters:
+refinement reuses documentation already scraped, so asking for a library that was
+never scraped yields guidance the model wrote from memory. Ask for it anyway and the
+banner says so — *"pydantic is not in this plan's scraped sources, so anything it says
+about it carries no citation"* — because uncited prose is indistinguishable from cited
+prose unless something points it out. To get a genuinely grounded plan for a new
+library, generate a new plan naming it.
+
 Each revision is appended to `plans` with the instruction that produced it, and the
 run directory on disk is updated too when it is still present — a plan revised in the
 browser and a stale `plan.md` on disk is the kind of divergence that wastes an
